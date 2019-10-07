@@ -1,0 +1,22 @@
+.Heading {
+    text-align:center;
+}
+body {
+    background-color: black
+}
+h1 {
+    color: white
+}
+h2 {
+    color: white
+}
+h3 {
+    text-align: center;
+}
+.Info {
+    color: white;
+    font-size: 20px;
+}
+.tech.jpg {
+    text-align:center;
+}

@@ -1,0 +1,1702 @@
+
+		   		 		<!-- article gated: false -->
+		  		 
+		<!-- og:image https://media2.govtech.com/images/BWC_ADOPTION_OVER_TIME.jpg -->
+
+				
+				  		 		 <!doctype html>
+<html lang="en" ng-app="app">
+<head>
+	
+	
+				    		   	
+<!-- IMPLEMENT DO NOT TRACK   AND  EU GDPR ajax -->
+    
+<script>
+var DNT = -1;
+var DNT_HEADER = -1;
+var DNT_COUNTRY = "unknown";
+var DNT_SEEN_COOKIE_STATEMENT = 0;
+var xdomainCookies = ['__utma','__utmb','__utmc','__utmt','__utmz'];
+
+var cookies = document.cookie.split(";");
+
+
+
+// first check if we have an existing cookie
+for (var i = 0; i < cookies.length; i++){
+	var spcook = cookies[i].split("=");
+	if( String(spcook[0]).trim() == 'DNT')
+	DNT = Number(spcook[1]);
+	else if( String(spcook[0]).trim() == 'DNT_HEADER')
+	DNT_HEADER = Number(spcook[1]);
+	else if( String(spcook[0]).trim() == 'DNT_COUNTRY')
+	DNT_COUNTRY = spcook[1];
+	else if(String(spcook[0]).trim() == 'DNT_SEEN_COOKIE_STATEMENT')
+	DNT_SEEN_COOKIE_STATEMENT = 1;
+}
+
+/* ****** IMPORTANT ***** DNT FUNCTIONALITY IS TEMPORARILY DISABLED UNTIL WE
+CAN PROPERLY SPEC AND DEAL WITH VARIABLES. ***************** */
+// var DNT = 0;
+// var DNT_HEADER = 1;
+// var DNT_COUNTRY = "United States";
+// var DNT_SEEN_COOKIE_STATEMENT = 1;
+
+function __enforceDNT() {
+	DNT = 1;
+	// NO. GA does not need to be disabled, setting _anonymizeIp instead.
+	// window['ga-disable-UA-2081253-1'] = true;  // governing
+	// window['ga-disable-UA-732206-2'] = true;  // govtech
+
+	var domain  = window.location.hostname;
+	var xdomain = domain.slice(domain.indexOf('.'));
+
+	// remove our tracking cookie
+	document.cookie = 'ef3_contact=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+
+	// remove Google cookies (using xdomain : .governing.com or .govtech  )
+	for (var i = 0; i < cookies.length; i++){
+		var spcook =  cookies[i].split("=");
+		var cookieName = String(spcook[0]).trim();
+		if(xdomainCookies.includes(cookieName))
+		document.cookie = cookieName +'=; Path=/; Domain=' + xdomain + '; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+	}
+}
+
+function __isNotEU(isNotEU) {
+	if( isNotEU ) {
+		console.log('is not EU');
+		// set cookies for next time;
+		var d = new Date();
+		d.setDate(d.getDate() + 30); // valid for 30 days
+		DNT = 0;
+		DNT_HEADER = 1;
+		DNT_COUNTRY = 'United States';
+		document.cookie = "DNT="+ DNT +"; Path=/; Expires="+d.toUTCString() +";" ;
+		document.cookie = "DNT_HEADER="+ DNT_HEADER +"; Path=/; Expires="+d.toUTCString() +";" ;
+		document.cookie = "DNT_COUNTRY="+ DNT_COUNTRY +"; Path=/; Expires="+d.toUTCString() +";" ;
+	} else {
+		console.log('is EU');
+		console.log('seen cookie statement '+ DNT_SEEN_COOKIE_STATEMENT);
+		console.log('DNT ', DNT);
+		if( DNT == -1 || DNT == 1 ) {
+			console.log('enforcing DNT');
+			__enforceDNT();
+		}
+	}
+}
+
+// if(DNT == -1 ){ // no cookie found, make ajax call
+
+	// var xhttp = new XMLHttpRequest();
+	// var rnd = Math.random() * 10000;
+	// var url = "/templates/common_check_country?rnd="+rnd;
+	// xhttp.open("GET", url, false); // synchronous !
+	// xhttp.send();
+	// console.log(xhttp.responseText);
+	// var resp = JSON.parse(xhttp.responseText);
+	//
+	// DNT = resp.DNT;
+	// DNT_HEADER = resp.DNT_HEADER;
+	// DNT_COUNTRY = resp.DNT_COUNTRY;
+
+	// this synchronous script call returns a soft boolean and triggers _isUS() below
+	var s = document.createElement('script');
+  s.src = 'https://analytics.erepublic.com/cms/geo/NTQuODYuMTc1LjE2O1VuaXRlZCBTdGF0ZXM=.js';
+  s.type = "text/javascript";
+  s.async = false;                                 // <-- this is important
+  document.getElementsByTagName('head')[0].appendChild(s);
+
+
+// }
+
+if(DNT == 1){
+	console.log("DNT = 1");
+
+	__enforceDNT();
+}
+
+
+
+</script>
+ 			
+	
+	<script>
+	
+		// hide interstitial in case errors
+		setTimeout(function(){
+			console.log('Auto close interstitial.');
+			var intElem = document.createElement("style");
+			intElem.setAttribute("rel", "stylesheet");
+			intElem.innerHTML = "#interstitial { display: none; }";
+			document.head.appendChild(intElem);
+		},15000);
+
+		var interCurrentPath = '/data';
+		var excludeContentId = '511965342';
+
+		// interstitial settings
+		var interExcludeSectionRaw = '/districts,/districts/awards,/districts/about,/districts/events,/districts/awards,/districts/news,/districts/podcasts,/districts/videos,/education/navigator,/education/navigator/numbers,/education/navigator/platform,/education/navigator/products,/smartcities,/navigator,/navigator/numbers,/navigator/platform,/navigator/products,/districts/media,/vmwaresecurity,/infor,/future,/future/cloudscore,/salesforce,/oracle360,/oracle360/news,/oracle360/videos,/oracle360/events,/oracle360/partners,/oracle360/papers,/oracle360/about,/oracle360/infographic,/oracle360/cloud,/oracle360/mobile,/oracle360/connected,/oracle360/analytics,/oracle360/local,/oracle360/health,/oracle360/campus,/salesforce/wyoming,/oracle360*,/oracle360/community,/salesforce/appexchange,/salesforce/trailblazers,/salesforce/news,/salesforce/papers,/bettercitizenexperience';
+		var interExcludeContentRaw = '422335023,422335593,3249343,452794863,474625203,474744043,475183093,484074711,487821191,493165881,499868212,482223131,502364571,505370201,505371011,505371542,505030532,507786381,424117004';
+		window.interstitialSettings = {};
+		window.interstitialSettings.excludeSection = interExcludeSectionRaw.split(',');
+		window.interstitialSettings.excludeContent = interExcludeContentRaw.split(',');
+		window.interstitialSettings.currentPath = interCurrentPath;
+		window.interstitialSettings.contentId = excludeContentId;
+
+		// billboard settings
+		var billboardExcludeSectionRaw = '/webinars,/100,/network,/health,/em/emergency-blogs/disaster-zone/, /computing,/salesforce,/oracle360,/oracle360/news,/oracle360/videos,/oracle360/events,/oracle360/partners,/oracle360/papers,/oracle360/about,/oracle360/infographic,/oracle360/cloud,/oracle360/mobile,/oracle360/connected,/oracle360/analytics,/oracle360/local,/oracle360/health,/oracle360/campus,/salesforce/wyoming,/oracle360*,/oracle360/community,/salesforce/appexchange,/salesforce/trailblazers,/salesforce/news,/salesforce/papers';
+		var billboardExcludeContentRaw = '423919253,452794863,474625203,474744043,476865163,484074711,442394643,494143751,494708941,499868212,505370201,505371011,505917871,507057101,440932933,507435591,507786381,508517831,509920321,509970601,510074731,510072831,510076001,510666691,510670371,424117004,503634461';
+		window.billboardSettings = {};
+		window.billboardSettings.excludeSection = billboardExcludeSectionRaw.split(',');
+		window.billboardSettings.excludeContent = billboardExcludeContentRaw.split(',');
+		window.billboardSettings.currentPath = interCurrentPath;
+		window.billboardSettings.contentId = excludeContentId;
+	</script>
+	<noscript>
+		<style>
+		#interstitial {
+			display:none !important;
+		}
+		</style>
+	</noscript>
+	<script>
+		function isMobileDevice() {
+		    return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+		};
+
+		var isIntWSSExcluded = window.interstitialSettings.excludeSection.indexOf(interCurrentPath) > -1 ? true : false;
+		var isIntContentExcluded = window.interstitialSettings.excludeContent.indexOf(excludeContentId) > -1 ? true : false;
+
+		//alert(isMobileDevice());
+	  if ( !isMobileDevice() && !isIntWSSExcluded && !isIntContentExcluded ) {
+
+			  var getCookie = function (name) {
+			  	var value = "; " + document.cookie;
+			  	var parts = value.split("; " + name + "=");
+			  	if (parts.length == 2) return parts.pop().split(";").shift();
+			  };
+
+			  // Get interstitial cookie
+			  var cookieVal = getCookie( 'intCookie' ); // return Boolean
+				
+				// check if intCookie is set
+			  if( cookieVal !== undefined ){
+			    console.log('Interstitial HAS BEEN SEEN. "intCookie" is set');
+					// hide interstitial 
+			    var intElem = document.createElement("style");
+			    intElem.setAttribute("rel", "stylesheet");
+			    intElem.innerHTML = "#interstitial { display: none; }";
+			    document.head.appendChild(intElem);
+			  } else {
+			    console.log('Interstitial NOT SEEN. intCookie not set');
+					// show interstitial 
+			    var intElem = document.createElement("style");
+			    intElem.setAttribute("rel", "stylesheet");
+			    intElem.innerHTML = "#interstitial { display: block; }";
+			    document.head.appendChild(intElem);
+			  }
+		} else {
+				// hide interstitial
+		    var intElem = document.createElement("style");
+		    intElem.setAttribute("rel", "stylesheet");
+		    intElem.innerHTML = "#interstitial { display: none; }";
+		    document.head.appendChild(intElem);
+		}
+
+	</script>
+
+
+ 	
+<!-- IMPLEMENT DO NOT TRACK   AND  EU GDPR ajax -->
+    
+<script>
+var DNT = -1;
+var DNT_HEADER = -1;
+var DNT_COUNTRY = "unknown";
+var DNT_SEEN_COOKIE_STATEMENT = 0;
+var xdomainCookies = ['__utma','__utmb','__utmc','__utmt','__utmz'];
+
+var cookies = document.cookie.split(";");
+
+
+
+// first check if we have an existing cookie
+for (var i = 0; i < cookies.length; i++){
+	var spcook = cookies[i].split("=");
+	if( String(spcook[0]).trim() == 'DNT')
+	DNT = Number(spcook[1]);
+	else if( String(spcook[0]).trim() == 'DNT_HEADER')
+	DNT_HEADER = Number(spcook[1]);
+	else if( String(spcook[0]).trim() == 'DNT_COUNTRY')
+	DNT_COUNTRY = spcook[1];
+	else if(String(spcook[0]).trim() == 'DNT_SEEN_COOKIE_STATEMENT')
+	DNT_SEEN_COOKIE_STATEMENT = 1;
+}
+
+/* ****** IMPORTANT ***** DNT FUNCTIONALITY IS TEMPORARILY DISABLED UNTIL WE
+CAN PROPERLY SPEC AND DEAL WITH VARIABLES. ***************** */
+// var DNT = 0;
+// var DNT_HEADER = 1;
+// var DNT_COUNTRY = "United States";
+// var DNT_SEEN_COOKIE_STATEMENT = 1;
+
+function __enforceDNT() {
+	DNT = 1;
+	// NO. GA does not need to be disabled, setting _anonymizeIp instead.
+	// window['ga-disable-UA-2081253-1'] = true;  // governing
+	// window['ga-disable-UA-732206-2'] = true;  // govtech
+
+	var domain  = window.location.hostname;
+	var xdomain = domain.slice(domain.indexOf('.'));
+
+	// remove our tracking cookie
+	document.cookie = 'ef3_contact=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+
+	// remove Google cookies (using xdomain : .governing.com or .govtech  )
+	for (var i = 0; i < cookies.length; i++){
+		var spcook =  cookies[i].split("=");
+		var cookieName = String(spcook[0]).trim();
+		if(xdomainCookies.includes(cookieName))
+		document.cookie = cookieName +'=; Path=/; Domain=' + xdomain + '; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+	}
+}
+
+function __isNotEU(isNotEU) {
+	if( isNotEU ) {
+		console.log('is not EU');
+		// set cookies for next time;
+		var d = new Date();
+		d.setDate(d.getDate() + 30); // valid for 30 days
+		DNT = 0;
+		DNT_HEADER = 1;
+		DNT_COUNTRY = 'United States';
+		document.cookie = "DNT="+ DNT +"; Path=/; Expires="+d.toUTCString() +";" ;
+		document.cookie = "DNT_HEADER="+ DNT_HEADER +"; Path=/; Expires="+d.toUTCString() +";" ;
+		document.cookie = "DNT_COUNTRY="+ DNT_COUNTRY +"; Path=/; Expires="+d.toUTCString() +";" ;
+	} else {
+		console.log('is EU');
+		console.log('seen cookie statement '+ DNT_SEEN_COOKIE_STATEMENT);
+		console.log('DNT ', DNT);
+		if( DNT == -1 || DNT == 1 ) {
+			console.log('enforcing DNT');
+			__enforceDNT();
+		}
+	}
+}
+
+// if(DNT == -1 ){ // no cookie found, make ajax call
+
+	// var xhttp = new XMLHttpRequest();
+	// var rnd = Math.random() * 10000;
+	// var url = "/templates/common_check_country?rnd="+rnd;
+	// xhttp.open("GET", url, false); // synchronous !
+	// xhttp.send();
+	// console.log(xhttp.responseText);
+	// var resp = JSON.parse(xhttp.responseText);
+	//
+	// DNT = resp.DNT;
+	// DNT_HEADER = resp.DNT_HEADER;
+	// DNT_COUNTRY = resp.DNT_COUNTRY;
+
+	// this synchronous script call returns a soft boolean and triggers _isUS() below
+	var s = document.createElement('script');
+  s.src = 'https://analytics.erepublic.com/cms/geo/NTQuODYuMTc1LjE2O1VuaXRlZCBTdGF0ZXM=.js';
+  s.type = "text/javascript";
+  s.async = false;                                 // <-- this is important
+  document.getElementsByTagName('head')[0].appendChild(s);
+
+
+// }
+
+if(DNT == 1){
+	console.log("DNT = 1");
+
+	__enforceDNT();
+}
+
+
+
+</script>
+ 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		  	
+			<title>Just How Common Are Body Cameras in Police Departments?</title>
+
+			<meta content="There's not much in the way of hard numbers, but a solid guess based on surveys would be that a little more than half of all law enforcement agencies in the U.S. use body-worn cameras in some capacity." name="description">
+	
+		<meta name='wss' content="Data">
+	<meta name='wssUrl' content="https://www.govtech.com/data">
+
+			<meta name='contentType' content="GT Article">
+		<meta name='source' content="">
+						<meta name='authors' content="[]">
+		<meta name='pubDate' content='2019-06-28'>
+		 			<link rel="amphtml" href="https://www.govtech.com/data/Just-How-Common-Are-Body-Cameras-in-Police-Departments.html?AMP">
+		 	
+	 														<meta property="og:title" content="Just How Common Are Body Cameras in Police Departments?">
+			<meta property="og:url" content="https://www.govtech.com/data/Just-How-Common-Are-Body-Cameras-in-Police-Departments.html">
+			<meta property="og:description" content="There's not much in the way of hard numbers, but a solid guess based on surveys would be that a little more than half of all law enforcement agencies in the U.S. use body-worn cameras in some capacity.">
+	    	<meta name="twitter:card" content="summary_large_image">
+	    	<meta name="twitter:site" content="@govtechnews">
+	    	<meta name="twitter:title" content="Just How Common Are Body Cameras in Police Departments?">
+	    	<meta name="twitter:description" content="There's not much in the way of hard numbers, but a solid guess based on surveys would be that a little more than half of all law enforcement agencies in the U.S. use body-worn cameras in some capacity.">
+							<meta property="og:image" content="https://media.governing.com/images/BWC_ADOPTION_OVER_TIME.jpg">
+				<meta name="twitter:image" content="https://media.governing.com/images/BWC_ADOPTION_OVER_TIME.jpg">
+																	 			 		 	 		<meta property="fb:pages" content="58080203190" />
+	
+
+		<meta name="p:domain_verify" content="6fde23837116ec868cad5f966cf08656"/>
+
+	
+	 		<link rel="icon" href="https://media2.govtech.com/designimages/gt_favicon.ico" type="image/x-icon">
+	 	<meta name="google-site-verification" content="X-HsOfNbpgrCBKZgw_PLvHDIwWcF7O5_2Cs2FCwwKAU" />	<meta name="google-site-verification" content="YGeeEDFGk0P1HO8tlyROBmRbQvw1H3jzQqXhn0Q55a8" />
+	<link href="https://plus.google.com/107858487983828752143" rel="publisher" />
+
+	<style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+	<link rel="stylesheet" href="//services.erepublic.com/fonts/ProximaNova/stylesheet.css">
+	<link rel="stylesheet" href="/includes/gt_2016_all.min.css?v=32106">
+
+		<script>/*<![CDATA[*/(function(w,a,b,d,s){w[a]=w[a]||{};w[a][b]=w[a][b]||{q:[],track:function(r,e,t){this.q.push({r:r,e:e,t:t||+new Date});}};var e=d.createElement(s);var f=d.getElementsByTagName(s)[0];e.async=1;e.src='//marketing.erepublic.com/cdnr/87/acton/bn/tracker/16245';f.parentNode.insertBefore(e,f);})(window,'ActOn','Beacon',document,'script');ActOn.Beacon.track();/*]]>*/</script>
+	
+	<script src="/includes/gt_2016_all.min.js?new=3295245"></script>
+
+	<!-- AdSense --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<script>
+		(adsbygoogle = window.adsbygoogle || []).push({
+		google_ad_client: "ca-pub-5318863293238952",
+		enable_page_level_ads: true
+		});
+	</script><!-- /AdSense -->
+
+		<script>
+	var googletag = googletag || {};
+	googletag.cmd = googletag.cmd || [];
+	</script>
+
+	<script language="Javascript" >var js="0.0";</script><script language="Javascript1.0" >js="1.0";</script><script language="Javascript1.1">js="1.1";</script><script language="Javascript1.2" >js="1.2";</script><script language="Javascript1.3">js="1.3";</script><script language="Javascript1.4" >js="1.4";</script><script language="Javascript1.5">js="1.5";</script><script language="Javascript1.6">js="1.6";</script><script language="Javascript1.7">js="1.7";</script><script language="Javascript1.8">js="1.8";</script><script language="Javascript1.9">js="1.9";</script><script language="javascript1.1" type="text/javascript"> 
+<!-- 
+var bb=new Image();var _ti=910;var _q="";var na=(navigator.appName=="Netscape");var ns=(navigator.appName.substring(0,9)=="Microsoft");var _qDate=new Date();var _r=(document.referrer.indexOf(getdomain(location))>-1?"":document.referrer);_q+="&5="+parseInt(_qDate.getTimezoneOffset());_q+="&35="+parseInt(_qDate.toString().indexOf("aylight")>-1?1:0);_q+="&6=511965342";_q+="&7=1688441";_q+="&8="+encodeURIComponent(document.location);_q+="&9="+encodeURIComponent(_r);_q+="&10="+encodeURIComponent(document.title);_q+="&11="+encodeURIComponent(navigator.userAgent);_q+="&12="+encodeURIComponent((na?navigator.language:navigator.userLanguage));_q+="&13="+((navigator.javaEnabled()?'1':'0'));_q+="&14="+encodeURIComponent(js);if(document.cookie.indexOf("cc")==-1)document.cookie="cc=t;";_q+="&15="+((document.cookie.indexOf("cc")==-1)?"0":"1");_q+="&16="+encodeURIComponent((screen.width+'x'+screen.height));_q+="&17="+encodeURIComponent(((ns)?screen.colorDepth:screen.pixelDepth));_q+="&18="+encodeURIComponent(Math.random());_q+="&19="+_ti;bb.src="https://s.clickability.com/s?"+_q;
+function setonclicks(a,b){var i=0;var retval=true;while(document.links[i]!=a){i++;}if(b.li[i])retval=b.li[i].oldonclick();bye(a);return retval;}
+function newonld(){if(hasonload)oldonld();lnks=new Object();var sze=document.links.length;lnks.li=new Array(sze);for (var i=0; i<sze; i++){if(document.links[i].onclick){lnks.li[i]=document.links[i];lnks.li[i].oldonclick=document.links[i].onclick;}eval("document.links[i].onclick=function(){return setonclicks(this,lnks);}");}}function bye(a){if(a.href.toLowerCase().indexOf('http')!=0)return true;if(getdomain(location)==getdomain(a))return true;if(a.href.toLowerCase().indexOf('http')!=0)return true;var _qc="https://s.clickability.com/s?19=912";_qc+="&6=511965342";_qc+="&7=1688441";_qc+="&18="+encodeURIComponent(Math.random());_qc+="&100="+a.href;_qc+="&101="+encodeURIComponent(a.text);var cc=new Image();if(na){cc.src=_qc;pc(100);}else cc.src=_qc;return true;}function pc(a){d = new Date(); while (1){m =new Date(); df = m-d;if( df > a ) {break;}}}function getdomain(a){var i=a.host.indexOf(":");return (i>=0)?a.host.substring(0,i):a.host;}if(self['setupalready']){var dosetup = false;alert('There are two $imware.tracker calls on this page. Please alert Client Services');}else{var dosetup = true;var hasonload=false;}if(dosetup && ((window.screen)||((new Array()).toSource)||((new Array()).shift&&ns))&&(navigator.userAgent.indexOf('Mac')<0)){if(window.onload){oldonld=window.onload;hasonload=true;}window.onload=newonld;var setupalready = true;}//-->
+</script><noscript>
+<img width="1" height="1" src="https://s.clickability.com/s?19=990&14=0&6=511965342&7=1688441&25=0&18=0.930017003869951">
+</noscript>
+
+
+<!-- $userRequest.getCookie("intCookie") -->
+
+	<!-- add a canonical url (hometarget)  per https://support.google.com/webmasters/answer/139066  -->
+				    	    				    	    																																											    													    															                                                                                                            																																				
+		<link rel="canonical" href="https://www.govtech.com/data/Just-How-Common-Are-Body-Cameras-in-Police-Departments.html" />
+	
+	
+		
+	
+<!-- Retargeting -->
+<script type="text/javascript">
+	(function() {
+		window._pa = window._pa || {};
+		// _pa.orderId = "myOrderId"; // OPTIONAL: attach unique conversion identifier to conversions
+		// _pa.revenue = "19.99"; // OPTIONAL: attach dynamic purchase values to conversions
+		// _pa.productId = "myProductId"; // OPTIONAL: Include product ID for use with dynamic ads
+	
+		var pa = document.createElement('script'); pa.type = 'text/javascript'; pa.async = true;
+		pa.src = ('https:' == document.location.protocol ? 'https:' : 'http:') + "//tag.marinsm.com/serve/5d83df4cf5507b1297000018.js";
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(pa, s);
+	})(); 
+</script>
+<!-- /Retargeting -->
+
+</head>
+
+<body ng-controller="global">
+		
+																
+	<div id="adParamInfo" class="hidden" domain="www.govtech.com" content-id="511965342" type="GT Article" urlname="Just,How,Common,Are,Body,Cameras,in,Police,Departments" path="data"></div>
+
+
+	
+  <div id="interstitial">
+		<style>
+			#interstitial {
+				position:fixed;
+				width:100%;
+				height:100%;
+				top:0;
+				left:0;
+				right:0;
+				bottom:0;
+				background: #EEF0F0;
+				z-index:100;
+			}
+			#interstitial > .header {
+				background-color: #092832;
+				width: 100%;
+				height: 125px;
+			}
+			#interstitial > .header .logo {
+				height: 100px;
+				margin: 10px 0;
+			}
+			#interstitial > .header .pull-right {
+				padding-top: 80px;
+			}
+			#interstitial > .header .close-button {
+				background: #f47421;
+				border:0;
+				font: 18px/24px proximanovathin;
+				padding: 2px 8px;
+				color:white;
+			}
+			#interstitial > .header .countdown {
+				font: 18px/24px proximanovathin;
+				color:white;
+			}
+			/*
+			#interstitial > .sizer {
+
+			}
+			*/
+		</style>
+
+		<div class="header">
+			<div class="container">
+								<svg ng-if="!isEm&&!isCde" class="logo" id=Layer_1 inkscape:version="0.91 r13725"sodipodi:docname=gt_2016_logo_cropped.svg version=1.1 viewBox="0 0 244.10001 130.89999"width=244.10001 x=0px xml:space=preserve xmlns=https://www.w3.org/2000/svg xmlns:cc=https://creativecommons.org/ns# xmlns:dc=https://purl.org/dc/elements/1.1/ xmlns:inkscape=https://www.inkscape.org/namespaces/inkscape xmlns:rdf=https://www.w3.org/1999/02/22-rdf-syntax-ns# xmlns:sodipodi=https://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd xmlns:svg=https://www.w3.org/2000/svg y=0px><metadata id=metadata31><rdf:RDF><cc:Work rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type rdf:resource=https://purl.org/dc/dcmitype/StillImage /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs id=defs29 /><sodipodi:namedview bordercolor=#666666 borderopacity=1 fit-margin-bottom=0 fit-margin-left=0 fit-margin-right=0 fit-margin-top=0 gridtolerance=10 guidetolerance=10 id=namedview27 inkscape:current-layer=Layer_1 inkscape:cx=-279.33898 inkscape:cy=68.1 inkscape:pageopacity=0 inkscape:pageshadow=2 inkscape:window-height=718 inkscape:window-maximized=0 inkscape:window-width=1341 inkscape:window-x=20 inkscape:window-y=43 inkscape:zoom=0.2979798 objecttolerance=10 pagecolor=#ffffff showgrid=false /><style id=style3>.st0{opacity:.51}.st1{fill:#939598}.st2{fill:#FFF}.st3{fill:#BCBEC0}.st4{fill:#F47421}</style><g id=g5 transform=translate(-139,-333.2)><g id=g7><g id=g9 class=st0 style=opacity:.51000001><g id=g11><path class=st1 d="m 270.5,452.5 c 0,4.3 1.9,5.2 4,5.2 1,0 2.2,-0.3 3.1,-1.3 l 0,-2 c -0.5,0.3 -1,0.5 -1.7,0.5 -0.9,0 -1.6,-0.3 -1.6,-2.1 l 0,-12.7 3.2,0 0,-2.6 -3.2,0 0,-8.6 -0.5,0 -2.9,1.9 0,6.6 -1.9,0 0,2.6 1.6,0 0,12.5 z m 12.8,5.2 c 3.4,0 5.3,-1.7 5.3,-5.5 l 0,-0.8 -3.1,0 0,0.6 c 0,2.1 -0.8,2.8 -1.7,2.8 -1.7,0 -2.1,-1.2 -2.1,-4.7 l 0,-2 6.6,0 c 0.3,-1.3 0.5,-3.1 0.5,-4.7 0,-4.8 -2.4,-6.3 -5,-6.3 -2.1,0 -5.8,0.6 -5.8,8.3 l 0,3.8 c -0.1,6.1 1.8,8.5 5.3,8.5 m -1.7,-12 0,-1.2 c 0,-3.4 0.6,-4.6 1.9,-4.6 1.2,0 1.8,1.1 1.8,3.7 0,0.5 0,1.6 -0.1,2.1 l -3.6,0 z m 13.4,12 c 3.3,0 5,-1.7 5,-5.5 l 0,-0.8 -3.2,0 0,0.6 c 0,2.1 -0.7,2.8 -1.4,2.8 -1.4,0 -1.9,-1.3 -1.9,-4.8 l 0,-5.7 c 0,-3.4 0.6,-4.5 1.8,-4.5 1.1,0 1.5,1.2 1.5,3.2 l 0,0.7 2.9,0 c 0.2,-0.6 0.2,-1.3 0.2,-2.2 0,-3 -1.9,-4.4 -4.6,-4.4 -2,0 -5.6,0.6 -5.6,8.3 l 0,3.8 c 0.1,5.8 2,8.5 5.3,8.5 m 6.5,-0.2 3.7,0 0,-16.2 c 0.6,-0.9 1.4,-1.4 2.1,-1.4 1,0 1.6,0.6 1.6,2.4 l 0,15.2 3.7,0 0,-15.3 c 0,-3.3 -1.3,-4.9 -3.7,-4.9 -1.4,0 -2.8,0.5 -3.9,1.9 l -0.1,-3.4 0,-6.9 -0.4,0 -2.9,1.8 0,0.2 0,26.6 z m 13.4,0 3.7,0 0,-16.2 c 0.6,-0.8 1.3,-1.4 2.1,-1.4 1,0 1.6,0.6 1.6,2.4 l 0,15.2 3.7,0 0,-15.3 c 0,-3.3 -1.3,-4.9 -3.7,-4.9 -1.5,0 -3,0.6 -4.2,2.4 l 0,0 -0.3,-2.1 -2.8,0 0,19.9 z m 18.4,0.2 c 2.3,0 5.5,-1 5.5,-8.8 l 0,-3.1 c 0,-7.9 -3.1,-8.5 -5.5,-8.5 -2.5,0 -5.6,0.7 -5.6,8.5 l 0,3.1 c 0,7.9 3.1,8.8 5.6,8.8 m 0,-2.8 c -1.4,0 -1.9,-1.2 -1.9,-5 l 0,-4.9 c 0,-3.8 0.5,-5 1.9,-5 1.3,0 1.8,1.3 1.8,5 l 0,4.9 c 0,3.8 -0.4,5 -1.8,5 m 7.4,2.6 3.7,0 0,-28.7 -0.6,0 -3,2 -0.1,0.1 0,26.6 z m 11,0.2 c 2.3,0 5.5,-1 5.5,-8.8 l 0,-3.1 c 0,-7.9 -3.1,-8.5 -5.5,-8.5 -2.5,0 -5.6,0.7 -5.6,8.5 l 0,3.1 c 0.1,7.9 3.1,8.8 5.6,8.8 m 0.1,-2.8 c -1.4,0 -1.9,-1.2 -1.9,-5 l 0,-4.9 c 0,-3.8 0.5,-5 1.9,-5 1.3,0 1.8,1.3 1.8,5 l 0,4.9 c -0.1,3.8 -0.5,5 -1.8,5 m 7.6,4 c -0.1,0.5 -0.2,0.9 -0.2,1.2 0,3.2 2.2,3.9 4.8,3.9 3.9,0 5.6,-2.8 5.6,-7.3 l 0,-19.2 -2.9,0 -0.3,2 c -0.5,-1.1 -1.5,-2.2 -3.5,-2.2 -1.5,0 -4.4,0.4 -4.4,6.9 l 0,5.3 c 0,6.8 3,7.2 4.3,7.2 1.5,0 2.5,-0.7 3.2,-1.6 l 0,3.2 c 0,2.4 -1,3 -2.1,3 -1.3,0 -2,-0.7 -2,-2.4 l -2.5,0 z m 4.7,-5.1 c -1.1,0 -1.9,-0.7 -1.9,-3.7 l 0,-6.6 c 0,-3 0.8,-3.6 1.8,-3.6 0.9,0 1.5,0.7 1.8,1.5 l 0,11 c -0.2,0.7 -0.7,1.4 -1.7,1.4 m 7.6,7.6 0,2.3 c 0.7,0.2 1.3,0.4 1.9,0.4 3.1,0 4.6,-1.9 5.3,-5.7 l 4.2,-20.8 -3.6,0 -1.7,11.1 -0.4,3.8 -0.1,0 -0.6,-3.8 -2.1,-11.1 -3.7,0 4.7,20.1 c -0.2,2.8 -1.7,4 -3.9,3.7"id=path13 inkscape:connector-curvature=0 style=fill:#939598 /><path class=st1 d="m 368.4,434.7 0,-16.8 c 0,-3.6 -1.5,-5.4 -4,-5.4 -1.6,0 -3.3,0.6 -4.6,2.6 l 0,0 -0.4,-2.3 -3.1,0 0,21.9 4,0 0,-17.7 c 0.6,-0.9 1.4,-1.5 2.3,-1.5 1.1,0 1.7,0.7 1.7,2.6 l 0,16.6 4.1,0 z m -13.7,-10.2 c 0.3,-1.4 0.5,-3.4 0.5,-5.1 0,-5.3 -2.6,-6.8 -5.5,-6.8 -2.3,0 -6.3,0.7 -6.3,9 l 0,4.1 c 0,0.7 0,1.3 0.1,1.8 l 1.9,0 0,5.8 c 1,1.1 2.3,1.5 3.8,1.5 3.8,0 5.8,-1.8 5.8,-6 l 0,-0.8 -3.4,0 0,0.7 c 0,2.3 -0.9,3 -1.9,3 -1.8,0 -2.3,-1.3 -2.3,-5.1 l 0,-2.2 7.3,0 z m -3.1,-5 c 0,0.6 0,1.8 -0.1,2.2 l -4,0 0,-1.3 c 0,-3.8 0.7,-5 2.1,-5 1.3,0.1 2,1.2 2,4.1 m -9.5,8.8 0,-10.4 c 0,-3.6 -1.5,-5.4 -4,-5.4 -1.6,0 -3.2,0.6 -4.5,2.5 -0.6,-1.7 -1.8,-2.5 -3.5,-2.5 -1.6,0 -3.3,0.6 -4.5,2.6 l 0,0 -0.3,-2.3 -3.1,0 0,21.9 4,0 0,-17.7 c 0.6,-0.9 1.4,-1.5 2.1,-1.5 1.3,0 1.9,0.7 1.9,2.6 l 0,16.6 4,0 0,-17.1 c 0,-0.2 0,-0.4 0,-0.6 0.6,-0.9 1.4,-1.5 2.1,-1.5 1.3,0 1.9,0.7 1.9,2.6 l 0,16.6 1.5,0 0,-4.7 2.4,-1.7 z m -25.6,6.4 4,0 0,-16.8 c 0,-3.6 -1.5,-5.4 -4,-5.4 -1.6,0 -3.3,0.6 -4.6,2.6 l 0,0 -0.4,-2.3 -3.1,0 0,21.9 4,0 0,-17.7 c 0.6,-0.9 1.4,-1.5 2.3,-1.5 1.1,0 1.7,0.7 1.7,2.6 l 0,16.6 z M 307,419.8 c 0.3,-0.9 0.5,-2.2 0.5,-3 0,-2.8 -1.1,-4.3 -3.4,-4.3 -1.2,0 -2.4,0.8 -3.3,2.5 l -0.3,-2.2 -2.9,0 0,21.9 2.9,0 0,-4.7 1.1,-0.8 0,-12.6 c 0.4,-0.7 0.9,-1.2 1.6,-1.2 0.6,0 1.1,0.5 1.1,2.3 l 0,2 2.7,0 z m -11,4.7 c 0.3,-1.4 0.5,-3.4 0.5,-5.1 0,-5.3 -2.6,-6.8 -5.5,-6.8 -2.3,0 -6.3,0.7 -6.3,9 l 0,4.1 c 0,6.5 2.1,9.2 5.8,9.2 3.8,0 5.8,-1.8 5.8,-6 l 0,-0.8 -3.4,0 0,0.7 c 0,2.3 -0.9,3 -1.9,3 -1.8,0 -2.3,-1.3 -2.3,-5.1 l 0,-2.2 7.3,0 z m -3.2,-5 c 0,0.6 0,1.8 -0.1,2.2 l -4,0 0,-1.3 c 0,-3.8 0.7,-5 2.1,-5 1.3,0.1 2,1.2 2,4.1 m -12.6,15.2 5,-21.9 -3.9,0 -2.1,11.6 -0.6,4.7 -0.1,0 -0.5,-4.7 -2.1,-11.6 -4,0 4.9,21.9 3.4,0 z m -7.9,-12.9 c 0,-8.6 -3.4,-9.3 -6,-9.3 -2.7,0 -6.1,0.8 -6.1,9.3 l 0,3.4 c 0,8.6 3.3,9.6 6.1,9.6 1.1,0 2.3,-0.2 3.4,-1.1 l 0,-3.7 2.4,-1.6 c 0.1,-0.9 0.2,-1.9 0.2,-3.1 l 0,-3.5 z m -4,4.6 c 0,4.1 -0.5,5.5 -2,5.5 -1.5,0 -2.1,-1.4 -2.1,-5.5 l 0,-5.4 c 0,-4.1 0.6,-5.5 2.1,-5.5 1.4,0 2,1.4 2,5.5 l 0,5.4 z m -9.1,7.4 0,-21 -3.2,0 -0.4,2.2 c -0.6,-1.2 -1.7,-2.4 -3.8,-2.4 -1.6,0 -4.8,0.4 -4.8,7.5 l 0,5.8 c 0,7.4 3.2,7.9 4.7,7.9 1.7,0 2.8,-0.8 3.5,-1.7 l 0,3.4 c 0,2.7 -1.1,3.3 -2.3,3.3 -1.4,0 -2.1,-0.7 -2.1,-2.6 l -2.8,0 c -0.1,0.5 -0.2,1 -0.2,1.3 0,3.5 2.4,4.3 5.2,4.3 4.4,-0.1 6.2,-3.1 6.2,-8 m -4,-4.8 c -0.4,0.8 -1,1.6 -2,1.6 -1.2,0 -2,-0.7 -2,-4 l 0,-7.2 c 0,-3.3 0.8,-4 2,-4 1,0 1.6,0.7 2,1.6 l 0,12 z"id=path15 inkscape:connector-curvature=0 style=fill:#939598 /><path class=st1 d="m 371,429.5 c 0,4.3 1.9,5.2 4,5.2 1,0 2.2,-0.3 3.1,-1.3 l 0,-2 c -0.5,0.3 -1,0.5 -1.7,0.5 -0.9,0 -1.6,-0.3 -1.6,-2.1 l 0,-12.7 3.2,0 0,-2.6 -3.2,0 0,-8.6 -0.5,0 -2.9,1.9 0,6.6 -1.9,0 0,2.6 1.6,0 0,12.5 z"id=path17 inkscape:connector-curvature=0 style=fill:#939598 /></g></g></g><rect class=st2 height=112.2 id=rect19 style=fill:#fff width=77.400002 x=148.10001 y=342.29999 /><polygon class=st3 id=polygon21 points="139,333.3 139.2,453.2 145,458.2 145,333.2 "style=fill:#bcbec0 /><g id=g23><path class=st4 d="m 175.9,410.8 0,-34.7 c -1.2,-2.5 -3.1,-4.7 -5.9,-4.7 -3.4,0 -5.9,2 -5.9,11.5 l 0,20.9 c 0,9.5 2.5,11.6 5.9,11.6 3.1,0 4.9,-2.3 5.9,-4.6 m 45.1,29.8 c -2.9,3.5 -6.9,4.5 -10.5,4.5 -7,0 -13.6,-3 -13.6,-17.8 l 0,-42.5 -10.7,0 0,-8.9 11.8,0 0.1,-22.7 9.8,-6.6 1.6,0 0,29.2 11,0 0,8.9 -11,0 0,43.6 c 0,6 2.5,7 5.4,7 2.4,0 4.3,-0.6 6,-1.7 l 0,7 z m -33.4,-67.4 -3.8,0 0,13.9 3.8,0 0,37.4 c 0,14.2 -5.3,23.1 -17.8,23.1 -8.4,0 -15.3,-2.5 -15.3,-12.5 0,-0.9 0.2,-2.2 0.6,-3.7 l 8.3,0 c 0,5.4 2,7.5 6.3,7.5 3.5,0 6.6,-1.7 6.6,-9.5 l 0,-10 c -2.1,2.7 -5.3,4.9 -10.2,4.9 -4.3,0 -13.7,-1.4 -13.7,-23 l 0,-16.7 c 0,-20.7 9.4,-21.9 14,-21.9 6.2,0 9.3,3.6 11,6.9 l 1.1,-6.3 9.1,0 0,9.9 z m 42.5,-40 -85.1,0 0,125.1 85.1,0 0,-125.1 z"id=path25 inkscape:connector-curvature=0 style=fill:#f47421 /></g></g></svg>
+				
+				
+				
+				<div class="pull-right text-right">
+					<button class="close-button" style="color:black;" ng-click="closeInterstitial()">CONTINUE TO SITE</button>
+				</div>
+			</div>
+		</div>
+
+							<interstitial
+				site="www.govtech.com"
+				path="_data"
+				content-id="511965342"
+				url-name="Just-How-Common-Are-Body-Cameras-in-Police-Departments"
+				ng-cloak>
+			</interstitial>
+		
+	</div>
+
+	<style>
+		#mobAdB {
+			background-color: white;
+			width: 100%;
+			position: fixed;
+			bottom: 0px;
+			z-index: 999;
+		}
+		.closeMobAdBtn {
+			background-color: black;
+			font-family: arial,sans-serif;
+			color: white;
+			font-weight: 1000;
+			font-size: 18px;
+			padding: 0px 8px;
+			border: 2px solid white;
+			border-radius: 29px;
+			position: absolute;
+			top: -10px;
+			left: 90%;
+			z-index:999;
+		}
+	</style>
+	<div id="mobAdB" class="visible-xs hidden">
+		<ad
+			ad-size="[[320,100]]"
+			site="www.govtech.com"
+			ad-unit="Mobile_Adhesion"
+			path="_data"
+			content-id="511965342"
+			url-name="Just-How-Common-Are-Body-Cameras-in-Police-Departments">
+		</ad>
+	</div>
+	<script>
+		window.addEventListener("message", function(event){
+			//console.log(event.data.adUnit);
+			if(event.data.adUnit == 'Mobile_Adhesion'){
+				$('#mobAdB').prepend('<div><a href="#closeMobAd"><span class="closeMobAdBtn">x</span></a></div>');
+				setTimeout( function(){ $(window).trigger('scroll'); }, 500 );
+			}
+		}, false);
+
+		$(document).ready(function(){
+			
+			var getCookie = function (name) {
+				var value = "; " + document.cookie;
+				var parts = value.split("; " + name + "=");
+				if (parts.length == 2) return parts.pop().split(";").shift();
+			};
+
+			//var mobAdTest = window.location.search.indexOf('?mobad=test') > -1 ? true : false;
+
+			// if mobile device and not homepage
+			if( isMobileDevice() ){
+				console.log('is mobile');
+				// exclude from sections
+				var intIsSponsored = $('.article-sponsored').length > 0 ? true : false;
+				var intIsResourceModule = false; //$('#rc_dart_ad').length > 0 ? true : false;
+				var intIsResourceModule2 = $('.exclude-inarticle').length > 0 ? true : false;
+
+				// eclude from settings in Sitewide Mobile Adhesion Settings
+				// Mobile Adhesion settings
+				var mobAdhesionExcludeSectionRaw = '/districts,/districts/news,/districts/about,/districts/events,/districts/podcasts,/districts/videos,/vmwaresecurity/,/education/saferschools,/infor,/districts/awards,/districts/media';
+				var mobAdhesionExcludeContentRaw = '493165881,424117004';
+				window.mobAdhesionSettings = {};
+				window.mobAdhesionSettings.excludeSection = mobAdhesionExcludeSectionRaw.split(',');
+				window.mobAdhesionSettings.excludeContent = mobAdhesionExcludeContentRaw.split(',');
+				
+				var isMobAdhesionExcluded = window.mobAdhesionSettings.excludeSection.indexOf(interCurrentPath) > -1 ? true : false;
+				var isMobAdhesionContentExcluded = window.mobAdhesionSettings.excludeContent.indexOf(excludeContentId) > -1 ? true : false;
+				
+				// check wildcard subsections
+				if( interCurrentPath.indexOf('/') == 0 ){
+					var pathParts = interCurrentPath.replace('/', '').split('/');
+				} else {
+					var pathParts = interCurrentPath.split('/');
+				}
+				
+				// check for subsections
+				if( pathParts.length == 2 ){
+					var isSubSectionExcluded = window.mobAdhesionSettings.excludeSection.indexOf('/'+pathParts[0]+'/*') > -1 ? true : false;
+				}
+				
+				if( pathParts.length == 3 ){
+					var isSubSectionExcluded = window.mobAdhesionSettings.excludeSection.indexOf('/'+pathParts[0]+'/'+pathParts[1]+'/*') > -1 ? true : false;
+				}
+
+				// if test, ignore conditions
+				if( window.location.search.indexOf('moad=1') == -1 ){
+
+					if( isSubSectionExcluded ){
+						console.log('Mobile_Adhesion is excluded from sub section per Sitewide Settings [493635451]');
+						$('#mobAdB').remove();
+					}
+
+					if( isMobAdhesionExcluded || isMobAdhesionContentExcluded ){
+						console.log('Mobile_Adhesion is excluded from this section per Sitewide Settings [493635451]');
+						$('#mobAdB').remove();
+					}
+
+					if( intIsSponsored ){
+						console.log('Sponsored, removing mobile Mobile_Adhesion');
+						$('#mobAdB').remove();
+					}
+
+					// remove if resource module
+					/* Sep 24, 2019: remove this logic
+					if( intIsResourceModule || intIsResourceModule2 ){
+						console.log('Resource Module detected, removing mobile Mobile_Adhesion');
+						$('#mobAdB').remove();
+					}
+					*/
+
+					// Get Mobile_Adhesion cookie
+					var mobAdcookieVal = getCookie( 'mobAdCookie' ); // return Boolean
+
+					if( mobAdcookieVal !== undefined ){
+						console.log('Mobile_Adhesion HAS BEEN seen. "mobAdCookie" is set');
+						$('#mobAdB').remove();
+					}
+					
+				}
+
+				// load ads if '#mobAdB' isn't removed
+				if( $('#mobAdB').length != 0 ){
+
+					$('#mobAdB').removeClass('hidden');
+					$(window).trigger('scroll');
+					
+					var checkMobileAdhesionCounter = 0;
+					var checkMobileAdhesion = setInterval(function(){
+						if( $('div[ad-unit="Mobile_Adhesion"]').length > 0 || checkMobileAdhesionCounter > 5 ){
+							// do something
+							$(window).scroll();
+							// clear interval
+							clearInterval(checkMobileAdhesion);
+							console.log('mobile adhesion check stopped');
+							} else {
+								checkMobileAdhesionCounter++;
+							}
+						console.log('checking mobile adhesion...'); 
+
+					},500);
+
+					$('#mobAdB').on('click', '.closeMobAdBtn', function(e){
+						console.log('mobAdB close btn clicked. Removing mobile adhesion.');
+						e.preventDefault();
+						$('#mobAdB').addClass('hidden');
+						$('#mobAdB').removeClass('visible-xs');
+
+						console.log('Mobile_Adhesion HAS NOT been seen. Setting "mobAdCookie" cookie');
+						var d1 = new Date();
+						var expireDate = new Date ( d1 );
+						expireDate.setMinutes ( d1.getMinutes() + 20 ); // 20 minutes
+						var expiresTemp = "expires="+ expireDate.toUTCString();
+						document.cookie = "mobAdCookie=true;" + expiresTemp + ";path=/";
+					});
+				}
+				
+			}
+
+		});
+	</script>
+
+
+
+
+
+
+	<!-- COOKIE STATEMENT -->
+   <div id="id_cookie_statement" style="display:none;
+  background-color:red;
+  color:white;
+  padding:1rem; ">This website uses cookies in order to offer you the most relevant information.
+  <button style="background-color:#ededee;
+    float:right;
+    color:red;
+    margin-top:0;
+    padding:3px;
+    border:2px;
+    font-size:25px;
+    line-height:20px;
+    margin-left:15px;" onClick="seen_cookie_statement()">×</button>
+  <button style="background-color:#ededee;
+    float:right;
+    color:red;
+    margin-top:0;
+    padding:3px;
+    border:2px;
+    line-height:20px;
+    margin-left:15px;" onClick="learn_more()">Learn More</button>
+  <button style="background-color:#ededee;
+    float:right;
+    color:red;
+    margin-top:0;
+    padding:3px;
+    border:2px;
+    line-height:20px;
+    margin-left:15px;" onClick="i_accept()">I Accept</button>
+</div>
+<!-- COOKIE STATEMENT SCRIPT -->
+
+<script>
+if(typeof DNT != 'undefined' && DNT==1 &&  DNT_SEEN_COOKIE_STATEMENT != 1 ) {
+  document.querySelector('#id_cookie_statement').style.display='block';
+  // --> log that GDPR was shown.
+  (new Image()).src = '//analytics.erepublic.com/cms/timing/show_gdpr/'+((new Date()).getTime() - window.performance.timing.responseStart)+'.gif';
+}
+function seen_cookie_statement(){
+  var d = new Date();
+  d.setDate(d.getDate() + 30); // valid for 30 days
+  document.querySelector('#id_cookie_statement').style.display='none';
+  document.cookie = "DNT_SEEN_COOKIE_STATEMENT=1; Path=/; Expires="+d.toUTCString() +";" ;
+}
+function i_accept(){
+  var d = new Date();
+  d.setDate(d.getDate() + 30); // valid for 30 days
+  document.cookie = "DNT=0; Path=/; Expires="+d.toUTCString() +";" ;
+  var logger = new Image();
+  var ct = appCore && appCore.__persistentData && appCore.__persistentData.ef3_contact ? appCore.__persistentData.ef3_contact : 'unidentified';
+  logger.src = '//analytics.erepublic.com/cms/gdpr/'+btoa(ct+';54.86.175.16')+'.gif';
+  logger.addEventListener('load', function() {
+    location.reload();
+  });
+}
+function learn_more(){
+  window.location="//www.erepublic.com/privacy";
+}
+</script>
+
+ 
+	<header ng-class="{'header-open':headerOpen}">
+		<div class="container">
+			<a href="/">
+				<svg id="logo" height=130.89999 id=Layer_1 inkscape:version="0.91 r13725" sodipodi:docname=gt_2016_logo_cropped.svg version=1.1 viewBox="0 0 244.10001 130.89999"width=244.10001 x=0px xml:space=preserve xmlns=https://www.w3.org/2000/svg xmlns:cc=https://creativecommons.org/ns# xmlns:dc=https://purl.org/dc/elements/1.1/ xmlns:inkscape=https://www.inkscape.org/namespaces/inkscape xmlns:rdf=https://www.w3.org/1999/02/22-rdf-syntax-ns# xmlns:sodipodi=https://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd xmlns:svg=https://www.w3.org/2000/svg y=0px><style id=style3>.st0{opacity:.51}.st1{fill:#939598}.st2{fill:#FFF}.st3{fill:#BCBEC0}.st4{fill:#F47421}</style><g id=g5 transform=translate(-139,-333.2)><g id=g7><g id=g9 class=st0 style=opacity:.51000001><g id=g11><path class=st1 d="m 270.5,452.5 c 0,4.3 1.9,5.2 4,5.2 1,0 2.2,-0.3 3.1,-1.3 l 0,-2 c -0.5,0.3 -1,0.5 -1.7,0.5 -0.9,0 -1.6,-0.3 -1.6,-2.1 l 0,-12.7 3.2,0 0,-2.6 -3.2,0 0,-8.6 -0.5,0 -2.9,1.9 0,6.6 -1.9,0 0,2.6 1.6,0 0,12.5 z m 12.8,5.2 c 3.4,0 5.3,-1.7 5.3,-5.5 l 0,-0.8 -3.1,0 0,0.6 c 0,2.1 -0.8,2.8 -1.7,2.8 -1.7,0 -2.1,-1.2 -2.1,-4.7 l 0,-2 6.6,0 c 0.3,-1.3 0.5,-3.1 0.5,-4.7 0,-4.8 -2.4,-6.3 -5,-6.3 -2.1,0 -5.8,0.6 -5.8,8.3 l 0,3.8 c -0.1,6.1 1.8,8.5 5.3,8.5 m -1.7,-12 0,-1.2 c 0,-3.4 0.6,-4.6 1.9,-4.6 1.2,0 1.8,1.1 1.8,3.7 0,0.5 0,1.6 -0.1,2.1 l -3.6,0 z m 13.4,12 c 3.3,0 5,-1.7 5,-5.5 l 0,-0.8 -3.2,0 0,0.6 c 0,2.1 -0.7,2.8 -1.4,2.8 -1.4,0 -1.9,-1.3 -1.9,-4.8 l 0,-5.7 c 0,-3.4 0.6,-4.5 1.8,-4.5 1.1,0 1.5,1.2 1.5,3.2 l 0,0.7 2.9,0 c 0.2,-0.6 0.2,-1.3 0.2,-2.2 0,-3 -1.9,-4.4 -4.6,-4.4 -2,0 -5.6,0.6 -5.6,8.3 l 0,3.8 c 0.1,5.8 2,8.5 5.3,8.5 m 6.5,-0.2 3.7,0 0,-16.2 c 0.6,-0.9 1.4,-1.4 2.1,-1.4 1,0 1.6,0.6 1.6,2.4 l 0,15.2 3.7,0 0,-15.3 c 0,-3.3 -1.3,-4.9 -3.7,-4.9 -1.4,0 -2.8,0.5 -3.9,1.9 l -0.1,-3.4 0,-6.9 -0.4,0 -2.9,1.8 0,0.2 0,26.6 z m 13.4,0 3.7,0 0,-16.2 c 0.6,-0.8 1.3,-1.4 2.1,-1.4 1,0 1.6,0.6 1.6,2.4 l 0,15.2 3.7,0 0,-15.3 c 0,-3.3 -1.3,-4.9 -3.7,-4.9 -1.5,0 -3,0.6 -4.2,2.4 l 0,0 -0.3,-2.1 -2.8,0 0,19.9 z m 18.4,0.2 c 2.3,0 5.5,-1 5.5,-8.8 l 0,-3.1 c 0,-7.9 -3.1,-8.5 -5.5,-8.5 -2.5,0 -5.6,0.7 -5.6,8.5 l 0,3.1 c 0,7.9 3.1,8.8 5.6,8.8 m 0,-2.8 c -1.4,0 -1.9,-1.2 -1.9,-5 l 0,-4.9 c 0,-3.8 0.5,-5 1.9,-5 1.3,0 1.8,1.3 1.8,5 l 0,4.9 c 0,3.8 -0.4,5 -1.8,5 m 7.4,2.6 3.7,0 0,-28.7 -0.6,0 -3,2 -0.1,0.1 0,26.6 z m 11,0.2 c 2.3,0 5.5,-1 5.5,-8.8 l 0,-3.1 c 0,-7.9 -3.1,-8.5 -5.5,-8.5 -2.5,0 -5.6,0.7 -5.6,8.5 l 0,3.1 c 0.1,7.9 3.1,8.8 5.6,8.8 m 0.1,-2.8 c -1.4,0 -1.9,-1.2 -1.9,-5 l 0,-4.9 c 0,-3.8 0.5,-5 1.9,-5 1.3,0 1.8,1.3 1.8,5 l 0,4.9 c -0.1,3.8 -0.5,5 -1.8,5 m 7.6,4 c -0.1,0.5 -0.2,0.9 -0.2,1.2 0,3.2 2.2,3.9 4.8,3.9 3.9,0 5.6,-2.8 5.6,-7.3 l 0,-19.2 -2.9,0 -0.3,2 c -0.5,-1.1 -1.5,-2.2 -3.5,-2.2 -1.5,0 -4.4,0.4 -4.4,6.9 l 0,5.3 c 0,6.8 3,7.2 4.3,7.2 1.5,0 2.5,-0.7 3.2,-1.6 l 0,3.2 c 0,2.4 -1,3 -2.1,3 -1.3,0 -2,-0.7 -2,-2.4 l -2.5,0 z m 4.7,-5.1 c -1.1,0 -1.9,-0.7 -1.9,-3.7 l 0,-6.6 c 0,-3 0.8,-3.6 1.8,-3.6 0.9,0 1.5,0.7 1.8,1.5 l 0,11 c -0.2,0.7 -0.7,1.4 -1.7,1.4 m 7.6,7.6 0,2.3 c 0.7,0.2 1.3,0.4 1.9,0.4 3.1,0 4.6,-1.9 5.3,-5.7 l 4.2,-20.8 -3.6,0 -1.7,11.1 -0.4,3.8 -0.1,0 -0.6,-3.8 -2.1,-11.1 -3.7,0 4.7,20.1 c -0.2,2.8 -1.7,4 -3.9,3.7"id=path13 inkscape:connector-curvature=0 style=fill:#939598 /><path class=st1 d="m 368.4,434.7 0,-16.8 c 0,-3.6 -1.5,-5.4 -4,-5.4 -1.6,0 -3.3,0.6 -4.6,2.6 l 0,0 -0.4,-2.3 -3.1,0 0,21.9 4,0 0,-17.7 c 0.6,-0.9 1.4,-1.5 2.3,-1.5 1.1,0 1.7,0.7 1.7,2.6 l 0,16.6 4.1,0 z m -13.7,-10.2 c 0.3,-1.4 0.5,-3.4 0.5,-5.1 0,-5.3 -2.6,-6.8 -5.5,-6.8 -2.3,0 -6.3,0.7 -6.3,9 l 0,4.1 c 0,0.7 0,1.3 0.1,1.8 l 1.9,0 0,5.8 c 1,1.1 2.3,1.5 3.8,1.5 3.8,0 5.8,-1.8 5.8,-6 l 0,-0.8 -3.4,0 0,0.7 c 0,2.3 -0.9,3 -1.9,3 -1.8,0 -2.3,-1.3 -2.3,-5.1 l 0,-2.2 7.3,0 z m -3.1,-5 c 0,0.6 0,1.8 -0.1,2.2 l -4,0 0,-1.3 c 0,-3.8 0.7,-5 2.1,-5 1.3,0.1 2,1.2 2,4.1 m -9.5,8.8 0,-10.4 c 0,-3.6 -1.5,-5.4 -4,-5.4 -1.6,0 -3.2,0.6 -4.5,2.5 -0.6,-1.7 -1.8,-2.5 -3.5,-2.5 -1.6,0 -3.3,0.6 -4.5,2.6 l 0,0 -0.3,-2.3 -3.1,0 0,21.9 4,0 0,-17.7 c 0.6,-0.9 1.4,-1.5 2.1,-1.5 1.3,0 1.9,0.7 1.9,2.6 l 0,16.6 4,0 0,-17.1 c 0,-0.2 0,-0.4 0,-0.6 0.6,-0.9 1.4,-1.5 2.1,-1.5 1.3,0 1.9,0.7 1.9,2.6 l 0,16.6 1.5,0 0,-4.7 2.4,-1.7 z m -25.6,6.4 4,0 0,-16.8 c 0,-3.6 -1.5,-5.4 -4,-5.4 -1.6,0 -3.3,0.6 -4.6,2.6 l 0,0 -0.4,-2.3 -3.1,0 0,21.9 4,0 0,-17.7 c 0.6,-0.9 1.4,-1.5 2.3,-1.5 1.1,0 1.7,0.7 1.7,2.6 l 0,16.6 z M 307,419.8 c 0.3,-0.9 0.5,-2.2 0.5,-3 0,-2.8 -1.1,-4.3 -3.4,-4.3 -1.2,0 -2.4,0.8 -3.3,2.5 l -0.3,-2.2 -2.9,0 0,21.9 2.9,0 0,-4.7 1.1,-0.8 0,-12.6 c 0.4,-0.7 0.9,-1.2 1.6,-1.2 0.6,0 1.1,0.5 1.1,2.3 l 0,2 2.7,0 z m -11,4.7 c 0.3,-1.4 0.5,-3.4 0.5,-5.1 0,-5.3 -2.6,-6.8 -5.5,-6.8 -2.3,0 -6.3,0.7 -6.3,9 l 0,4.1 c 0,6.5 2.1,9.2 5.8,9.2 3.8,0 5.8,-1.8 5.8,-6 l 0,-0.8 -3.4,0 0,0.7 c 0,2.3 -0.9,3 -1.9,3 -1.8,0 -2.3,-1.3 -2.3,-5.1 l 0,-2.2 7.3,0 z m -3.2,-5 c 0,0.6 0,1.8 -0.1,2.2 l -4,0 0,-1.3 c 0,-3.8 0.7,-5 2.1,-5 1.3,0.1 2,1.2 2,4.1 m -12.6,15.2 5,-21.9 -3.9,0 -2.1,11.6 -0.6,4.7 -0.1,0 -0.5,-4.7 -2.1,-11.6 -4,0 4.9,21.9 3.4,0 z m -7.9,-12.9 c 0,-8.6 -3.4,-9.3 -6,-9.3 -2.7,0 -6.1,0.8 -6.1,9.3 l 0,3.4 c 0,8.6 3.3,9.6 6.1,9.6 1.1,0 2.3,-0.2 3.4,-1.1 l 0,-3.7 2.4,-1.6 c 0.1,-0.9 0.2,-1.9 0.2,-3.1 l 0,-3.5 z m -4,4.6 c 0,4.1 -0.5,5.5 -2,5.5 -1.5,0 -2.1,-1.4 -2.1,-5.5 l 0,-5.4 c 0,-4.1 0.6,-5.5 2.1,-5.5 1.4,0 2,1.4 2,5.5 l 0,5.4 z m -9.1,7.4 0,-21 -3.2,0 -0.4,2.2 c -0.6,-1.2 -1.7,-2.4 -3.8,-2.4 -1.6,0 -4.8,0.4 -4.8,7.5 l 0,5.8 c 0,7.4 3.2,7.9 4.7,7.9 1.7,0 2.8,-0.8 3.5,-1.7 l 0,3.4 c 0,2.7 -1.1,3.3 -2.3,3.3 -1.4,0 -2.1,-0.7 -2.1,-2.6 l -2.8,0 c -0.1,0.5 -0.2,1 -0.2,1.3 0,3.5 2.4,4.3 5.2,4.3 4.4,-0.1 6.2,-3.1 6.2,-8 m -4,-4.8 c -0.4,0.8 -1,1.6 -2,1.6 -1.2,0 -2,-0.7 -2,-4 l 0,-7.2 c 0,-3.3 0.8,-4 2,-4 1,0 1.6,0.7 2,1.6 l 0,12 z"id=path15 inkscape:connector-curvature=0 style=fill:#939598 /><path class=st1 d="m 371,429.5 c 0,4.3 1.9,5.2 4,5.2 1,0 2.2,-0.3 3.1,-1.3 l 0,-2 c -0.5,0.3 -1,0.5 -1.7,0.5 -0.9,0 -1.6,-0.3 -1.6,-2.1 l 0,-12.7 3.2,0 0,-2.6 -3.2,0 0,-8.6 -0.5,0 -2.9,1.9 0,6.6 -1.9,0 0,2.6 1.6,0 0,12.5 z"id=path17 inkscape:connector-curvature=0 style=fill:#939598 /></g></g></g><rect class=st2 height=112.2 id=rect19 style=fill:#fff width=77.400002 x=148.10001 y=342.29999 /><polygon class=st3 id=polygon21 points="139,333.3 139.2,453.2 145,458.2 145,333.2 "style=fill:#bcbec0 /><g id=g23><path class=st4 d="m 175.9,410.8 0,-34.7 c -1.2,-2.5 -3.1,-4.7 -5.9,-4.7 -3.4,0 -5.9,2 -5.9,11.5 l 0,20.9 c 0,9.5 2.5,11.6 5.9,11.6 3.1,0 4.9,-2.3 5.9,-4.6 m 45.1,29.8 c -2.9,3.5 -6.9,4.5 -10.5,4.5 -7,0 -13.6,-3 -13.6,-17.8 l 0,-42.5 -10.7,0 0,-8.9 11.8,0 0.1,-22.7 9.8,-6.6 1.6,0 0,29.2 11,0 0,8.9 -11,0 0,43.6 c 0,6 2.5,7 5.4,7 2.4,0 4.3,-0.6 6,-1.7 l 0,7 z m -33.4,-67.4 -3.8,0 0,13.9 3.8,0 0,37.4 c 0,14.2 -5.3,23.1 -17.8,23.1 -8.4,0 -15.3,-2.5 -15.3,-12.5 0,-0.9 0.2,-2.2 0.6,-3.7 l 8.3,0 c 0,5.4 2,7.5 6.3,7.5 3.5,0 6.6,-1.7 6.6,-9.5 l 0,-10 c -2.1,2.7 -5.3,4.9 -10.2,4.9 -4.3,0 -13.7,-1.4 -13.7,-23 l 0,-16.7 c 0,-20.7 9.4,-21.9 14,-21.9 6.2,0 9.3,3.6 11,6.9 l 1.1,-6.3 9.1,0 0,9.9 z m 42.5,-40 -85.1,0 0,125.1 85.1,0 0,-125.1 z"id=path25 inkscape:connector-curvature=0 style=fill:#f47421 /></g></g></svg>
+			</a>
+			<nav>
+				<a href="#" class="search pull-right visible-md visible-lg" ng-click="toggleHeader();loadGoogleSearch()">
+					<svg fill="#F47421" height="20" viewBox="0 0 24 24" width="20" xmlns="https://www.w3.org/2000/svg">
+						<path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+						<path d="M0 0h24v24H0z" fill="none"></path>
+					</svg>
+				</a>
+				<span class="links">
+					<a href="https://www.govtech.com/magazines/gt/Government-Technology-OctoberNovember-2019.html?promo_code=topnav">MAGAZINE</a>
+					<a href="/subscribe/newsletters?promo_code=topnav">NEWSLETTERS</a>
+					<a href="/events?promo_code=topnav">EVENTS</a>
+					<a href="/library?promo_code=topnav">PAPERS</a>
+					<a href="/navigator?promo_code=topnav">NAVIGATOR</a>
+					<div class="dropdown">
+						<a class="dropdown-toggle" href="#">SECTIONS</a>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href="/education?promo_code=topnav">CENTER FOR DIGITAL EDUCATION</a>
+							<a class="dropdown-item" href="/cdg?promo_code=topnav">CENTER FOR DIGITAL GOVERNMENT</a>
+							<a class="dropdown-item" href="/em?promo_code=topnav">EMERGENCY MANAGEMENT</a>
+							<a class="dropdown-item" href="/fs?promo_code=topnav">FUTURESTRUCTURE</a>
+							<a class="dropdown-item" href="/districts?promo_code=topnav">SPECIAL DISTRICTS</a>
+							<a class="dropdown-item" href="/dc?promo_code=topnav">DIGITAL COMMUNITIES</a>
+							<a class="dropdown-item" href="/cdg/dspi?promo_code=topnav">DIGITAL STATES PERFORMANCE INSTITUTE</a>
+							<div style="border-top:1px solid #666; margin-bottom:10px;"></div>
+							<a class="dropdown-item" href="/top-25?promo_code=topnav">TOP 25</a>
+							<a class="dropdown-item" href="/100?promo_code=topnav">GOVTECH 100</a>
+							<a class="dropdown-item" href="/special-projects?promo_code=topnav">SPECIAL PROJECTS</a>
+						</div>
+					</div>
+					<a href="/search">SEARCH</a>
+				</span>
+				<span class="sub-links">
+					<a href="/security?promo_code=topnav">Cybersecurity</a>
+					<a href="/biz?promo_code=topnav">GovTech Biz</a>
+					<a href="/products?promo_code=topnav">Emerging Tech</a>
+					<a href="/computing?promo_code=topnav">Cloud</a>
+					<a href="/gov-experience?promo_code=topnav">Gov Experience</a>
+					<a href="/topics?promo_code=topnav">More</a>
+				</span>
+				<span class="toggles pull-right">
+					<a href="#" class="menu-hamburger" ng-click="toggleHeader();loadGoogleSearch()">
+						<svg fill="#FFFFFF" height="20" viewBox="0 0 24 24" width="20" xmlns="https://www.w3.org/2000/svg">
+							<path d="M0 0h24v24H0z" fill="none"/>
+							<path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+						</svg>
+					</a>
+				</span>
+			</nav>
+			<div ng-show="headerOpen" id="google_search">
+				<svg width='23px' height='23px' xmlns="https://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="uil-default"><rect x="0" y="0" width="100" height="100" fill="none" class="bk"></rect><rect  x='48.5' y='40' width='3' height='20' rx='2' ry='2' fill='#f47421' transform='rotate(0 50 50) translate(0 -35)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0s' repeatCount='indefinite'/></rect><rect  x='48.5' y='40' width='3' height='20' rx='2' ry='2' fill='#f47421' transform='rotate(18 50 50) translate(0 -35)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.05s' repeatCount='indefinite'/></rect><rect  x='48.5' y='40' width='3' height='20' rx='2' ry='2' fill='#f47421' transform='rotate(36 50 50) translate(0 -35)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.1s' repeatCount='indefinite'/></rect><rect  x='48.5' y='40' width='3' height='20' rx='2' ry='2' fill='#f47421' transform='rotate(54 50 50) translate(0 -35)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.15s' repeatCount='indefinite'/></rect><rect  x='48.5' y='40' width='3' height='20' rx='2' ry='2' fill='#f47421' transform='rotate(72 50 50) translate(0 -35)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.2s' repeatCount='indefinite'/></rect><rect  x='48.5' y='40' width='3' height='20' rx='2' ry='2' fill='#f47421' transform='rotate(90 50 50) translate(0 -35)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.25s' repeatCount='indefinite'/></rect><rect  x='48.5' y='40' width='3' height='20' rx='2' ry='2' fill='#f47421' transform='rotate(108 50 50) translate(0 -35)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.3s' repeatCount='indefinite'/></rect><rect  x='48.5' y='40' width='3' height='20' rx='2' ry='2' fill='#f47421' transform='rotate(126 50 50) translate(0 -35)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.35s' repeatCount='indefinite'/></rect><rect  x='48.5' y='40' width='3' height='20' rx='2' ry='2' fill='#f47421' transform='rotate(144 50 50) translate(0 -35)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.4s' repeatCount='indefinite'/></rect><rect  x='48.5' y='40' width='3' height='20' rx='2' ry='2' fill='#f47421' transform='rotate(162 50 50) translate(0 -35)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.45s' repeatCount='indefinite'/></rect><rect  x='48.5' y='40' width='3' height='20' rx='2' ry='2' fill='#f47421' transform='rotate(180 50 50) translate(0 -35)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.5s' repeatCount='indefinite'/></rect><rect  x='48.5' y='40' width='3' height='20' rx='2' ry='2' fill='#f47421' transform='rotate(198 50 50) translate(0 -35)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.55s' repeatCount='indefinite'/></rect><rect  x='48.5' y='40' width='3' height='20' rx='2' ry='2' fill='#f47421' transform='rotate(216 50 50) translate(0 -35)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.6s' repeatCount='indefinite'/></rect><rect  x='48.5' y='40' width='3' height='20' rx='2' ry='2' fill='#f47421' transform='rotate(234 50 50) translate(0 -35)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.65s' repeatCount='indefinite'/></rect><rect  x='48.5' y='40' width='3' height='20' rx='2' ry='2' fill='#f47421' transform='rotate(252 50 50) translate(0 -35)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.7s' repeatCount='indefinite'/></rect><rect  x='48.5' y='40' width='3' height='20' rx='2' ry='2' fill='#f47421' transform='rotate(270 50 50) translate(0 -35)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.75s' repeatCount='indefinite'/></rect><rect  x='48.5' y='40' width='3' height='20' rx='2' ry='2' fill='#f47421' transform='rotate(288 50 50) translate(0 -35)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.8s' repeatCount='indefinite'/></rect><rect  x='48.5' y='40' width='3' height='20' rx='2' ry='2' fill='#f47421' transform='rotate(306 50 50) translate(0 -35)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.85s' repeatCount='indefinite'/></rect><rect  x='48.5' y='40' width='3' height='20' rx='2' ry='2' fill='#f47421' transform='rotate(324 50 50) translate(0 -35)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.9s' repeatCount='indefinite'/></rect><rect  x='48.5' y='40' width='3' height='20' rx='2' ry='2' fill='#f47421' transform='rotate(342 50 50) translate(0 -35)'>  <animate attributeName='opacity' from='1' to='0' dur='1s' begin='0.95s' repeatCount='indefinite'/></rect></svg>
+				<gcse:search></gcse:search>
+			</div>
+					</div>
+
+	</header>
+	
+	<div class="container">
+		<div id="subsite_logo">
+					</div>
+							<div class="visible-lg" id="t2_ad">
+												<!-- $req.param('i1test') /  -->
+								<ad
+					ad-size="[[728,90]]"
+					site="www.govtech.com"
+					ad-unit="T2"
+					path="_data"
+					content-id="511965342"
+					url-name="Just-How-Common-Are-Body-Cameras-in-Police-Departments">
+				</ad>
+			</div>
+			
+			
+			</div>
+
+ 	<section id="wss_header">
+		<div class="container">
+			 				<div class="row">
+					<div class="col-md-12">
+						 							<a href="/data">
+								<div class="breadcrumb">Data</div>
+							</a>
+						 					</div>
+					<div class="clearfix"></div>
+				</div>
+			 		</div>
+	</section>
+ 
+ 				<style>
+
+		.article-sponsored {
+			background-color: #ccc;
+			padding: 6px 8px 2px 8px;
+			font-weight: bold;
+			text-transform: uppercase;
+			margin-top: -10px;
+			font-size: 12px;
+			margin-bottom: 10px;
+		}
+		#in_article_ad {
+			visibility: hidden;
+		}
+		#in_article_ad:before {
+		    content: ' ADVERTISEMENT';
+		    width: 100%;
+		    display: block;
+								color: #ccc;
+						    text-align: center;
+		    font-family: proximanovathin;
+		    left: 0;
+		    top: 0;
+		    font-size: 12px;
+		}
+		#in_article_ad img {
+		    max-width: none !important;
+		}
+		h2 {
+			margin-top:0;
+			line-height: 1em;
+			font-family: ProximaNovaSemibold, arial;
+		}
+		h6, h6 a {
+			font-size: 9px;
+			line-height: 1em;
+			letter-spacing: 1px;
+			margin-top: 10px;
+			color: #f47421;
+			text-transform: uppercase;
+			font-family: ProximaNovaRegular, arial;
+		}
+		#sidebar .container {
+		    width: 100%;
+		}
+		#sidebar .module-header {
+		    text-align: center;
+		    width: 100%;
+		    background: #f47421;
+		}
+		#sidebar .module-header > span {
+			display: inline-block;
+			background: #f47421;
+			color: white;
+			font-size: 16px;
+			font-weight: 300;
+			letter-spacing: 4px;
+			padding: 5px 20px;
+			text-transform: uppercase;
+		}
+		#sidebar .module-body {
+			background: #eee;
+			padding: 20px 10px;
+		}
+		#sidebar .module-body .sub-feature-article {
+		    margin-bottom: 25px;
+		}
+		#sidebar .module-body .sub-feature-article h2 {
+			margin-top:0;
+			font-size: 18px;
+			margin-bottom: 5px;
+			line-height: 1em;
+		}
+		#sidebar .module-body .col-md-4 {
+		    clear: both;
+		    width: 100%;
+		}
+		.page-footer .page-module .sub-feature-article h2 {
+		    font-size: 18px;
+		    line-height: 1em;
+		}
+		.page-footer .module-header {
+		    text-align: center;
+		    width: 100%;
+		    background: #f47421;
+		    margin-bottom: 15px;
+		}
+		.page-footer .module-header > span {
+		    display: inline-block;
+		    background: #f47421;
+		    color: white;https://media.erepublic.com/image/pdf.jpg
+		    font-size: 16px;
+		    font-weight: 300;
+		    letter-spacing: 4px;
+		    padding: 5px 20px;
+		    text-transform: uppercase;
+		}
+		@media (min-width: 992px) {
+			#article_body .col-md-10 {
+					width:87% !important; 
+				}
+				.col-md-2.social {
+					width:12% !important;
+				}
+
+		}
+		</style>
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+		<section class="page detail" ng-controller="article">
+						<div class="container">
+				<div class="row row-flex">
+					<div class="col-md-8">
+						<div id="article_header">
+							<h1>Just How Common Are Body Cameras in Police Departments?</h1>
+							<p class="description">There's not much in the way of hard numbers, but a solid guess based on surveys would be that a little more than half of all law enforcement agencies in the U.S. use body-worn cameras in some capacity.</p>
+							<div class="author-detail">
+								<span class="author">
+									 									    	    				    	    																																											    													    															
+
+    	    																																																		    							    															
+
+
+
+
+
+
+
+
+
+
+                	    				    	    																													    													    															    	    				    	    																																											    													    															                                                                                                            																																				
+																												
+
+        
+                        
+        
+                
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+          
+        
+    
+
+
+
+
+
+																																				
+
+
+                                                                              																																				
+ 																			by <a rel='author' href='https://www.govtech.com/authors/Ben-Miller.html'>Ben Miller</a>
+																	</span>
+								<span class="orange-highlight"> / </span>
+								<span class="date">
+																			June 28, 2019
+																	</span>
+	
+								<div class="clearfix"></div>
+							</div>
+														 								 									 										  										 										 									 	
+									 																				      										<div id="feature_image">
+											<amp-img src="//media2.govtech.com/images/940*630/BWC_ADOPTION_OVER_TIME.jpg" width="940" height="630" alt="Body camera adoption over time" layout="responsive"></amp-img>
+											 												<span class="caption">Data up to 2016 from surveys, 2017 and 2018 are estimates assuming a continuing rate of increase.</span>
+											 											 												<span class="credit">
+													Center for Digital Government
+												</span>
+											 										</div>
+									 															 						</div>
+						<div class="row" id="article_body">
+							<div class="col-md-2 social">
+								<div class="facebook"
+									socialshare
+									socialshare-url="https://www.govtech.com/data/Just-How-Common-Are-Body-Cameras-in-Police-Departments.html"
+									socialshare-provider="facebook">
+									<svg enable-background="new 0 0 48 48" id="Layer_1" version="1.1" viewBox="0 0 48 48" xml:space="preserve" xmlns="//www.w3.org/2000/svg" xmlns:xlink="//www.w3.org/1999/xlink">
+										<circle cx="24" cy="24" fill="#4E71A8" r="24" />
+										<path d="M29.9,19.5h-4v-2.6c0-1,0.7-1.2,1.1-1.2c0.5,0,2.8,0,2.8,0v-4.4l-3.9,0c-4.4,0-5.3,3.3-5.3,5.3v2.9h-2.5V24  h2.5c0,5.8,0,12.7,0,12.7h5.3c0,0,0-7,0-12.7h3.6L29.9,19.5z" fill="#FFFFFF" />
+									</svg>
+								</div>
+								<div class="linkedin"
+									socialshare
+									socialshare-url="https://www.govtech.com/data/Just-How-Common-Are-Body-Cameras-in-Police-Departments.html"
+									socialshare-provider="linkedin">
+									<svg enable-background="new 0 0 48 48" id="Layer_1" version="1.1" viewBox="0 0 48 48" xml:space="preserve" xmlns="//www.w3.org/2000/svg" xmlns:xlink="//www.w3.org/1999/xlink">
+										<circle cx="24" cy="24" fill="#1686B0" r="24" />
+										<path d="M17.4,34.9h-4.6V20.1h4.6V34.9z M14.9,18.2L14.9,18.2c-1.7,0-2.8-1.1-2.8-2.6c0-1.5,1.1-2.6,2.8-2.6  c1.7,0,2.8,1.1,2.8,2.6C17.7,17.1,16.7,18.2,14.9,18.2z M35.9,34.9h-5.3v-7.7c0-2-0.8-3.4-2.6-3.4c-1.4,0-2.1,0.9-2.5,1.8  c-0.1,0.3-0.1,0.8-0.1,1.2v8h-5.2c0,0,0.1-13.6,0-14.8h5.2v2.3c0.3-1,2-2.5,4.6-2.5c3.3,0,5.9,2.1,5.9,6.7V34.9z" fill="#FFFFFF" />
+									</svg>
+								</div>
+								<div class="twitter"
+									socialshare
+									socialshare-url="https://www.govtech.com/data/Just-How-Common-Are-Body-Cameras-in-Police-Departments.html"
+									socialshare-text="Just How Common Are Body Cameras in Police Departments?"
+									socialshare-provider="twitter">
+									<svg enable-background="new 0 0 48 48" id="Layer_1" version="1.1" viewBox="0 0 48 48" xml:space="preserve" xmlns="//www.w3.org/2000/svg" xmlns:xlink="//www.w3.org/1999/xlink">
+										<circle cx="24" cy="24" fill="#1CB7EB" r="24" />
+										<g>
+												<g>
+														<path d="M36.8,15.4c-0.9,0.5-2,0.8-3,0.9c1.1-0.7,1.9-1.8,2.3-3.1c-1,0.6-2.1,1.1-3.4,1.4c-1-1.1-2.3-1.8-3.8-1.8    c-2.9,0-5.3,2.5-5.3,5.7c0,0.4,0,0.9,0.1,1.3c-4.4-0.2-8.3-2.5-10.9-5.9c-0.5,0.8-0.7,1.8-0.7,2.9c0,2,0.9,3.7,2.3,4.7    c-0.9,0-1.7-0.3-2.4-0.7c0,0,0,0.1,0,0.1c0,2.7,1.8,5,4.2,5.6c-0.4,0.1-0.9,0.2-1.4,0.2c-0.3,0-0.7,0-1-0.1    c0.7,2.3,2.6,3.9,4.9,3.9c-1.8,1.5-4.1,2.4-6.5,2.4c-0.4,0-0.8,0-1.3-0.1c2.3,1.6,5.1,2.6,8.1,2.6c9.7,0,15-8.6,15-16.1    c0-0.2,0-0.5,0-0.7C35.2,17.6,36.1,16.6,36.8,15.4z" fill="#FFFFFF" />
+												</g>
+										</g>
+									</svg>
+								</div>
+								<div class="reddit"
+									socialshare
+									socialshare-url="https://www.govtech.com/data/Just-How-Common-Are-Body-Cameras-in-Police-Departments.html"
+									socialshare-provider="reddit">
+									<svg enable-background="new 0 0 32 32" version="1.1" viewBox="0 0 32 32" xml:space="preserve" xmlns="//www.w3.org/2000/svg" xmlns:xlink="//www.w3.org/1999/xlink">
+										<g id="Flat_copy">
+												<g>
+														<path d="M16.005-0.016c-8.837,0-16,7.163-16,16c0,8.836,7.163,16,16,16s16-7.164,16-16    C32.005,7.148,24.842-0.016,16.005-0.016z" fill="#CCCCCC" />
+												</g>
+												<path d="M13.024,19.114c-0.956,0-1.733-0.777-1.733-1.732c0-0.955,0.777-1.732,1.733-1.732   c0.955,0,1.732,0.777,1.732,1.732C14.756,18.337,13.979,19.114,13.024,19.114z M25.56,17.906c0.026,0.198,0.04,0.393,0.04,0.583   c0,3.602-4.309,6.533-9.607,6.533s-9.607-2.931-9.607-6.533c0-0.197,0.015-0.401,0.043-0.608c-0.679-0.501-1.08-1.286-1.08-2.131   c0-1.465,1.192-2.656,2.656-2.656c0.571,0,1.127,0.186,1.584,0.526c1.647-1.001,3.746-1.585,5.953-1.655l1.692-4.809l4.055,0.969   c0.382-0.723,1.129-1.18,1.958-1.18c1.222,0,2.217,0.995,2.217,2.217c0,1.222-0.995,2.217-2.217,2.217   c-1.15,0-2.1-0.882-2.207-2.005l-2.987-0.714l-1.17,3.324c2.05,0.13,3.995,0.708,5.531,1.647c0.46-0.348,1.021-0.538,1.6-0.538   c1.465,0,2.656,1.192,2.656,2.656C26.672,16.613,26.259,17.406,25.56,17.906z M6.622,15.75c0,0.266,0.078,0.524,0.221,0.745   c0.35-0.742,0.898-1.441,1.611-2.055c-0.143-0.049-0.294-0.074-0.448-0.074C7.242,14.367,6.622,14.987,6.622,15.75z M24.326,18.489   c0-2.901-3.739-5.26-8.334-5.26s-8.334,2.36-8.334,5.26c0,2.9,3.739,5.26,8.334,5.26C20.588,23.749,24.326,21.39,24.326,18.489z    M23.542,14.45c0.717,0.62,1.267,1.328,1.614,2.078c0.157-0.228,0.243-0.498,0.243-0.778c0-0.763-0.621-1.384-1.383-1.384   C23.852,14.367,23.693,14.395,23.542,14.45z M22.304,9.164c0,0.521,0.424,0.944,0.944,0.944s0.944-0.424,0.944-0.944   c0-0.521-0.424-0.944-0.944-0.944S22.304,8.643,22.304,9.164z M19.191,20.469c-0.172,0-0.334,0.068-0.45,0.186   c-0.034,0.034-0.867,0.817-2.766,0.817c-1.876,0-2.632-0.784-2.634-0.786c-0.121-0.139-0.296-0.218-0.48-0.218   c-0.151,0-0.298,0.054-0.413,0.152c-0.129,0.11-0.208,0.265-0.221,0.434c-0.013,0.17,0.041,0.334,0.151,0.463   c0.03,0.035,0.307,0.349,0.894,0.648c0.753,0.384,1.662,0.579,2.703,0.579c1.034,0,1.955-0.192,2.736-0.569   c0.606-0.293,0.907-0.598,0.94-0.632c0.239-0.25,0.232-0.652-0.017-0.895C19.515,20.533,19.358,20.469,19.191,20.469z    M19.171,15.649c-0.956,0-1.733,0.777-1.733,1.732c0,0.955,0.777,1.732,1.733,1.732c0.955,0,1.732-0.777,1.732-1.732   C20.903,16.426,20.126,15.649,19.171,15.649z" fill="#FFFFFF" />
+										</g>
+									</svg>
+								</div>
+								<div class="email"
+									socialshare
+									socialshare-subject="Just How Common Are Body Cameras in Police Departments?"
+									socialshare-body="https://www.govtech.com/data/Just-How-Common-Are-Body-Cameras-in-Police-Departments.html"
+									socialshare-url="https://www.govtech.com/data/Just-How-Common-Are-Body-Cameras-in-Police-Departments.html"
+									socialshare-provider="email">
+									<svg enable-background="new 0 0 32 32" version="1.1" viewBox="0 0 32 32" xml:space="preserve" xmlns="//www.w3.org/2000/svg" xmlns:xlink="//www.w3.org/1999/xlink">
+										<g id="Style_2">
+												<g>
+														<path d="M16,0C7.163,0,0,7.163,0,16c0,8.836,7.163,16,16,16s16-7.164,16-16C32,7.163,24.837,0,16,0z" fill="#FF0000" />
+												</g>
+												<g>
+														<polygon fill="#FFFFFF" points="6.518,21.815 11.707,15.291 6.518,12.119   " />
+														<polygon fill="#FFFFFF" points="19.5,15.746 15.989,17.908 12.472,15.758 7.11,22.5 24.867,22.5   " />
+														<polygon fill="#FFFFFF" points="15.988,16.864 25.482,11.017 25.482,9.5 6.518,9.5 6.518,11.076   " />
+														<polygon fill="#FFFFFF" points="20.263,15.276 25.482,21.843 25.482,12.062   " />
+												</g>
+										</g>
+									</svg>
+								</div>
+								<div class="print" ng-click="printArticle(511965342)">
+									<svg width="45.000000pt" height="45.000000pt" viewBox="0 0 45.000000 45.000000" preserveAspectRatio="xMidYMid meet" xmlns="//www.w3.org/2000/svg">
+										<g transform="translate(0.000000,45.000000) scale(0.100000,-0.100000)" style="fill: rgb(0, 0, 0); stroke: none;">
+											<path d="M167 427 c-88 -28 -147 -108 -147 -197 0 -125 83 -210 205 -210 72 0&#10;111 17 157 68 63 70 73 162 25 247 -43 76 -155 120 -240 92z m161 -143 c20 -6&#10;22 -12 22 -70 0 -51 -3 -64 -15 -64 -11 0 -14 7 -9 25 l6 25 -107 0 -107 0 6&#10;-25 c5 -18 2 -25 -9 -25 -12 0 -15 13 -15 64 0 42 4 66 13 69 17 8 188 8 215&#10;1z m-23 -156 l0 -53 -80 0 -80 0 -3 53 -3 52 83 0 84 0 -1 -52z"/>
+										</g>
+										<rect x="16.068" y="9.507" width="13.124" height="5.354" style="fill: rgb(255, 255, 255);"/>
+										<rect x="33.691" y="30.557" width="10.447" height="0.718" style="fill: rgb(216, 216, 216);" transform="matrix(1, 0, 0, 0.999997, -16.251261, -0.940024)"/>
+										<rect x="17.57" y="31.478" width="10.447" height="0.718" style="fill: rgb(216, 216, 216);"/>
+										<rect x="12.848" y="30.396" width="7.639" height="0.653" style="fill: rgb(216, 216, 216);" transform="matrix(1, 0, 0, 1.000003, 7.137699, 2.975352)"/>
+									</svg>
+								</div>
+								<div class ="pdf">
+								<!-- https://community.uplandsoftware.com/hc/en-us/articles/360014881691-How-To-Print-to-PDF  gt_2016_print_to_pdf?debug..html , xhtml2xslfo.xml -->
+								<a href="https://www.govtech.com/data/Just-How-Common-Are-Body-Cameras-in-Police-Departments.pdf" target="_blank">
+									<img  src="https://media.erepublic.com/image/pdf.jpg"  alt="Print to PDF" style = "width:44px"/>					
+								 </a>
+								</div  >
+							</div>
+							<div class="col-md-10" >
+								 								  									 									 										  										 									 										 									 										 									 										 									 										 									 										 									 										 									 										 									 										 									 										 									 										 									   									  									 									<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<p><em>Editor's note: This is the second part in a series about body cameras in the U.S. To follow along with the series, go <a href="https://www.govtech.com/biz/bodycams.html" target="_blank">here</a>.</em></p>
+<p>Sales of body cameras <a href="https://www.govtech.com/data/Data-Pinpoints-the-Moment-When-Police-Body-Cameras-Took-Off.html" target="_blank">aren't terribly difficult to track</a>. But arriving at a solid estimate of how many law enforcement agencies are using the technology is, as it happens, quite a bit more difficult.</p>
+<p>That&rsquo;s because, according to the Bureau of Justice Statistics (BJS), there are <a href="https://www.bjs.gov/content/pub/pdf/nsleed.pdf" target="_blank">18,000 law enforcement agencies</a> in the U.S. And smaller ones tend to behave a little differently than larger ones. And sheriff&rsquo;s offices behave differently than local cops.</p>
+<div class="related"><h3>RELATED</h3><a href="https://www.govtech.com/biz/Axon-Decides-Against-Facial-Recognition-for-Body-Cameras.html">Axon Decides Against Facial Recognition for Body Cameras</a><a href="https://www.govtech.com/data/Data-Pinpoints-the-Moment-When-Police-Body-Cameras-Took-Off.html">Data Pinpoints the Moment When Police Body Cameras Took Off</a><a href="https://www.govtech.com/public-safety/Boston-PD-Turns-to-Body-Cameras-to-Boost-Transparency.html">Boston PD Turns to Body Cameras to Boost Transparency</a></div><p>It&rsquo;s the kind of question that&rsquo;s best suited to surveys, and there have been just a handful of nationally representative surveys conducted on body camera adoption in the past several years. We found two organizations with three such surveys that would work for the purposes of this article &mdash; the Police Executive Research Forum and the BJS. <a href="https://assets.bwbx.io/documents/users/iqjWHBFdfxIU/rvnT.EAJQwK4/v0" target="_blank">Another survey</a> from the Major Cities Chiefs Association and the Major County Sheriffs Association, asked its questions in a different way and therefore the results couldn&rsquo;t be compared.</p>
+<p>The three resulting numbers were for <a href="https://www.policeforum.org/assets/docs/Free_Online_Documents/Technology/implementing%20a%20body-worn%20camera%20program.pdf" target="_blank">2013</a>, <a href="https://www.policeforum.org/assets/BWCCostBenefit.pdf" target="_blank">2015</a> and <a href="https://www.bjs.gov/content/pub/pdf/bwclea16.pdf" target="_blank">2016</a>, which leaves question marks for more recent years. But they combine to paint a consistent portrait of steady growth among police in the U.S. adopting body camera programs &mdash; from a quarter of agencies using them in 2013 to 45 percent in 2016, an increase of around 1,200 agencies per year.</p>
+<p>If that trend continued into 2017 and 2018 &mdash; by no means an established supposition, since most technology markets tend to reach saturation at some point and, in fact, body camera purchasing activity took a dip in 2017 &mdash; then that would mean that about 10,500 agencies, or 58 percent of all law enforcement departments in the U.S., used body cameras by the end of 2018.</p>
+<p>The numbers in the chart above were calculated by applying the percentages in the survey results to the total number of law enforcement agencies in the U.S. These are rough guesses based on surveys from two different entities, so take it with a grain of salt.</p>
+<p>It should also be noted that the number of agencies that have adopted body cameras does not necessarily equate to the number of police using body cameras, or the number of people who live in communities where police use body cameras. There are <a href="https://www.govtech.com/data/Nearly-Half-of-US-Cities-Have-Fewer-Than-1000-Residents.html" target="_blank">far more small towns in the U.S.</a> than there are large or even medium-sized cities, so it follows logically that the number of small police agencies is greater than the number of large ones.</p>
+<p>When it studied body cameras, the BJS found that for the most part, larger agencies were more likely to have body cameras than smaller ones.&nbsp;</p>
+<p><amp-img src="http://images.centerdigitaled.com/images/BWC_ADOPTION_BY_AGENCY_SIZE_AND_TYPE.jpg" alt="Body+camera+adoption+by+agency+type+and+size" width="940" height="630" layout="responsive"></amp-img></p>
+<p>In the coming days, we will examine where the national momentum toward body cameras came from, and whether they are fulfilling the expectations that propelled them to such popularity in the first place.</p>
+
+ 									 								 								  									    	    																																																		    							    															
+
+
+
+
+
+
+
+
+
+
+                	    				    	    																													    													    															    	    				    	    																																											    													    															                                                                                                            																																				
+																												
+
+        
+                        
+        
+                
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+          
+        
+    
+
+
+
+
+
+																																				
+
+  									 										 											<div class="after-author-bar">
+												<div class="author-meta">
+													 													<a href="https://www.govtech.com/authors/Ben-Miller.html" class="author-name">Ben Miller</a>
+																										<span class="author-title">Associate Editor of GT Data and Business</span>
+													<hr />
+													<p>Ben Miller is the associate editor of data and business for&nbsp;<em>Government Technology</em>. His reporting experience includes breaking news, business, community features and technical subjects. He holds a Bachelor&rsquo;s degree in journalism from the Reynolds School of Journalism at the University of Nevada, Reno, and lives in Sacramento, Calif.</p>
+												</div>
+											</div>
+																											
+																
+																 								 								 
+    	    				    	    																						    													    															
+
+
+
+																								
+
+  								 									<div class="related mobile-related">
+										<h3>RELATED</h3>
+																					  												<a href="https://www.govtech.com/data/Who-Is-the-State-CISO-Data-On-Governments-Cyberguardians.html">Who Is the State CISO? Data On Government's Cyberguardians</a>
+											 																					  												<a href="https://www.govtech.com/biz/data/What-Body-Cams-Do-Policy-Discretion-and-Deeper-Problems.html">What Body Cams Do: Policy, Discretion and Deeper Problems</a>
+											 																					  												<a href="https://www.govtech.com/biz/What-Body-Cams-Do-Resolving-Complaints-Against-Officers.html">What Body Cams Do: Resolving Complaints Against Officers</a>
+											 										 									</div>
+									<div class="clearfix"></div>
+															</div>
+						</div>
+						
+																						        				        												
+						<div class="article-footer">
+	
+							<a class="more" href="https://www.govtech.com/data">
+								MORE FROM Data
+							</a>
+																					<div class="clearfix"></div>
+						</div>
+																	</div>
+					<div class="col-md-4 flex-column" id="sidebar">
+						  						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						  							 							 							 							 							 							 							 							 							 							 							 							 							 						 						 												 							<!-- [ Right Sidebar ] from /data (newRightSidebar) -->
+							 						 												 						     							 								 									<div data-module-id="218710101" class="module ">
+									 									    	    				    	    				    	    				    	    				    	    																																																																																					    																															    															
+
+	
+	
+			
+	
+					
+					
+			
+	<!-- using common_get_url_keywords -->
+		
+    	    				    	    																																																									    													    															
+
+
+
+
+
+
+ 
+
+   
+		
+
+
+	
+		
+																
+		
+																																											
+
+																		
+
+																																												
+
+
+	
+			
+			
+	
+							<div id="R2_ad" class="ad-wrap">
+			<ad
+				ad-size="[[300,250],[300,600],[300,64]]"
+				site="www.govtech.com"
+				ad-unit="R2"
+				path="data"
+				content-id="511965342"
+				url-name="data,just,how,common,are,body,cameras,police,departments">
+			</ad>
+		</div>
+																																																																									
+
+ 									</div>
+								 																							 						     							 								 									<div data-module-id="301744711" class="module ">
+									 									       	    								    							    															
+
+	<div data-ac-module="https://cms.erepublic.com/common/dynamic_modules/list_papers_by_topic?dyn_promo_code=gt_papers_budget_finance&amp;display_title=Featured Resources&amp;topic=Budget, Finance and HR&amp;limit=3"><span style="opacity:0">Papers</span></div>
+
+												
+
+
+ 									</div>
+								 																							 						     							 								 									<div data-module-id="219540951" class="module ">
+									 									    	    				    	    				    	    				    	    				    	    																																																																																					    																															    															
+
+	
+	
+			
+	
+					
+					
+			
+	<!-- using common_get_url_keywords -->
+		
+    	    				    	    																																																									    													    															
+
+
+
+
+
+
+ 
+
+   
+		
+
+
+	
+		
+																
+		
+																																											
+
+																		
+
+																																												
+
+
+	
+			
+			
+	
+							<div id="R4_ad" class="ad-wrap">
+			<ad
+				ad-size="[[300,250],[300,600],[300,64]]"
+				site="www.govtech.com"
+				ad-unit="R4"
+				path="data"
+				content-id="511965342"
+				url-name="data,just,how,common,are,body,cameras,police,departments">
+			</ad>
+		</div>
+																																																																									
+
+ 									</div>
+								 																							 						 					</div>
+				</div>
+	
+				<div class="page-footer row">
+					
+				</div>
+				
+													<!-- Template / gt_2016_sponsored_articles_module.html v8 / modified: 2019-10-02 15:58:20.0 -->
+<style>
+  .sp-art-div .abstract {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+    font-weight:normal !important;
+    font-size:14px !important;
+  }
+  .sp-art-div h3 {
+    font-family: ProximaNovaSemibold, arial;
+  }
+  .sponsored-header {
+    margin-bottom:10px;
+    border-bottom:1px solid #ccc;
+  }
+</style>
+<div class="page-footer row">
+  <div class="col-sm-12">
+    <div class="sponsored-header">
+      <span>SPONSORED ARTICLES</span>
+    </div>
+  </div>
+</div>
+
+<div class="page-footer row">
+  
+
+   
+          	    				    	    																													    													    															    	    				    	    																																											    													    															                                                                                                                                            																																				
+																												
+
+        
+        
+    <div class="col-sm-4 page-module sp-art-div">
+              <a href="https://www.govtech.com/biz/Going-electric-What-you-need-to-know-about-EV-fleet-management.html?promo_code=article">
+          <img src="https://media2.govtech.com/images/400*266/GeoTab_October_Electric+Vehicles.png" width="400" height="266" alt="" title="" border="0"class="img-responsive" />
+        </a>
+            <h3><a href="https://www.govtech.com/biz/Going-electric-What-you-need-to-know-about-EV-fleet-management.html?promo_code=article">Going Electric: What You Need to Know About EV Fleet Management</a></h3>
+      <p class="abstract">Fleet adoption of electric vehicles (EVs) is on the rise. With government targets to cut carbon emissions, the continued push to reduce fleet costs, and the increasing choice and affordability of EVs, this trend will only continue. </p>
+    </div>
+          	    				    	    																													    													    															    	    				    	    																																											    													    															                                                                                                                            																																				
+																												
+
+        
+        
+    <div class="col-sm-4 page-module sp-art-div">
+              <a href="https://www.govtech.com/products/How-5G-will-Deliver-the-Customer-Experience-of-Tomorrow.html?promo_code=article">
+          <img src="https://media2.govtech.com/images/400*266/shutterstock_1291282390_Verizon_5G.jpg" width="400" height="266" alt="" title="" border="0"class="img-responsive" />
+        </a>
+            <h3><a href="https://www.govtech.com/products/How-5G-will-Deliver-the-Customer-Experience-of-Tomorrow.html?promo_code=article">How 5G will Deliver the Customer Experience of Tomorrow</a></h3>
+      <p class="abstract">As the world looks forward to 5G becoming an everyday reality, now is the time for you to think about how 5G will impact your customer experience (CX) strategy. </p>
+    </div>
+          	    				    	    																													    													    															    	    				    	    																																											    													    															                                                                                                                            																																				
+																												
+
+        
+        
+    <div class="col-sm-4 page-module sp-art-div">
+              <a href="https://www.govtech.com/public-safety/Making-Informed-Decisions-with-Data-Analytics-and-APIS.html?promo_code=article">
+          <img src="https://media2.govtech.com/images/400*253/shutterstock_235434241.jpg" width="400" height="253" alt="" title="" border="0"class="img-responsive" />
+        </a>
+            <h3><a href="https://www.govtech.com/public-safety/Making-Informed-Decisions-with-Data-Analytics-and-APIS.html?promo_code=article">Making Informed Decisions with Data, Analytics, and APIS</a></h3>
+      <p class="abstract">How one Meraki customer personalizes end user experiences based on the numbers.</p>
+    </div>
+  </div>
+
+				
+				<div class="clearfix"></div>
+				
+	
+				<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+				<script>
+					$(document).ready(function() {
+							$('.dataTable').DataTable();
+					} );
+				</script>
+
+			</div>
+		</section>
+				<div class="hidden">
+					</div>
+				
+<style>
+footer {
+	font-size: 12px;
+	letter-spacing: 1px;
+	padding-top: 15px;
+}
+footer .container {
+    margin-bottom: 0;
+}
+footer h4 {
+	color: #f47421;
+	font-size: 12px;
+	letter-spacing: 1px;
+	margin-bottom: 5px;
+	text-transform: uppercase;
+}
+footer div {
+	margin-bottom: 5px;
+}
+footer svg.logo {
+	width: 160px;
+}
+footer div.header {
+	color: #f47421;
+	font-size: 12px;
+	letter-spacing: 1px;
+	margin-bottom: 5px;
+	text-transform: uppercase;
+}
+footer #site_info_links a {
+	margin-right: 10px;
+}
+footer #site_social svg {
+	width: 20px;
+}
+footer #slim-footer {
+	display:none;
+}
+</style>
+
+<div class="platforms-module">
+	<div class="module-header"><span>Platforms &amp; Programs</span></div>
+<div class="feature-module">
+<div class="container">
+<div class="row">
+<div class="col-sm-2 col-xs-6" style="min-height: 100px;"><a href="/education"><svg id="cde_logo" viewbox="-3 -8 105 50"><defs><style type="text/css">#cde_logo .cls-1{fill:none;}#cde_logo .cls-2{clip-path:url(#clip-path);}#cde_logo .cls-3{fill:#ffffff;}</style><clippath id="clip-path" transform="translate(-85.98 -131.84)"><rect class="cls-1" x="85.98" y="131.84" width="97.63" height="32.87"></rect></clippath></defs>
+<title></title>
+<g class="cls-2">
+<path class="cls-3" d="M111.92,136.38a1.36,1.36,0,0,0-.18-0.49,1.86,1.86,0,0,1-1.33.67,2.36,2.36,0,0,1,0-4.71,1.82,1.82,0,0,1,1.33.67,1.63,1.63,0,0,0,.18-0.5h0.19v1.75h-0.2a1.62,1.62,0,0,0-1.5-1.54c-1.13,0-1.46,1.12-1.46,2s0.33,2,1.46,2a1.62,1.62,0,0,0,1.5-1.53h0.2v1.76h-0.19Z" transform="translate(-85.98 -131.84)"></path>
+<path class="cls-3" d="M116.83,135.36l0.05-.2h0.2L117,136.38h-3.78v-0.2c0.68,0,.8-0.17.8-1.18v-1.61c0-1-.12-1.17-0.8-1.17V132h3.53l0.08,1.21h-0.21l-0.05-.2c-0.11-.46-0.24-0.65-1.16-0.65h-0.68v1.5h0.06c1,0,1.09-.12,1.09-0.8h0.2v2h-0.2c0-.67-0.08-0.8-1.09-0.8h-0.06v0.59c0,1,.12,1.17.8,1.17h0.12c0.92,0,1-.17,1.17-0.65" transform="translate(-85.98 -131.84)"></path>
+<path class="cls-3" d="M118,132.21V132h1.24L122,135.2v-1.82c0-1-.12-1.17-0.8-1.17V132h2v0.2c-0.68,0-.8.16-0.8,1.17v3.16h-0.19L119.2,133v2c0,1,.12,1.18.8,1.18v0.2h-2v-0.2c0.68,0,.8-0.17.8-1.18v-1.62c0-1-.12-1.17-0.8-1.17" transform="translate(-85.98 -131.84)"></path>
+<path class="cls-3" d="M125,132.4c-0.93,0-1,.17-1.13.65l-0.05.2h-0.2l0.06-1.24h4.5l0.07,1.24H128L128,133c-0.12-.47-0.24-0.65-1.17-0.65h-0.53V135c0,1,.13,1.18.81,1.18v0.2h-2.32v-0.2c0.68,0,.81-0.17.81-1.18V132.4H125Z" transform="translate(-85.98 -131.84)"></path>
+<path class="cls-3" d="M132.34,135.36l0-.2h0.2l-0.08,1.22h-3.78v-0.2c0.68,0,.8-0.17.8-1.18v-1.61c0-1-.12-1.17-0.8-1.17V132h3.53l0.08,1.21h-0.21l0-.2c-0.11-.46-0.24-0.65-1.16-0.65h-0.68v1.5h0.06c1,0,1.09-.12,1.09-0.8h0.2v2h-0.2c0-.67-0.08-0.8-1.09-0.8h-0.06v0.59c0,1,.12,1.17.8,1.17h0.12c0.92,0,1-.17,1.17-0.65" transform="translate(-85.98 -131.84)"></path>
+<path class="cls-3" d="M136,134.48a1.27,1.27,0,0,0,1.22-1.22,1.37,1.37,0,0,0-1.62-1.25h-2.09v0.2c0.68,0,.8.16,0.8,1.17V135c0,1-.12,1.18-0.8,1.18v0.2h2.31v-0.2c-0.68,0-.8-0.17-0.8-1.18V134.5h0.28l1.37,1.88H138v-0.2a2.44,2.44,0,0,1-1.35-.94Zm0.43-1.22a0.79,0.79,0,0,1-.83.87H135v-1.76h0.57a0.8,0.8,0,0,1,.83.89" transform="translate(-85.98 -131.84)"></path>
+<path class="cls-3" d="M143.09,136.18v0.2h-2.31v-0.2c0.68,0,.8-0.17.8-1.18v-1.61c0-1-.12-1.17-0.8-1.17V132h3.65l0.08,1.21H144.3l-0.05-.2c-0.12-.46-0.24-0.65-1.17-0.65h-0.79v1.5h0.06c1,0,1.09-.12,1.09-0.8h0.2v2h-0.2c0-.67-0.08-0.8-1.09-0.8h-0.06V135c0,1,.12,1.18.8,1.18" transform="translate(-85.98 -131.84)"></path>
+<path class="cls-3" d="M150.21,134.19a2.46,2.46,0,1,0-2.46,2.36,2.42,2.42,0,0,0,2.46-2.36m-0.83,0a1.66,1.66,0,1,1-1.64-2,1.75,1.75,0,0,1,1.64,2" transform="translate(-85.98 -131.84)"></path>
+<path class="cls-3" d="M153.73,134.48a1.27,1.27,0,0,0,1.22-1.22,1.37,1.37,0,0,0-1.61-1.25h-2.09v0.2c0.68,0,.8.16,0.8,1.17V135c0,1-.12,1.18-0.8,1.18v0.2h2.31v-0.2c-0.68,0-.79-0.17-0.79-1.18V134.5H153l1.37,1.88h1.29v-0.2a2.44,2.44,0,0,1-1.35-.94Zm0.43-1.22a0.79,0.79,0,0,1-.83.87h-0.57v-1.76h0.57a0.8,0.8,0,0,1,.83.89" transform="translate(-85.98 -131.84)"></path>
+</g><rect class="cls-3" x="0.04" y="23.18" width="97.36" height="0.3"></rect><g class="cls-2">
+<path class="cls-3" d="M157.86,146.26l1.92-4.46,1.34,3.09a30.45,30.45,0,0,0-3.26,1.37m25,2.74-0.17.68c-0.41,1.6-.81,2.17-3.94,2.17H177.6c-2.28,0-2.68-.54-2.68-3.94v-4.28c1.26,0,2.26,0,2.92.1l0.1,0.06-0.39,1.05,0.76-.77,0.92,0.74-0.5-.93,1-.67-1.11.16-0.27-1.13-0.28,1.08-1.06-.07,0.51,0.29c-0.88-.19-1.75-0.32-2.6-0.41V143c0-3.39.41-3.94,2.68-3.94v-0.68h-7.77v0.68c2.26,0,2.68.54,2.68,3.88a31.54,31.54,0,0,0-9.09,1.19l-2.72-6.33h-0.47l-5,11.61c-1.12,2.55-1.43,3-3.5,3v0.71h6.41V152.4c-2.68,0-2.68-.58-1.83-2.58l0.31-.71a32.79,32.79,0,0,1,5.15-2.74l1.47,3.45c0.85,2,.61,2.58-1.83,2.58v0.71H169V152.4c-1.8,0-2.21-.41-3.33-3L164,145.51a35.17,35.17,0,0,1,8.51-1.77v4.72c0,3.39-.41,4-2.68,4v0.68h13.54l0.24-4.11h-0.71Zm-34.53-9.27c3.12,0,3.53.58,3.94,2.17l0.17,0.68h0.71l-0.24-4.17H137.8l-0.21,4.17h0.68l0.17-.68c0.41-1.6.68-2.17,3.8-2.17h2v8.72c0,3.39-.44,4-2.72,4v0.68h7.81v-0.68c-2.27,0-2.72-.58-2.72-4v-8.72h1.77Zm-19.41-.64c2.28,0,2.68.54,2.68,3.94v5.43c0,3.39-.41,4-2.68,4v0.68h7.77v-0.68c-2.27,0-2.68-.58-2.68-4V143c0-3.39.41-3.94,2.68-3.94v-0.68h-7.77v0.68Zm-8.69,8.31c1.66,0,2.92.71,2.92,2.07,0,1.83-2.61,2.89-4.31,2.89-3.8,0-5-3.73-5-6.62s1.19-6.62,5-6.62c2.61,0,4.41,2,5.06,5.16h0.68v-5.87H124a5.51,5.51,0,0,1-.61,1.66,6.13,6.13,0,0,0-4.48-2.24,7.93,7.93,0,0,0,0,15.85c2,0,4.07-1.29,6.21-1.29v-1c0-3.39.41-4,2.68-4v-0.68h-7.5v0.68Zm-18.19-8.31c2.27,0,2.68.54,2.68,3.94v5.43c0,3.39-.41,4-2.68,4v0.68h7.77v-0.68c-2.27,0-2.68-.58-2.68-4V143c0-3.39.41-3.94,2.68-3.94v-0.68h-7.77v0.68Zm-8.79,12.76H93c-1.7,0-1.93-.37-1.93-2.58v-9.64h2.21c4.48,0,5.36,3.43,5.36,6.11s-0.88,6.11-5.36,6.11m-0.1-13.44H86v0.68c2.28,0,2.68.54,2.68,3.94v5.43c0,3.39-.41,4-2.68,4v0.68h7.2c5.77,0,8.28-3.33,8.28-7.37s-2.51-7.33-8.28-7.33" transform="translate(-85.98 -131.84)"></path>
+<path class="cls-3" d="M90.12,159.28c0-.56-0.42-0.62-0.92-0.62,0,0,0,0,0-.08v-0.1c0-.08.15-0.09,0.45-0.09s0.73,0,1.09,0,0.69,0,1,0h1.82c0.07,0,.08.08,0.08,0.17v1.05a0.06,0.06,0,0,1-.06.07c-0.07,0-.21,0-0.22-0.09l0-.27a0.73,0.73,0,0,0-.91-0.65H91.53c-0.48,0-.64.1-0.64,0.76V161a0.11,0.11,0,0,0,.07.07l1,0a0.7,0.7,0,0,0,.79-0.64c0-.05,0-0.07.14-0.07s0.1,0,.1.05S93,161,93,161.24c0,0.47.05,0.72,0.05,0.86a0.15,0.15,0,0,1-.14.1,0.13,0.13,0,0,1-.15-0.11,5,5,0,0,0-.09-0.52,0.36,0.36,0,0,0-.4-0.2l-1.22,0c-0.12,0-.12,0-0.12.1v2c0,0.62.46,0.64,1.05,0.64h0.46a2,2,0,0,0,1-.14,2.55,2.55,0,0,0,.55-0.85,0.27,0.27,0,0,1,.26.09,0.62,0.62,0,0,1,0,.14l-0.24.87c-0.07.23-.11,0.23-0.22,0.23-0.93,0-1.84,0-3.09,0-0.28,0-1,0-1.45,0a0.17,0.17,0,0,1-.05-0.14,0.15,0.15,0,0,1,.05-0.15c0.75,0,1-.11,1-0.9v-4Z" transform="translate(-85.98 -131.84)"></path>
+<path class="cls-3" d="M100.86,163.25a1.09,1.09,0,0,0,1.35.95,2.56,2.56,0,0,0,2.44-2.77,2.87,2.87,0,0,0-1.42-2.64,3.57,3.57,0,0,0-1.33-.22c-0.71,0-1,.05-1,0.6v4.08Zm-0.78-3.84c0-.33-0.07-0.66-0.39-0.66-0.1,0-.38,0-0.54,0a0.24,0.24,0,0,1,0-.17c0-.05,0-0.08.15-0.11a18.35,18.35,0,0,1,2.7-.22,5.21,5.21,0,0,1,1.34.16,3,3,0,0,1,2.26,2.95,3.15,3.15,0,0,1-3.42,3.1c-0.82,0-1.25,0-1.68,0s-0.86,0-1.29,0a0.14,0.14,0,0,1,0-.14,0.16,0.16,0,0,1,.08-0.15,1.6,1.6,0,0,0,.65-0.15,0.53,0.53,0,0,0,.22-0.5v-4.13Z" transform="translate(-85.98 -131.84)"></path>
+<path class="cls-3" d="M111.46,159.37c0-.68-0.41-0.68-0.89-0.68l0,0V158.5c0-.09.06-0.1,0.16-0.1s0.78,0,1.18,0,0.87,0,1.3,0l0,0v0.22l0,0H113c-0.56,0-.81.06-0.81,0.71v2.5c0,1.24.24,2.21,1.72,2.21s2-.74,2-2.2v-2.24c0-1,0-.91-0.76-1l0-.07v-0.16l0-.05c0.16,0,.33,0,1,0,0.36,0,.82,0,1.09,0l0,0.05v0.18l-0.05.05c-0.63,0-.85,0-0.85.47v3.07a2.19,2.19,0,0,1-2.49,2.38c-1.25,0-2.48-.44-2.48-1.88v-3.36Z" transform="translate(-85.98 -131.84)"></path>
+<path class="cls-3" d="M127.91,164.14a4.65,4.65,0,0,1-2.06.46,3.4,3.4,0,0,1-3.56-3.18,3.35,3.35,0,0,1,3.51-3.14,4.9,4.9,0,0,1,2.07.5l0.11,1c0,0.07,0,.16,0,0.21s-0.14.06-.17,0.06a1,1,0,0,1-.23-0.42,1.93,1.93,0,0,0-1.77-1,2.65,2.65,0,0,0-2.58,2.9,2.62,2.62,0,0,0,4.09,2.29,1.91,1.91,0,0,0,.48-0.92,0.16,0.16,0,0,1,.1,0c0.07,0,.2,0,0.17.13Z" transform="translate(-85.98 -131.84)"></path>
+<path class="cls-3" d="M136.85,161.73l-1-2.46h0l-0.82,2.46h1.79Zm-1.9.34-0.38,1.22a2,2,0,0,0-.1.56c0,0.29.41,0.35,0.64,0.35,0.08,0,.09.05,0.09,0.16s0,0.12-.07.12l-1.06,0c-0.23,0-.59,0-0.85,0s-0.17,0-.17-0.14v-0.09s0.08-.06.28-0.08a0.63,0.63,0,0,0,.67-0.6l1.71-5a1.89,1.89,0,0,1,.57-0.41l2.16,5.45a0.72,0.72,0,0,0,.8.54c0.09,0,.11.1,0.11,0.2s-0.06.09-.16,0.09-0.69,0-1,0-0.69,0-1,0c-0.13,0-.14,0-0.14-0.15s0.05-.14.17-0.14,0.55,0,.55-0.23a1.73,1.73,0,0,0-.15-0.51L137,162.07h-2.06Z" transform="translate(-85.98 -131.84)"></path>
+<path class="cls-3" d="M146.5,163.56c0,0.64.43,0.64,1,.64l0.05,0v0.14c0,0.1,0,.1-0.18.1s-0.59,0-1.2,0-1.21,0-1.42,0a0.55,0.55,0,0,1,0-.15,0.13,0.13,0,0,1,0-.09l0.09,0h0.1c0.78,0,.82-0.27.82-1v-4.08l0-.4h-1.15c-0.66,0-.76.41-0.92,1a0.1,0.1,0,0,1-.1.08c-0.12,0-.2,0-0.2-0.09s0.1-.95.1-1.63a0.35,0.35,0,0,1,.24,0,0.67,0.67,0,0,0,.73.37h3.2a1,1,0,0,0,1-.45c0.06,0,.26,0,0.26.08a10.58,10.58,0,0,0-.19,1.4,0.41,0.41,0,0,1-.07.28,0.43,0.43,0,0,1-.28-0.09l0-.43c0-.44-0.24-0.45-0.59-0.45H146.5v4.82Z" transform="translate(-85.98 -131.84)"></path>
+<path class="cls-3" d="M155.33,162.89c0,1.26,0,1.27.87,1.31l0,0.06v0.16a0.22,0.22,0,0,1-.21.06c-0.12,0-.7,0-1.05,0s-0.84,0-1.28,0a0.17,0.17,0,0,1,0-.16c0-.11,0-0.13.28-0.13,0.59,0,.62-0.13.62-0.78V159.3c0-.49-0.15-0.61-0.87-0.61l0,0,0-.14a0.12,0.12,0,0,1,.14-0.1c0.23,0,.51,0,1.1,0,0.43,0,.95,0,1.29,0l0,0.06v0.15l0,0.05-0.23,0c-0.34,0-.61.06-0.61,0.46v3.75Z" transform="translate(-85.98 -131.84)"></path>
+<path class="cls-3" d="M167.21,161.48a2.75,2.75,0,0,0-2.54-2.92c-1.59,0-2.36,1.25-2.36,2.7a2.74,2.74,0,0,0,2.5,3c1.58,0,2.4-1.3,2.4-2.78m-5.82.07a3.34,3.34,0,0,1,3.32-3.27,3.21,3.21,0,0,1,3.42,3,3.51,3.51,0,0,1-3.38,3.29,3.13,3.13,0,0,1-3.36-3" transform="translate(-85.98 -131.84)"></path>
+<path class="cls-3" d="M174.21,159.46a0.54,0.54,0,0,0,0-.28,1.3,1.3,0,0,0-.6-0.47l-0.46,0a0.17,0.17,0,0,1,0-.16s0-.11,0-0.11l0.69,0c0.4,0,1,0,1.18.05l2.61,3.15a19.85,19.85,0,0,0,1.4,1.55h0v-3.79c0-.57-0.21-0.65-0.48-0.66l-0.37,0a0.16,0.16,0,0,1-.05-0.15,0.13,0.13,0,0,1,.08-0.14c0.19,0,.64,0,1.06,0s0.8,0,1,0a0.06,0.06,0,0,1,.05.07v0.16s0,0.05-.08.05h-0.22c-0.59,0-.59.3-0.59,1v5h-0.21l-4.65-5.32v4c0,0.74.1,0.83,0.84,0.85a0.15,0.15,0,0,1,.06.15,0.16,0.16,0,0,1,0,.14c-0.16,0-.72,0-1.08,0s-0.61,0-1,0c-0.05,0-.06-0.06-0.06-0.17s0-.11.11-0.11a0.62,0.62,0,0,0,.77-0.53v-4.21Z" transform="translate(-85.98 -131.84)"></path>
+</g></svg></a></div>
+<div class="col-sm-2 col-xs-6" style="min-height: 100px;"><a href="/cdg"><svg viewbox="0 0 186 87" id="cdg_logo"><defs><style type="text/css">#cdg_logo .cls-1{fill:#fff;}</style></defs>
+<title></title>
+<polygon class="cls-1" points="167.29 39.21 169.21 38.94 167.49 40.1 168.35 41.71 166.77 40.43 165.46 41.75 166.12 39.94 164.52 39.01 166.35 39.13 166.84 37.27 167.29 39.21"></polygon>
+<path class="cls-1" d="M51.53,27.16a2.34,2.34,0,0,0-.31-0.85,3.2,3.2,0,0,1-2.3,1.15,4.06,4.06,0,0,1,0-8.12,3.14,3.14,0,0,1,2.3,1.15,2.8,2.8,0,0,0,.31-0.85h0.33v3H51.51C51.18,21,50.26,20,48.92,20,47,20,46.4,21.92,46.4,23.38s0.57,3.39,2.52,3.39c1.34,0,2.26-1,2.59-2.65h0.35v3H51.53Z"></path>
+<path class="cls-1" d="M60,25.4l0.09-.35h0.35L60.3,27.16H53.79V26.81c1.16,0,1.37-.29,1.37-2V22c0-1.74-.21-2-1.37-2V19.62h6.09L60,21.71H59.65l-0.09-.35c-0.19-.8-0.42-1.11-2-1.11H56.4v2.59h0.1c1.74,0,1.88-.21,1.88-1.37h0.35v3.39H58.38c0-1.15-.14-1.37-1.88-1.37H56.4v1c0,1.74.21,2,1.37,2H58C59.57,26.52,59.79,26.22,60,25.4Z"></path>
+<path class="cls-1" d="M62.05,20V19.62h2.14l4.63,5.5V22c0-1.74-.21-2-1.38-2V19.62h3.39V20c-1.17,0-1.38.28-1.38,2v5.44H69.14l-5.06-6.07v3.41c0,1.74.21,2,1.37,2v0.35H62.05V26.81c1.17,0,1.37-.29,1.37-2V22C63.43,20.25,63.22,20,62.05,20Z"></path>
+<path class="cls-1" d="M74.08,20.3c-1.6,0-1.74.3-1.95,1.11L72,21.77H71.69l0.1-2.14h7.76l0.12,2.14H79.31l-0.09-.35c-0.21-.82-0.42-1.11-2-1.11H76.3v4.47c0,1.74.23,2,1.39,2v0.35h-4V26.81c1.17,0,1.39-.29,1.39-2V20.3h-1Z"></path>
+<path class="cls-1" d="M86.73,25.4l0.08-.35h0.35L87,27.16H80.51V26.81c1.17,0,1.37-.29,1.37-2V22c0-1.74-.21-2-1.37-2V19.62H86.6l0.14,2.09H86.38l-0.08-.35c-0.19-.8-0.42-1.11-2-1.11H83.12v2.59h0.1c1.74,0,1.88-.21,1.88-1.37h0.35v3.39H85.11c0-1.15-.14-1.37-1.88-1.37h-0.1v1c0,1.74.21,2,1.37,2h0.21C86.29,26.52,86.52,26.22,86.73,25.4Z"></path>
+<path class="cls-1" d="M93.81,21.78a1.36,1.36,0,0,1-1.43,1.5h-1v-3h1A1.38,1.38,0,0,1,93.81,21.78Zm-0.75,2.11a2.19,2.19,0,0,0,2.11-2.11c0-1.23-1-2.16-2.78-2.16h-3.6V20c1.17,0,1.38.28,1.38,2v2.78c0,1.74-.21,2-1.38,2v0.35h4V26.81c-1.17,0-1.37-.29-1.37-2V23.92h0.48l2.37,3.24h2.23V26.81a4.22,4.22,0,0,1-2.33-1.62Z"></path>
+<path class="cls-1" d="M105.25,26.81v0.35h-4V26.81c1.17,0,1.38-.29,1.38-2V22c0-1.74-.21-2-1.38-2V19.62h6.3l0.14,2.09h-0.36l-0.09-.35c-0.21-.8-0.42-1.11-2-1.11h-1.36v2.59H104c1.74,0,1.88-.21,1.88-1.37h0.35v3.39h-0.35c0-1.15-.14-1.37-1.88-1.37h-0.1v1.29C103.88,26.52,104.09,26.81,105.25,26.81Z"></path>
+<path class="cls-1" d="M116.09,23.38c0,1.51-.77,3.39-2.82,3.39s-2.82-1.88-2.82-3.39S111.22,20,113.27,20,116.09,21.89,116.09,23.38Zm1.42,0a4.25,4.25,0,1,0-4.24,4.07A4.18,4.18,0,0,0,117.52,23.38Z"></path>
+<path class="cls-1" d="M124.34,21.78a1.36,1.36,0,0,1-1.43,1.5h-1v-3h1A1.38,1.38,0,0,1,124.34,21.78Zm-0.75,2.11a2.19,2.19,0,0,0,2.1-2.11c0-1.23-1-2.16-2.78-2.16h-3.6V20c1.16,0,1.37.28,1.37,2v2.78c0,1.74-.21,2-1.37,2v0.35h4V26.81c-1.16,0-1.37-.29-1.37-2V23.92h0.48l2.37,3.24H127V26.81a4.2,4.2,0,0,1-2.33-1.62Z"></path>
+<path class="cls-1" d="M14.84,72.45a4.94,4.94,0,0,1,0-9.87A3.82,3.82,0,0,1,17.63,64a3.43,3.43,0,0,0,.38-1h0.4V66.6H18c-0.4-2-1.52-3.21-3.15-3.21-2.36,0-3.1,2.35-3.1,4.12s0.74,4.12,3.1,4.12c1.06,0,2.68-.65,2.68-1.8,0-.84-0.78-1.29-1.82-1.29V68.12h4.67v0.42c-1.42,0-1.67.36-1.67,2.47v0.64C17.38,71.65,16.07,72.45,14.84,72.45Z"></path>
+<path class="cls-1" d="M35.71,67.51c0,1.84-.93,4.12-3.42,4.12s-3.42-2.28-3.42-4.12,0.93-4.12,3.42-4.12S35.71,65.69,35.71,67.51Zm1.73,0a5.16,5.16,0,1,0-5.15,4.94A5.08,5.08,0,0,0,37.45,67.51Z"></path>
+<path class="cls-1" d="M51.93,65.23L48.8,72.45H48.53L45.4,65.23c-0.68-1.61-.95-1.86-2-1.86V62.95h4.73v0.42c-1.52,0-1.67.38-1.14,1.6l2.16,5,2.13-5c0.55-1.25.55-1.6-1.12-1.6V62.95h4v0.42C52.8,63.37,52.61,63.62,51.93,65.23Z"></path>
+<path class="cls-1" d="M67.88,70L68,69.54h0.42L68.24,72.1h-7.9V71.67c1.42,0,1.67-.36,1.67-2.47V65.82c0-2.11-.25-2.45-1.67-2.45V62.95h7.39l0.17,2.54H67.46l-0.11-.42c-0.23-1-.5-1.35-2.42-1.35H63.51v3.15h0.13c2.11,0,2.28-.25,2.28-1.67h0.42v4.12H65.92c0-1.39-.17-1.67-2.28-1.67H63.51v1.23c0,2.11.25,2.45,1.67,2.45h0.25C67.35,71.31,67.63,71,67.88,70Z"></path>
+<path class="cls-1" d="M81.76,65.57A1.65,1.65,0,0,1,80,67.39h-1.2V63.71H80A1.68,1.68,0,0,1,81.76,65.57Zm-0.91,2.56a2.66,2.66,0,0,0,2.56-2.56c0-1.5-1.2-2.62-3.38-2.62H75.66v0.42c1.41,0,1.67.34,1.67,2.45V69.2c0,2.11-.26,2.47-1.67,2.47V72.1h4.84V71.67c-1.42,0-1.67-.36-1.67-2.47v-1h0.59l2.87,3.93H85V71.67a5.13,5.13,0,0,1-2.83-2Z"></path>
+<path class="cls-1" d="M91.18,63.37V62.95h2.6l5.62,6.68v-3.8c0-2.11-.25-2.45-1.67-2.45V62.95h4.12v0.42c-1.41,0-1.67.34-1.67,2.45v6.61h-0.4l-6.14-7.37V69.2c0,2.11.25,2.47,1.67,2.47V72.1H91.18V71.67c1.41,0,1.67-.36,1.67-2.47V65.82C92.85,63.71,92.6,63.37,91.18,63.37Z"></path>
+<path class="cls-1" d="M111.53,69.2c0,2.11.26,2.47,1.67,2.47V72.1h-4.12V71.67c1.42,0,1.67-.36,1.67-2.47V65.82c0-2.11-.25-2.45-1.67-2.45V62.95h3.17L115.39,70l3.13-7.06h3v0.42c-1.42,0-1.69.34-1.69,2.45V69.2c0,2.11.27,2.47,1.69,2.47V72.1h-4.84V71.67c1.42,0,1.67-.36,1.67-2.47v-4l-3.19,7.2h-0.29L111.53,65V69.2Z"></path>
+<path class="cls-1" d="M136.22,70l0.11-.42h0.42l-0.17,2.56h-7.9V71.67c1.42,0,1.67-.36,1.67-2.47V65.82c0-2.11-.25-2.45-1.67-2.45V62.95h7.39l0.17,2.54H135.8l-0.1-.42c-0.24-1-.51-1.35-2.43-1.35h-1.42v3.15H132c2.11,0,2.28-.25,2.28-1.67h0.42v4.12h-0.42c0-1.39-.17-1.67-2.28-1.67h-0.13v1.23c0,2.11.25,2.45,1.67,2.45h0.26C135.7,71.31,136,71,136.22,70Z"></path>
+<path class="cls-1" d="M144,63.37V62.95h2.6l5.62,6.68v-3.8c0-2.11-.25-2.45-1.67-2.45V62.95h4.12v0.42c-1.41,0-1.67.34-1.67,2.45v6.61h-0.4l-6.15-7.37V69.2c0,2.11.25,2.47,1.67,2.47V72.1H144V71.67c1.42,0,1.67-.36,1.67-2.47V65.82C145.67,63.71,145.41,63.37,144,63.37Z"></path>
+<path class="cls-1" d="M163.88,63.77c-1.94,0-2.11.36-2.37,1.35l-0.11.42H161l0.13-2.6h9.42l0.15,2.6h-0.45l-0.1-.42c-0.25-1-.51-1.35-2.45-1.35h-1.1V69.2c0,2.11.27,2.47,1.69,2.47V72.1h-4.86V71.67c1.41,0,1.69-.36,1.69-2.47V63.77h-1.23Z"></path>
+<path class="cls-1" d="M29.44,43.3c0,4.68-1.52,10.53-9.24,10.53H19.73c-2.92,0-3.33-.64-3.33-4.45V32.77h3.8C27.92,32.77,29.44,38.68,29.44,43.3ZM7.62,56H20C30,56,34.29,50.26,34.29,43.3S30,30.66,20,30.66H7.62v1.17c3.92,0,4.62.94,4.62,6.79V48c0,5.85-.7,6.84-4.62,6.84V56Z"></path>
+<path class="cls-1" d="M35.35,56V54.82c3.92,0,4.62-1,4.62-6.84V38.62c0-5.85-.7-6.79-4.62-6.79V30.66H48.74v1.17c-3.92,0-4.62.94-4.62,6.79V48c0,5.85.7,6.84,4.62,6.84V56H35.35Z"></path>
+<path class="cls-1" d="M64.3,57a13.67,13.67,0,0,1,0-27.32A10.57,10.57,0,0,1,72,33.53a9.48,9.48,0,0,0,1.05-2.87h1.11V40.78H73c-1.11-5.44-4.21-8.89-8.72-8.89-6.55,0-8.6,6.49-8.6,11.41s2,11.41,8.6,11.41c2.93,0,7.43-1.81,7.43-5,0-2.34-2.16-3.57-5-3.57V45H79.63v1.17c-3.92,0-4.62,1-4.62,6.84v1.76C71.32,54.76,67.69,57,64.3,57Z"></path>
+<path class="cls-1" d="M81.67,56V54.82c3.92,0,4.62-1,4.62-6.84V38.62c0-5.85-.7-6.79-4.62-6.79V30.66h13.4v1.17c-3.92,0-4.62.94-4.62,6.79V48c0,5.85.7,6.84,4.62,6.84V56H81.67Z"></path>
+<path class="cls-1" d="M104.6,32.94c-5.38,0-5.85,1-6.55,3.74l-0.29,1.17H96.59l0.35-7.19H123l0.41,7.19h-1.23l-0.29-1.17c-0.7-2.75-1.4-3.74-6.79-3.74h-3V48c0,5.85.76,6.84,4.68,6.84V56H103.32V54.82c3.92,0,4.68-1,4.68-6.84v-15H104.6Z"></path>
+<path class="cls-1" d="M137.7,43.13L131,45.46l3.86-8.95ZM130,47.63l7.9-4,2.87,6.74c1.46,3.45,1.05,4.45-3.16,4.45V56h13.1V54.76c-3.1,0-3.8-.7-5.73-5.09l-8.6-20h-0.82l-8.6,20c-1.93,4.39-2.46,5.09-6,5.09V56H132V54.76c-4.62,0-4.62-1-3.16-4.45Z"></path>
+<path class="cls-1" d="M152.13,31.83V30.66h13.39v1.17c-3.92,0-4.62.94-4.62,6.79V47c0,5.85.7,6.78,4.62,6.78h2c5.38,0,6.08-1,6.79-3.74l0.29-1.17h1.23L175.47,56H152.13V54.82c3.92,0,4.62-1,4.62-6.84V38.62C156.76,32.77,156.05,31.83,152.13,31.83Z"></path>
+<rect class="cls-1" x="7.68" y="59.29" width="167.81" height="0.51"></rect>
+<path class="cls-1" d="M130.38,44.78s17.44-10,37.17-4.76A58.67,58.67,0,0,0,129,49.34Z"></path>
+</svg></a></div>
+<div class="col-sm-2 col-xs-6" style="min-height: 100px;"><a href="/em"><svg version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" id="em_logo" viewbox="-2 55 220 110"> 	        <g> 	          <g>
+<path fill="#ffffff" d="M27.2,117.8H4.6V117h1c0.1,0,0.3,0,0.5,0c0.2,0,0.4-0.1,0.6-0.1c0.2-0.1,0.4-0.1,0.6-0.2&#xA;&#9;              c0.2-0.1,0.4-0.2,0.5-0.3c0.1-0.1,0.3-0.3,0.4-0.4c0.1-0.2,0.2-0.4,0.3-0.6c0.1-0.3,0.1-0.6,0.2-1c0-0.4,0.1-1,0.1-1.6V93.8&#xA;&#9;              c0-1.9-0.2-3-0.6-3.4c-0.3-0.3-0.6-0.5-1-0.6c-0.4-0.2-1-0.2-1.5-0.2h-1v-0.8h22.6l0.3,6.3h-0.8c-0.1-0.4-0.2-0.8-0.3-1.2&#xA;&#9;              c-0.1-0.4-0.2-0.8-0.3-1.1s-0.3-0.7-0.5-1c-0.2-0.3-0.5-0.6-0.9-0.8c-0.4-0.2-0.9-0.4-1.4-0.5c-0.6-0.1-1.3-0.2-2.2-0.2h-8v11.5&#xA;&#9;              h6.4c1,0,1.8-0.1,2.3-0.2c0.6-0.2,1-0.4,1.3-0.8c0.3-0.3,0.5-0.8,0.6-1.3c0.1-0.5,0.3-1.2,0.3-1.9h0.8v10.1H24&#xA;&#9;              c-0.1-0.8-0.2-1.4-0.3-2c-0.1-0.6-0.3-1-0.6-1.3c-0.3-0.3-0.7-0.6-1.3-0.8c-0.6-0.2-1.3-0.3-2.3-0.3H13v9.6c0,0.5,0,0.9,0,1.3&#xA;&#9;              s0.1,0.7,0.2,1c0.1,0.3,0.4,0.5,0.7,0.7c0.3,0.2,0.9,0.3,1.5,0.3h4.9c1.2,0,2.2-0.1,2.9-0.2s1.5-0.4,2.1-0.8&#xA;&#9;              c0.6-0.4,1.2-1,1.7-1.7c0.5-0.7,1.1-1.7,1.8-2.9h0.9L27.2,117.8z"></path>
+<path fill="#ffffff" d="M49.1,117.8v-0.7h0.8c0.5,0,1-0.1,1.3-0.2c0.3-0.1,0.6-0.4,0.8-0.7c0.1-0.2,0.2-0.5,0.3-0.9&#xA;&#9;              c0.1-0.4,0.1-1,0.1-1.7V97.7l-9.2,20.1h-0.6l-9.2-20.1v15.9c0,1.5,0.2,2.4,0.5,2.8c0.4,0.5,1.1,0.7,2.1,0.7h0.8v0.7h-8.2v-0.7h0.8&#xA;&#9;              c0.5,0,0.9-0.1,1.3-0.2s0.6-0.4,0.9-0.7c0.1-0.2,0.2-0.5,0.3-0.9c0.1-0.4,0.1-1,0.1-1.7V98.1c0-0.8-0.1-1.3-0.1-1.8&#xA;&#9;              c-0.1-0.4-0.3-0.8-0.6-1c-0.1-0.1-0.3-0.2-0.4-0.3c-0.1-0.1-0.3-0.1-0.5-0.2c-0.2-0.1-0.4-0.1-0.7-0.1c-0.3,0-0.6-0.1-0.9-0.1V94&#xA;&#9;              h6.7l8.7,18.7L52.6,94h6.8v0.6h-0.8c-1,0-1.7,0.3-2.2,0.9c-0.1,0.2-0.2,0.5-0.3,1c-0.1,0.4-0.1,1-0.1,1.7v15.6&#xA;&#9;              c0,1.5,0.2,2.4,0.5,2.8c0.4,0.5,1.1,0.7,2.1,0.7h0.8v0.7H49.1z"></path>
+<path fill="#ffffff" d="M78.9,117.8H60.4v-0.7h0.8c0.1,0,0.2,0,0.4,0c0.2,0,0.3-0.1,0.5-0.1c0.2-0.1,0.4-0.1,0.5-0.2&#xA;&#9;              c0.2-0.1,0.3-0.2,0.4-0.3c0.1-0.1,0.2-0.2,0.3-0.3c0.1-0.1,0.2-0.3,0.2-0.5c0.1-0.2,0.1-0.5,0.1-0.8s0.1-0.8,0.1-1.3V98.1&#xA;&#9;              c0-1.5-0.1-2.4-0.4-2.8c-0.2-0.2-0.5-0.4-0.8-0.5s-0.8-0.2-1.3-0.2h-0.8V94H79l0.3,5.2h-0.7c-0.1-0.3-0.2-0.7-0.2-1&#xA;&#9;              c-0.1-0.3-0.1-0.6-0.3-0.9c-0.1-0.3-0.3-0.6-0.4-0.8c-0.2-0.3-0.4-0.4-0.7-0.6c-0.3-0.2-0.7-0.3-1.2-0.4c-0.5-0.1-1.1-0.1-1.8-0.1&#xA;&#9;              h-6.6v9.4h5.3c0.8,0,1.5-0.1,1.9-0.2c0.4-0.1,0.8-0.3,1.1-0.6c0.3-0.3,0.4-0.6,0.5-1.1c0.1-0.4,0.2-1,0.3-1.5H77v8.3h-0.7&#xA;&#9;              c-0.1-0.6-0.2-1.2-0.3-1.6c-0.1-0.4-0.3-0.8-0.5-1.1c-0.3-0.3-0.6-0.5-1.1-0.6c-0.4-0.1-1.1-0.2-1.9-0.2h-5.3v7.9&#xA;&#9;              c0,0.4,0,0.7,0,1.1c0,0.3,0.1,0.6,0.2,0.8c0.1,0.2,0.3,0.4,0.6,0.6s0.7,0.2,1.3,0.2h4c1,0,1.8-0.1,2.4-0.2&#xA;&#9;              c0.6-0.1,1.2-0.4,1.7-0.7c0.5-0.3,0.9-0.8,1.4-1.4c0.4-0.6,0.9-1.4,1.5-2.4h0.7L78.9,117.8z"></path>
+<path fill="#ffffff" d="M103.7,126.9l-14.2-20.3c-0.3,0-0.6,0-0.8,0.1c-0.2,0-0.4,0-0.6,0s-0.3,0-0.5,0c-0.2,0-0.3,0-0.5-0.1v6.9&#xA;&#9;              c0,1.5,0.2,2.4,0.5,2.8c0.4,0.5,1.1,0.8,2,0.8h0.9v0.7H80.2v-0.7h0.9c1,0,1.8-0.3,2.2-1c0.2-0.3,0.4-1.2,0.4-2.6V98.2&#xA;&#9;              c0-1.5-0.1-2.4-0.4-2.8c-0.3-0.3-0.5-0.4-0.9-0.6c-0.3-0.1-0.7-0.2-1.2-0.2h-0.9V94h8.5c1.2,0,2.3,0.1,3.3,0.1s1.7,0.2,2.3,0.4&#xA;&#9;              c0.6,0.2,1.2,0.5,1.7,0.8s1,0.8,1.3,1.2c0.4,0.5,0.7,1,0.9,1.6c0.2,0.6,0.3,1.2,0.3,1.9c0,0.8-0.1,1.4-0.3,2.1&#xA;&#9;              c-0.2,0.6-0.6,1.2-1,1.8c-0.5,0.5-1.1,1-1.8,1.4s-1.5,0.7-2.5,0.9l4.7,6.9c0.5,0.8,1,1.4,1.5,1.9s7.1,10,7.5,10.3&#xA;&#9;              c0.5,0.3,1,0.5,1.5,0.7c0.5,0.1,1.1,0.3,1.8,0.3v0.7L103.7,126.9L103.7,126.9z M94.5,98.3c-0.2-0.6-0.6-1.2-1-1.6&#xA;&#9;              c-0.4-0.4-1-0.8-1.6-1c-0.6-0.3-1.3-0.4-2.1-0.4c-0.6,0-1.5,0.1-2.7,0.3v10h1c1.2,0,2.1-0.1,3-0.4c0.8-0.3,1.5-0.6,2.1-1.1&#xA;&#9;              c0.6-0.4,1-1,1.2-1.7c0.3-0.6,0.4-1.3,0.4-2.1C94.9,99.6,94.7,98.9,94.5,98.3z"></path>
+<path fill="#ffffff" d="M123,105.3c-0.9,0-1.6,0.3-1.9,0.9c-0.1,0.2-0.2,0.5-0.3,1c-0.1,0.4-0.1,1-0.1,1.6v7.3&#xA;&#9;              c-1.3,0.8-2.7,1.3-4.1,1.7c-1.4,0.4-2.8,0.5-4.4,0.5c-2.1,0-3.9-0.3-5.6-1c-1.6-0.6-3-1.5-4.2-2.6s-2-2.4-2.6-3.9&#xA;&#9;              c-0.6-1.5-0.9-3.1-0.9-4.8c0-1,0.1-2,0.3-3c0.2-1,0.5-2,1-3c0.4-1,1-1.9,1.6-2.7c0.6-0.8,1.4-1.6,2.4-2.2c0.9-0.6,2-1.1,3.1-1.5&#xA;&#9;              s2.4-0.5,3.8-0.5c1,0,1.9,0.1,2.6,0.2c0.8,0.2,1.4,0.3,1.9,0.5c0.5,0.2,1,0.4,1.3,0.5c0.3,0.2,0.6,0.2,0.9,0.2&#xA;&#9;              c0.1,0,0.2,0,0.3-0.1c0.1,0,0.2-0.1,0.3-0.2c0.1-0.1,0.1-0.3,0.2-0.5c0.1-0.2,0.1-0.4,0.1-0.8h0.7l0.6,7.6h-0.6&#xA;&#9;              c-0.4-1.2-0.8-2.1-1.4-2.9c-0.5-0.8-1.2-1.5-1.8-2c-0.7-0.5-1.4-0.9-2.2-1.1c-0.8-0.2-1.6-0.3-2.5-0.3c-1.4,0-2.7,0.3-3.8,0.8&#xA;&#9;              c-1.1,0.6-2.1,1.3-2.8,2.3c-0.8,1-1.3,2.1-1.7,3.4c-0.4,1.3-0.6,2.7-0.6,4.3c0,1.7,0.2,3.3,0.7,4.7s1.1,2.7,2,3.7&#xA;&#9;              c0.8,1,1.9,1.8,3,2.4c1.2,0.6,2.4,0.9,3.8,0.9c0.9,0,1.7-0.1,2.6-0.3c0.8-0.2,1.7-0.5,2.5-1v-6.9c0-0.8,0-1.3-0.1-1.8&#xA;&#9;              c-0.1-0.4-0.2-0.8-0.5-1c-0.2-0.3-0.6-0.4-1-0.5c-0.4-0.1-0.9-0.1-1.6-0.2v-0.6h9.3v0.6H123z"></path>
+<path fill="#ffffff" d="M140,117.8h-18.5v-0.7h0.8c0.1,0,0.2,0,0.4,0c0.2,0,0.3-0.1,0.5-0.1c0.2-0.1,0.4-0.1,0.5-0.2&#xA;&#9;              c0.2-0.1,0.3-0.2,0.4-0.3c0.1-0.1,0.2-0.2,0.3-0.3c0.1-0.1,0.2-0.3,0.2-0.5c0.1-0.2,0.1-0.5,0.1-0.8s0.1-0.8,0.1-1.3V98.1&#xA;&#9;              c0-1.5-0.1-2.4-0.4-2.8c-0.2-0.2-0.5-0.4-0.8-0.5c-0.4-0.1-0.8-0.2-1.3-0.2h-0.8V94H140l0.3,5.2h-0.7c-0.1-0.3-0.2-0.7-0.2-1&#xA;&#9;              c-0.1-0.3-0.1-0.6-0.3-0.9s-0.3-0.6-0.4-0.8c-0.2-0.3-0.4-0.4-0.7-0.6c-0.3-0.2-0.7-0.3-1.2-0.4c-0.5-0.1-1.1-0.1-1.8-0.1h-6.6&#xA;&#9;              v9.4h5.3c0.8,0,1.5-0.1,1.9-0.2c0.4-0.1,0.8-0.3,1.1-0.6s0.4-0.6,0.5-1.1c0.1-0.4,0.2-1,0.3-1.5h0.7v8.3h-0.7&#xA;&#9;              c-0.1-0.6-0.2-1.2-0.3-1.6c-0.1-0.4-0.3-0.8-0.5-1.1c-0.3-0.3-0.6-0.5-1.1-0.6s-1.1-0.2-1.9-0.2h-5.2v7.9c0,0.4,0,0.7,0,1.1&#xA;&#9;              c0,0.3,0.1,0.6,0.2,0.8c0.1,0.2,0.3,0.4,0.6,0.6s0.7,0.2,1.3,0.2h4c1,0,1.8-0.1,2.4-0.2c0.6-0.1,1.2-0.4,1.7-0.7&#xA;&#9;              c0.5-0.3,0.9-0.8,1.4-1.4c0.4-0.6,0.9-1.4,1.5-2.4h0.7L140,117.8z"></path>
+<path fill="#ffffff" d="M165.3,94.6c-0.5,0-1,0.1-1.3,0.2c-0.4,0.1-0.6,0.4-0.8,0.6c-0.1,0.2-0.2,0.5-0.3,1s-0.1,1-0.1,1.6v19.8&#xA;&#9;              h-0.6L146.4,99v14.7c0,1.5,0.2,2.4,0.5,2.8c0.4,0.5,1.1,0.7,2.1,0.7h0.8v0.7h-8.3v-0.7h0.8c0.5,0,1-0.1,1.3-0.2&#xA;&#9;              c0.4-0.1,0.6-0.4,0.8-0.7c0.3-0.3,0.4-1.2,0.4-2.6V97c-0.1-0.1-0.3-0.3-0.4-0.6c-0.2-0.3-0.4-0.6-0.7-0.8&#xA;&#9;              c-0.3-0.3-0.7-0.5-1.2-0.7c-0.5-0.2-1.1-0.3-1.7-0.3V94h5.8l14.6,17.9V98.1c0-1.5-0.2-2.4-0.5-2.8c-0.4-0.5-1.1-0.8-2.1-0.8h-0.8&#xA;&#9;              V94h8.3v0.6H165.3z"></path>
+<path fill="#ffffff" d="M183.3,115.2c-0.7,0.8-1.4,1.4-2.2,1.9c-0.8,0.5-1.7,0.8-2.6,1c-1,0.2-2,0.3-3.1,0.3c-1.8,0-3.5-0.3-4.9-1&#xA;&#9;              c-1.4-0.6-2.6-1.5-3.5-2.6c-0.9-1.1-1.6-2.4-2.1-3.9c-0.5-1.5-0.7-3-0.7-4.7c0-1.2,0.1-2.3,0.4-3.4c0.2-1.1,0.6-2.1,1-3.1&#xA;&#9;              c0.4-1,1-1.8,1.7-2.6c0.6-0.8,1.4-1.5,2.4-2.1c0.9-0.6,1.9-1,3-1.3c1.1-0.3,2.2-0.5,3.5-0.5c0.9,0,1.7,0.1,2.4,0.3&#xA;&#9;              c0.7,0.2,1.3,0.4,1.8,0.6c0.5,0.2,0.9,0.4,1.2,0.6c0.3,0.2,0.6,0.3,0.8,0.3c0.3,0,0.6-0.1,0.9-0.4s0.4-0.7,0.6-1.3h0.6l0.6,8.2&#xA;&#9;              h-0.6c-0.4-1.2-0.8-2.3-1.3-3.1c-0.5-0.9-1.1-1.6-1.8-2.1c-0.7-0.5-1.4-1-2.2-1.2c-0.8-0.3-1.7-0.4-2.6-0.4&#xA;&#9;              c-1.2,0-2.4,0.2-3.4,0.7c-1,0.5-1.9,1.2-2.7,2.2c-0.8,1-1.3,2.2-1.7,3.7c-0.4,1.5-0.6,3.2-0.6,5.2c0,1.7,0.2,3.3,0.6,4.6&#xA;&#9;              c0.4,1.3,1,2.4,1.8,3.3c0.8,0.9,1.7,1.6,2.8,2.1c1.1,0.4,2.3,0.7,3.7,0.7c0.8,0,1.5-0.1,2.2-0.2c0.7-0.1,1.3-0.4,1.9-0.8&#xA;&#9;              c0.6-0.4,1.3-0.9,1.9-1.5s1.3-1.5,2-2.4l0.5,0.4C184.7,113.5,184,114.4,183.3,115.2z"></path>
+<path fill="#ffffff" d="M210.9,89.5c-0.2,0-0.4,0-0.7,0.1c-0.3,0.1-0.6,0.2-0.9,0.3c-0.3,0.1-0.7,0.3-1,0.6&#xA;&#9;              c-0.3,0.3-0.7,0.5-1,0.9c-0.3,0.3-0.6,0.7-1,1.2c-0.3,0.5-0.8,1.1-1.2,1.8l-7,11v7.2c0,1.8,0.2,2.9,0.6,3.4&#xA;&#9;              c0.5,0.6,1.3,0.9,2.6,0.9h0.9v0.8h-12.5V117h1c0.6,0,1.1-0.1,1.5-0.3c0.4-0.2,0.8-0.5,1.1-0.9c0.1-0.2,0.2-0.6,0.3-1.1&#xA;&#9;              c0.1-0.5,0.1-1.2,0.1-2.1v-6.9l-7.9-12.1c-0.5-0.7-0.9-1.3-1.2-1.8c-0.3-0.5-0.7-0.9-1.1-1.2c-0.4-0.3-0.8-0.5-1.3-0.8&#xA;&#9;              c-0.5-0.3-1.1-0.4-1.7-0.4v-0.8H193v0.8h-0.6c-0.2,0-0.4,0-0.8,0.1c-0.3,0.1-0.6,0.1-0.9,0.3c-0.3,0.1-0.5,0.3-0.7,0.6&#xA;&#9;              c-0.2,0.3-0.3,0.6-0.3,1c0,0.2,0.1,0.6,0.3,1.1c0.2,0.5,0.5,1.1,1,1.8l6.2,9.4l5.8-9c0.6-1,1-1.8,1.2-2.4c0.2-0.6,0.1-1.2-0.3-1.7&#xA;&#9;              c-0.1-0.1-0.2-0.3-0.3-0.4c-0.1-0.1-0.3-0.2-0.5-0.3c-0.2-0.1-0.4-0.2-0.7-0.2c-0.3-0.1-0.6-0.1-1-0.1v-0.8h10.1v0.8H210.9z"></path>
+</g> 	          <g>
+<path fill="#ffffff" d="M118.4,125.4l-2.4-5.1l0,0h-2v0.3h0.1c0.1,0,0.2,0,0.3,0c0.1,0,0.1,0,0.2,0c0.1,0,0.1,0,0.1,0.1&#xA;&#9;              c0,0,0.1,0.1,0.1,0.1c0.1,0.1,0.1,0.1,0.1,0.3c0,0.1,0,0.3,0,0.5v4.4c0,0.2,0,0.3,0,0.5c0,0.1-0.1,0.2-0.1,0.2&#xA;&#9;              c-0.1,0.1-0.1,0.1-0.2,0.2c-0.1,0-0.2,0.1-0.3,0.1H114v0.3h2.4v-0.3h-0.3c-0.3,0-0.4-0.1-0.5-0.2c-0.1-0.1-0.1-0.3-0.1-0.7v-4.2&#xA;&#9;              l2.5,5.4l0,0h0.3l2.5-5.4v4.2c0,0.2,0,0.3,0,0.5c0,0.1-0.1,0.2-0.1,0.2c-0.1,0.1-0.1,0.1-0.2,0.2c-0.1,0-0.2,0.1-0.3,0.1h-0.3v0.3&#xA;&#9;              h3v-0.3h-0.3c-0.3,0-0.4-0.1-0.5-0.2c-0.1-0.1-0.1-0.3-0.1-0.7v-4.4c0-0.2,0-0.3,0-0.4c0-0.1,0-0.2,0.1-0.2&#xA;&#9;              c0.1-0.1,0.3-0.2,0.6-0.2h0.3v-0.3h-2L118.4,125.4z"></path>
+<path fill="#ffffff" d="M131.5,126.7c-0.1,0-0.2-0.1-0.3-0.1c-0.1-0.1-0.2-0.2-0.2-0.3c-0.1-0.1-0.2-0.3-0.3-0.6l-2.3-5.6l0-0.1&#xA;&#9;              h-0.3l-2.4,5.6c-0.1,0.2-0.2,0.3-0.2,0.5c-0.1,0.1-0.1,0.3-0.2,0.3s-0.2,0.2-0.3,0.2c-0.1,0.1-0.2,0.1-0.3,0.1h-0.1v0.3h2.2v-0.3&#xA;&#9;              h-0.1c-0.2,0-0.4-0.1-0.5-0.1s-0.2-0.1-0.2-0.2c0-0.1,0-0.1,0-0.3s0.1-0.3,0.1-0.4l0.4-1h2.5l0.4,0.9c0.1,0.1,0.1,0.3,0.1,0.4&#xA;&#9;              s0.1,0.2,0,0.3c0,0.1-0.1,0.1-0.1,0.2s-0.3,0.1-0.4,0.1h-0.1v0.3h2.8v-0.3h-0.1C131.7,126.8,131.6,126.8,131.5,126.7z M129,124.3&#xA;&#9;              h-2.1l1.1-2.5L129,124.3z"></path>
+<path fill="#ffffff" d="M138.4,120.5h0.3c0.3,0,0.4,0.1,0.5,0.2c0.1,0.1,0.1,0.2,0.1,0.7v3.7l-4-4.9h-1.7v0.3h0.1&#xA;&#9;              c0.2,0,0.3,0,0.5,0.1c0.1,0.1,0.2,0.1,0.3,0.2c0.1,0.1,0.1,0.1,0.2,0.2c0.1,0.1,0.1,0.1,0.1,0.2v4.7c0,0.4-0.1,0.6-0.1,0.7&#xA;&#9;              c-0.1,0.1-0.1,0.1-0.2,0.2c-0.1,0-0.2,0.1-0.3,0.1h-0.3v0.3h2.5v-0.3h-0.3c-0.3,0-0.4-0.1-0.5-0.2c-0.1-0.1-0.1-0.3-0.1-0.7v-4&#xA;&#9;              l4.3,5.2l0,0h0.3v-5.7c0-0.2,0-0.3,0-0.4c0-0.1,0-0.2,0.1-0.2c0.1-0.1,0.1-0.1,0.2-0.2c0.1,0,0.2-0.1,0.3-0.1h0.3v-0.3h-2.5&#xA;&#9;              L138.4,120.5L138.4,120.5z"></path>
+<path fill="#ffffff" d="M149.5,126.7c-0.1,0-0.2-0.1-0.3-0.1c-0.1-0.1-0.2-0.2-0.2-0.3c-0.1-0.1-0.2-0.3-0.3-0.6l-2.3-5.6l0-0.1&#xA;&#9;              h-0.3l-2.4,5.6c-0.1,0.2-0.2,0.3-0.2,0.5c-0.1,0.1-0.1,0.3-0.2,0.3s-0.2,0.2-0.3,0.2c-0.1,0.1-0.2,0.1-0.3,0.1h-0.1v0.3h2.2v-0.3&#xA;&#9;              h-0.1c-0.2,0-0.4-0.1-0.5-0.1c-0.1,0-0.2-0.1-0.2-0.2c0-0.1,0-0.1,0-0.3s0.1-0.3,0.1-0.4l0.4-1h2.5l0.4,0.9&#xA;&#9;              c0.1,0.1,0.1,0.3,0.1,0.4s0.1,0.2,0,0.3c0,0.1-0.1,0.1-0.1,0.2s-0.3,0.1-0.4,0.1h-0.1v0.3h2.8v-0.3h-0.1&#xA;&#9;              C149.7,126.8,149.6,126.8,149.5,126.7z M147.1,124.3H145l1.1-2.5L147.1,124.3z"></path>
+<path fill="#ffffff" d="M156.2,123.6L156.2,123.6c0.2,0,0.4,0,0.5,0.1c0.1,0,0.2,0.1,0.2,0.1c0.1,0.1,0.1,0.1,0.1,0.3&#xA;&#9;              c0,0.1,0,0.3,0,0.5v1.9c-0.2,0.1-0.4,0.2-0.6,0.3s-0.5,0.1-0.7,0.1c-0.4,0-0.7-0.1-1-0.2c-0.3-0.2-0.6-0.4-0.8-0.7&#xA;&#9;              c-0.2-0.3-0.4-0.6-0.5-1c-0.1-0.4-0.2-0.8-0.2-1.3c0-0.4,0.1-0.8,0.2-1.2c0.1-0.4,0.3-0.7,0.5-1c0.2-0.3,0.4-0.5,0.8-0.6&#xA;&#9;              c0.3-0.1,0.6-0.2,1-0.2c0.3,0,0.5,0,0.7,0.1s0.4,0.2,0.6,0.3c0.2,0.1,0.3,0.3,0.5,0.5c0.1,0.2,0.3,0.5,0.4,0.8l0,0.1h0.3l-0.2-2.3&#xA;&#9;              h-0.3v0.1c0,0.1,0,0.1,0,0.2c0,0.1,0,0.1-0.1,0.1c0,0,0,0,0,0h0c-0.1,0-0.1,0-0.2-0.1c-0.1-0.1-0.2-0.1-0.4-0.1&#xA;&#9;              c-0.1-0.1-0.3-0.1-0.6-0.1c-0.2-0.1-0.5-0.1-0.8-0.1c-0.4,0-0.8,0.1-1.1,0.2c-0.3,0.1-0.6,0.3-0.9,0.4c-0.3,0.2-0.5,0.4-0.7,0.6&#xA;&#9;              c-0.2,0.3-0.3,0.5-0.5,0.8c-0.1,0.3-0.2,0.6-0.3,0.8s-0.1,0.6-0.1,0.9c0,0.5,0.1,1,0.3,1.4s0.4,0.8,0.8,1.1&#xA;&#9;              c0.3,0.3,0.7,0.6,1.2,0.8c0.5,0.2,1,0.3,1.6,0.3c0.4,0,0.8-0.1,1.2-0.2c0.4-0.1,0.8-0.3,1.2-0.5l0,0v-2.1c0-0.2,0-0.3,0-0.4&#xA;&#9;              c0-0.1,0-0.2,0.1-0.3c0.1-0.1,0.2-0.2,0.5-0.2h0.2v-0.3h-2.8V123.6z"></path>
+<path fill="#ffffff" d="M166.5,125.3c-0.1,0.3-0.3,0.5-0.4,0.7c-0.1,0.2-0.2,0.3-0.4,0.4s-0.3,0.2-0.4,0.2c-0.2,0-0.4,0.1-0.7,0.1&#xA;&#9;              h-1.1c-0.1,0-0.3,0-0.3-0.1c-0.1,0-0.1-0.1-0.1-0.1c0-0.1,0-0.1,0-0.2v-2.4h1.4c0.2,0,0.4,0,0.5,0.1c0.1,0,0.2,0.1,0.3,0.2&#xA;&#9;              c0.1,0.1,0.1,0.2,0.1,0.3c0,0.1,0.1,0.3,0.1,0.4v0.1h0.3v-2.5h-0.3v0.1c0,0.2-0.1,0.3-0.1,0.4c0,0.1-0.1,0.2-0.1,0.3&#xA;&#9;              c-0.1,0.1-0.1,0.1-0.3,0.1s-0.3,0.1-0.5,0.1h-1.4v-2.5h1.8c0.2,0,0.4,0,0.5,0c0.1,0,0.2,0.1,0.3,0.1c0.1,0.1,0.1,0.1,0.2,0.2&#xA;&#9;              c0.1,0.1,0.1,0.1,0.1,0.2c0,0.1,0.1,0.2,0.1,0.3c0,0.1,0,0.2,0.1,0.3v0.1h0.3l-0.1-1.6h-5.3v0.3h0.3c0.1,0,0.3,0,0.3,0.1&#xA;&#9;              c0.1,0,0.2,0.1,0.2,0.1c0,0.1,0.1,0.2,0.1,0.7v4.4c0,0.1,0,0.3,0,0.4c0,0.1,0,0.2,0,0.2s0,0.1-0.1,0.1c0,0-0.1,0.1-0.1,0.1&#xA;&#9;              c0,0-0.1,0.1-0.1,0.1c-0.1,0-0.1,0-0.1,0.1c-0.1,0-0.1,0-0.1,0c0,0-0.1,0-0.1,0h-0.3v0.3h5.3l0.6-1.9L166.5,125.3L166.5,125.3z"></path>
+<path fill="#ffffff" d="M173.1,125.4l-2.4-5.1l0,0h-2v0.3h0.1c0.1,0,0.2,0,0.3,0c0.1,0,0.1,0,0.2,0c0.1,0,0.1,0,0.1,0.1&#xA;&#9;              c0,0,0.1,0.1,0.1,0.1c0.1,0.1,0.1,0.1,0.1,0.3c0,0.1,0,0.3,0,0.5v4.4c0,0.2,0,0.3,0,0.5c0,0.1-0.1,0.2-0.1,0.2&#xA;&#9;              c-0.1,0.1-0.1,0.1-0.2,0.2c-0.1,0-0.2,0.1-0.3,0.1h-0.3v0.3h2.4v-0.3h-0.3c-0.3,0-0.4-0.1-0.5-0.2c-0.1-0.1-0.1-0.3-0.1-0.7v-4.2&#xA;&#9;              l2.5,5.4l0,0h0.3l2.5-5.4v4.2c0,0.2,0,0.3,0,0.5c0,0.1-0.1,0.2-0.1,0.2c-0.1,0.1-0.1,0.1-0.2,0.2c-0.1,0-0.2,0.1-0.3,0.1h-0.3v0.3&#xA;&#9;              h3v-0.3h-0.3c-0.3,0-0.4-0.1-0.5-0.2c-0.1-0.1-0.1-0.3-0.1-0.7v-4.4c0-0.2,0-0.3,0-0.4c0-0.1,0-0.2,0.1-0.2&#xA;&#9;              c0.1-0.1,0.3-0.2,0.6-0.2h0.3v-0.3h-2L173.1,125.4z"></path>
+<path fill="#ffffff" d="M185.1,125.3c-0.1,0.3-0.3,0.5-0.4,0.7c-0.1,0.2-0.2,0.3-0.4,0.4s-0.3,0.2-0.4,0.2c-0.2,0-0.4,0.1-0.7,0.1&#xA;&#9;              H182c-0.1,0-0.3,0-0.3-0.1c-0.1,0-0.1-0.1-0.1-0.1c0-0.1,0-0.1,0-0.2v-2.4h1.4c0.2,0,0.4,0,0.5,0.1c0.1,0,0.2,0.1,0.3,0.2&#xA;&#9;              c0.1,0.1,0.1,0.2,0.1,0.3c0,0.1,0.1,0.3,0.1,0.4v0.1h0.3v-2.5H184v0.1c0,0.2-0.1,0.3-0.1,0.4c0,0.1-0.1,0.2-0.1,0.3&#xA;&#9;              c-0.1,0.1-0.1,0.1-0.3,0.1c-0.1,0-0.3,0.1-0.5,0.1h-1.4v-2.5h1.8c0.2,0,0.4,0,0.5,0c0.1,0,0.2,0.1,0.3,0.1s0.1,0.1,0.2,0.2&#xA;&#9;              c0.1,0.1,0.1,0.1,0.1,0.2c0,0.1,0.1,0.2,0.1,0.3c0,0.1,0,0.2,0.1,0.3v0.1h0.3l-0.1-1.6h-5.3v0.3h0.3c0.1,0,0.3,0,0.3,0.1&#xA;&#9;              c0.1,0,0.2,0.1,0.2,0.1c0,0.1,0.1,0.2,0.1,0.7v4.4c0,0.1,0,0.3,0,0.4c0,0.1,0,0.2,0,0.2s0,0.1-0.1,0.1c0,0-0.1,0.1-0.1,0.1&#xA;&#9;              s-0.1,0.1-0.1,0.1c-0.1,0-0.1,0-0.1,0.1c-0.1,0-0.1,0-0.1,0c0,0-0.1,0-0.1,0h-0.3v0.3h5.3l0.6-1.9L185.1,125.3L185.1,125.3z"></path>
+<path fill="#ffffff" d="M192,120.5h0.3c0.3,0,0.4,0.1,0.5,0.2c0.1,0.1,0.1,0.2,0.1,0.7v3.7l-4-4.9h-1.7v0.3h0.1&#xA;&#9;              c0.2,0,0.3,0,0.5,0.1c0.1,0.1,0.2,0.1,0.3,0.2s0.1,0.1,0.2,0.2c0.1,0.1,0.1,0.1,0.1,0.2v4.7c0,0.4-0.1,0.6-0.1,0.7&#xA;&#9;              s-0.1,0.1-0.2,0.2s-0.2,0.1-0.3,0.1h-0.3v0.3h2.5v-0.3h-0.3c-0.3,0-0.4-0.1-0.5-0.2c-0.1-0.1-0.1-0.3-0.1-0.7v-4l4.3,5.2l0,0h0.3&#xA;&#9;              v-5.7c0-0.2,0-0.3,0-0.4c0-0.1,0-0.2,0.1-0.2c0.1-0.1,0.1-0.1,0.2-0.2c0.1,0,0.2-0.1,0.3-0.1h0.3v-0.3H192L192,120.5L192,120.5z"></path>
+<path fill="#ffffff" d="M202.3,120.2h-5.7l-0.1,1.7h0.4v-0.1c0-0.4,0.2-0.7,0.4-0.9c0.1,0,0.1-0.1,0.1-0.1s0.1-0.1,0.2-0.1&#xA;&#9;              c0.1,0,0.1,0,0.2,0s0.2,0,0.3,0h0.7v5.1c0,0.2,0,0.3,0,0.5c0,0.1-0.1,0.2-0.1,0.2c-0.1,0.1-0.1,0.1-0.2,0.2&#xA;&#9;              c-0.1,0-0.2,0.1-0.3,0.1h-0.3v0.3h3v-0.3h-0.3c-0.3,0-0.4-0.1-0.5-0.2c0,0-0.1-0.1-0.1-0.3c0-0.1,0-0.3,0-0.5v-5.1h0.9&#xA;&#9;              c0.2,0,0.4,0,0.5,0.1s0.3,0.1,0.3,0.2c0,0,0.1,0.1,0.1,0.1c0,0.1,0.1,0.1,0.1,0.1c0,0.1,0.1,0.1,0.1,0.2c0,0.1,0,0.2,0.1,0.3v0.1&#xA;&#9;              h0.3L202.3,120.2z"></path>
+</g> 	        </g> 	      </svg></a></div>
+<div class="col-sm-2 col-xs-6" style="min-height: 100px;"><a href="/fs"><svg id="fs_logo" viewbox="0 -25 140 70"><defs><style type="text/css">#fs_logo .cls-1{fill:#fff;}</style></defs>
+<title></title>
+<path class="cls-1" d="M142.62,16.89A2.21,2.21,0,0,1,145,14.81a2.15,2.15,0,0,1,2.32,2.08h-4.73Zm7.64,1.7c0.21-3-1.54-5.81-5.14-5.81A5.11,5.11,0,0,0,139.71,18c0,3,2.07,5.15,5.41,5.15a4.75,4.75,0,0,0,5-3.29h-2.56a2.42,2.42,0,0,1-2.29,1.27,2.31,2.31,0,0,1-2.6-2.48h7.64Zm-17,4.24h2.91V18.42c0-1.72.74-3.14,2.87-3.14a5.73,5.73,0,0,1,1,.09v-2.5a2.33,2.33,0,0,0-.63-0.09,3.76,3.76,0,0,0-3.38,2.08h0V13.05h-2.77v9.78Zm-0.78-9.78h-2.91v5.13c0,2-.68,2.8-2.25,2.8-1.35,0-1.86-.79-1.86-2.4V13.05h-2.91v6c0,2.42.78,4,3.87,4a3.87,3.87,0,0,0,3.24-1.63h0.06v1.36h2.77V13.05Zm-12.64-2.93h-2.91v2.93h-1.76v1.8h1.76v5.77c0,1.95,1.56,2.33,3.34,2.33a12.13,12.13,0,0,0,1.7-.09v-2.1a4.84,4.84,0,0,1-.9.08c-1,0-1.23-.23-1.23-1.14V14.85H122v-1.8h-2.13V10.12Zm-4.57,6.38c-0.18-2.5-2.48-3.71-5-3.71a5,5,0,0,0-5.41,5.3c0,2.93,2.15,5,5.35,5,2.79,0,4.73-1.42,5.1-4h-2.81a2.17,2.17,0,0,1-2.31,2c-1.82,0-2.42-1.68-2.42-3.08s0.61-3.18,2.48-3.18a1.94,1.94,0,0,1,2.15,1.68h2.85Zm-11-3.44h-2.91v5.13c0,2-.68,2.8-2.25,2.8-1.35,0-1.86-.79-1.86-2.4V13.05H94.31v6c0,2.42.78,4,3.87,4a3.87,3.87,0,0,0,3.24-1.63h0.06v1.36h2.77V13.05ZM87,22.83h2.91V18.42c0-1.72.74-3.14,2.87-3.14a5.73,5.73,0,0,1,1,.09v-2.5a2.33,2.33,0,0,0-.63-0.09,3.76,3.76,0,0,0-3.38,2.08h0V13.05H87v9.78Zm-2.7-12.71H81.34v2.93H79.58v1.8h1.76v5.77c0,1.95,1.56,2.33,3.34,2.33a12.13,12.13,0,0,0,1.7-.09v-2.1a4.84,4.84,0,0,1-.9.08c-1,0-1.23-.23-1.23-1.14V14.85h2.13v-1.8H84.25V10.12ZM67.47,18.35c0,3.33,3,4.81,6.23,4.81,4,0,6.08-1.85,6.08-4.33,0-3.06-3.28-3.69-4.34-3.94-3.67-.87-4.36-1-4.36-2s1.19-1.53,2.21-1.53c1.54,0,2.79.42,2.89,2h3.11c0-3.12-2.81-4.35-5.86-4.35C70.79,9,68,10.33,68,13.09c0,2.54,2.19,3.31,4.36,3.84s4.34,0.78,4.34,2.23S75,20.85,73.82,20.85c-1.72,0-3.24-.7-3.24-2.5H67.47Zm-8.34-1.46a2.21,2.21,0,0,1,2.42-2.08,2.15,2.15,0,0,1,2.31,2.08H59.13Zm7.64,1.7c0.2-3-1.54-5.81-5.14-5.81A5.11,5.11,0,0,0,56.23,18c0,3,2.07,5.15,5.41,5.15a4.75,4.75,0,0,0,5-3.29H64a2.42,2.42,0,0,1-2.29,1.27,2.31,2.31,0,0,1-2.6-2.48h7.64Zm-17,4.24H52.7V18.42c0-1.72.74-3.14,2.87-3.14a5.74,5.74,0,0,1,1,.09v-2.5A2.34,2.34,0,0,0,56,12.79a3.76,3.76,0,0,0-3.38,2.08h0V13.05H49.79v9.78Zm-0.57-9.78H46.31v5.13c0,2-.68,2.8-2.25,2.8-1.35,0-1.86-.79-1.86-2.4V13.05H39.28v6c0,2.42.78,4,3.87,4a3.87,3.87,0,0,0,3.24-1.63h0.06v1.36h2.77V13.05ZM36.58,10.12H33.67v2.93H31.91v1.8h1.76v5.77c0,1.95,1.56,2.33,3.34,2.33a12.12,12.12,0,0,0,1.7-.09v-2.1a4.83,4.83,0,0,1-.9.08c-1,0-1.23-.23-1.23-1.14V14.85h2.13v-1.8H36.58V10.12ZM31.5,13.05H28.59v5.13c0,2-.68,2.8-2.25,2.8-1.35,0-1.86-.79-1.86-2.4V13.05H21.56v6c0,2.42.78,4,3.87,4a3.87,3.87,0,0,0,3.24-1.63h0.06v1.36H31.5V13.05ZM11.15,22.83h3.22V17.25H20.5V14.94H14.37V11.82h7.07V9.32H11.15V22.83Z" transform="translate(-11.15 -9)"></path>
+</svg></a></div>
+<div class="col-sm-2 col-xs-6" style="min-height: 100px;"><a href="/districts"><svg data-name="Layer 1" id="districts_logo" viewbox="-25 0 350 177"><defs><style type="text/css">#districts_logo .cls-1{fill:#ffb81c;}#districts_logo .cls-2{fill:#fff;}</style></defs>
+<title></title>
+<circle class="cls-1" cx="16.34" cy="144.72" r="13.05"></circle>
+<path class="cls-2" d="M99.28,118.18V50.94a2.5,2.5,0,0,0-1.5-2.29l-13.62-5.9A1.56,1.56,0,0,0,82,44.18v62.46c-2.61-1.28-5.35-2.49-8.19-3.65V12.75a2.5,2.5,0,0,0-1.5-2.29L58.65,4.56A1.56,1.56,0,0,0,56.47,6V96.61Q52.07,95,48.28,93.2V27.64a2.5,2.5,0,0,0-1.5-2.29l-13.62-5.9A1.56,1.56,0,0,0,31,20.88V82.71C14.42,69.14,15.95,55,17.58,49.07a.91.91,0,0,0-1.45-1C7.14,55.46,3.3,65,3.3,73c0,23,19.13,33.51,43.51,42,0,0,64.52,20.62,43.34,53.8a.92.92,0,0,0,1.26,1.26c11.28-6.89,18-17.11,18-28.49C109.44,131.93,105.63,124.37,99.28,118.18Z"></path>
+<path class="cls-2" d="M132.36,102.44a16.09,16.09,0,0,1-7.45-1.6V94.93h3.85v2.72a12.11,12.11,0,0,0,3.32.47q4,0,4-2.29a1.65,1.65,0,0,0-.8-1.44,12.53,12.53,0,0,0-3.12-1.19l-1.35-.38a9.09,9.09,0,0,1-4.33-2.35,5.65,5.65,0,0,1-1.36-3.94,6.35,6.35,0,0,1,1-3.63,6.45,6.45,0,0,1,2.9-2.33,10.94,10.94,0,0,1,4.34-.8,18.74,18.74,0,0,1,3.68.36,14,14,0,0,1,3.15,1v5.76h-3.85V84.47a8.51,8.51,0,0,0-2.63-.38,5.23,5.23,0,0,0-2.66.55,1.77,1.77,0,0,0-.91,1.61,1.7,1.7,0,0,0,.74,1.42,8.14,8.14,0,0,0,2.52,1l1.35.38a11.32,11.32,0,0,1,4.93,2.39,5.31,5.31,0,0,1,1.42,3.93,6.22,6.22,0,0,1-2.36,5.12A10,10,0,0,1,132.36,102.44Z"></path>
+<path class="cls-2" d="M143.92,80.15h10.36a8.94,8.94,0,0,1,6.14,1.94,6.9,6.9,0,0,1,2.19,5.45,7.09,7.09,0,0,1-2.22,5.53,8.74,8.74,0,0,1-6.1,2H151v3.1h2.47v3.88h-9.55V98.18h2.16V84h-2.16ZM151,90.92h3a3.82,3.82,0,0,0,2.71-.89,3.24,3.24,0,0,0,1-2.49,3,3,0,0,0-.94-2.4,4,4,0,0,0-2.72-.83h-3Z"></path>
+<path class="cls-2" d="M177.82,84.32h-5.48V89h7.2v4.16h-7.2V97.9h5.79v-2.1H182v6.26H165.27V98.18h2.16V84h-2.16V80.15h16.4v6.26h-3.85Z"></path>
+<path class="cls-2" d="M195.66,102.44a11.19,11.19,0,0,1-5.81-1.47,9.79,9.79,0,0,1-3.8-4,12.59,12.59,0,0,1-1.31-5.82,12,12,0,0,1,1.46-6,10.21,10.21,0,0,1,3.93-4,11.09,11.09,0,0,1,5.54-1.39,16.78,16.78,0,0,1,3.66.39,12.48,12.48,0,0,1,3.16,1.14v6.23h-3.85V84.69a7.57,7.57,0,0,0-2.41-.38,6.18,6.18,0,0,0-4.68,1.85,7.75,7.75,0,0,0,0,9.88,6.16,6.16,0,0,0,4.67,1.86,11.2,11.2,0,0,0,2.72-.31V94.71h3.85v6.23a13,13,0,0,1-3.29,1.11A18.85,18.85,0,0,1,195.66,102.44Z"></path>
+<path class="cls-2" d="M205.71,98.18h2.16V84h-2.16V80.15h9.24V84h-2.16V98.18h2.16v3.88h-9.24Z"></path>
+<path class="cls-2" d="M221.8,80.15h8.33l6.73,18h1.78v3.88h-9V98.28h2.07l-.81-2.57h-6.79l-.81,2.57h2.1v3.79h-8.77V98.18h1.78L223.71,84H221.8Zm3.57,11.71h4.35l-2.16-6.79Z"></path>
+<path class="cls-2" d="M240.37,80.15h9.24V84h-2.16V97.68h5.48V95.49h3.85v6.57h-16.4V98.18h2.16V84h-2.16Z"></path>
+<path class="cls-2" d="M145.92,119.81a11.93,11.93,0,0,1-1.38,5.87,9.18,9.18,0,0,1-3.88,3.79,12.54,12.54,0,0,1-5.85,1.3h-10v-3.88h2.16V112.73h-2.16v-3.88h10a12.34,12.34,0,0,1,6,1.36A9.21,9.21,0,0,1,144.6,114,12.1,12.1,0,0,1,145.92,119.81Zm-5,0a7.08,7.08,0,0,0-1.6-4.95,5.75,5.75,0,0,0-4.48-1.75h-3v13.4h3a5.75,5.75,0,0,0,4.48-1.75A7.08,7.08,0,0,0,140.88,119.81Z"></path>
+<path class="cls-2" d="M148.67,126.88h2.16V112.73h-2.16v-3.88h9.24v3.88h-2.16v14.15h2.16v3.88h-9.24Z"></path>
+<path class="cls-2" d="M168.15,131.14a16.09,16.09,0,0,1-7.45-1.6v-5.92h3.85v2.72a12.11,12.11,0,0,0,3.32.47q4,0,4-2.29a1.65,1.65,0,0,0-.8-1.44A12.55,12.55,0,0,0,168,121.9l-1.35-.38a9.08,9.08,0,0,1-4.33-2.35,5.65,5.65,0,0,1-1.36-3.94,6.35,6.35,0,0,1,1-3.63,6.45,6.45,0,0,1,2.9-2.33,10.94,10.94,0,0,1,4.34-.8,18.77,18.77,0,0,1,3.68.36,14,14,0,0,1,3.15,1v5.76h-3.85v-2.41a8.5,8.5,0,0,0-2.63-.38,5.23,5.23,0,0,0-2.66.55A1.77,1.77,0,0,0,166,115a1.7,1.7,0,0,0,.74,1.42,8.15,8.15,0,0,0,2.52,1l1.35.38a11.32,11.32,0,0,1,4.93,2.4,5.31,5.31,0,0,1,1.42,3.93,6.22,6.22,0,0,1-2.36,5.12A10,10,0,0,1,168.15,131.14Z"></path>
+<path class="cls-2" d="M194.29,113.23h-3v13.65h2.47v3.88h-9.86v-3.88h2.47V113.23h-3v2.5h-3.85v-6.89h18.56v6.89h-3.85Z"></path>
+<path class="cls-2" d="M220.18,130.76h-8.3V127H213l-2-3.66h-3.26V127h1.69v3.79h-8.77v-3.88h2.16V112.73h-2.16v-3.88h10.49a8.92,8.92,0,0,1,6,1.88,6.56,6.56,0,0,1,2.16,5.23,7.33,7.33,0,0,1-1,3.82,6.62,6.62,0,0,1-2.8,2.57l2.79,4.54h1.85Zm-12.46-11.61h3.41a3.24,3.24,0,0,0,2.35-.85,3.32,3.32,0,0,0,0-4.48,3.31,3.31,0,0,0-2.36-.81h-3.41Z"></path>
+<path class="cls-2" d="M222.8,126.88H225V112.73H222.8v-3.88H232v3.88h-2.16v14.15H232v3.88H222.8Z"></path>
+<path class="cls-2" d="M245.72,131.14a11.19,11.19,0,0,1-5.81-1.47,9.79,9.79,0,0,1-3.8-4,12.58,12.58,0,0,1-1.31-5.82,12,12,0,0,1,1.46-6,10.21,10.21,0,0,1,3.93-4,11.09,11.09,0,0,1,5.54-1.39,16.78,16.78,0,0,1,3.66.39,12.48,12.48,0,0,1,3.16,1.14v6.23h-3.85v-2.85a7.58,7.58,0,0,0-2.41-.37,6.18,6.18,0,0,0-4.68,1.85,7.75,7.75,0,0,0,0,9.88,6.16,6.16,0,0,0,4.67,1.86,11.2,11.2,0,0,0,2.72-.31v-2.88h3.85v6.23a13,13,0,0,1-3.29,1.11A18.85,18.85,0,0,1,245.72,131.14Z"></path>
+<path class="cls-2" d="M270.36,113.23h-3v13.65h2.47v3.88H260v-3.88h2.47V113.23h-3v2.5h-3.85v-6.89h18.56v6.89h-3.85Z"></path>
+<path class="cls-2" d="M284.32,131.14a16.09,16.09,0,0,1-7.45-1.6v-5.92h3.85v2.72a12.11,12.11,0,0,0,3.32.47q4,0,4-2.29a1.65,1.65,0,0,0-.8-1.44,12.55,12.55,0,0,0-3.12-1.19l-1.35-.38a9.08,9.08,0,0,1-4.33-2.35,5.65,5.65,0,0,1-1.36-3.94,6.35,6.35,0,0,1,1-3.63,6.45,6.45,0,0,1,2.9-2.33,10.94,10.94,0,0,1,4.34-.8,18.77,18.77,0,0,1,3.68.36,14,14,0,0,1,3.15,1v5.76h-3.85v-2.41a8.5,8.5,0,0,0-2.63-.38,5.23,5.23,0,0,0-2.66.55,1.77,1.77,0,0,0-.91,1.61,1.7,1.7,0,0,0,.74,1.42,8.15,8.15,0,0,0,2.52,1l1.35.38a11.32,11.32,0,0,1,4.93,2.4,5.31,5.31,0,0,1,1.42,3.93,6.22,6.22,0,0,1-2.36,5.12A10,10,0,0,1,284.32,131.14Z"></path>
+<path class="cls-2" d="M124.83,144.07h4.38a5,5,0,0,1,3.44,1.09,3.84,3.84,0,0,1,1.23,3,4,4,0,0,1-1.25,3.1,4.91,4.91,0,0,1-3.42,1.13h-2.28v4.42h-2.1Zm2.1,6.52h2.15a2.84,2.84,0,0,0,2-.63,2.25,2.25,0,0,0,.7-1.76,2.1,2.1,0,0,0-.69-1.69,3,3,0,0,0-2-.59h-2.15Z"></path>
+<path class="cls-2" d="M145.12,152.18h-2.34v4.67h-2.1V144.07h4.53a4.88,4.88,0,0,1,3.34,1,3.73,3.73,0,0,1,1.19,2.95,4.07,4.07,0,0,1-.67,2.34,3.82,3.82,0,0,1-1.87,1.44l3.1,5h-2.41Zm-2.34-1.84h2.41a2.49,2.49,0,0,0,1.76-.6,2.11,2.11,0,0,0,.65-1.62,2.07,2.07,0,0,0-.64-1.61,2.53,2.53,0,0,0-1.77-.58h-2.41Z"></path>
+<path class="cls-2" d="M162.19,143.87a5.78,5.78,0,0,1,3.17.88,5.87,5.87,0,0,1,2.13,2.37,7.37,7.37,0,0,1,.75,3.34,7.26,7.26,0,0,1-.8,3.45,5.79,5.79,0,0,1-2.17,2.33,5.9,5.9,0,0,1-3.07.81,5.77,5.77,0,0,1-3.17-.88,5.86,5.86,0,0,1-2.13-2.37,7.36,7.36,0,0,1-.75-3.34A7.25,7.25,0,0,1,157,147a5.78,5.78,0,0,1,2.17-2.33A5.9,5.9,0,0,1,162.19,143.87Zm0,2a3.61,3.61,0,0,0-2.06.6,3.86,3.86,0,0,0-1.37,1.65,5.68,5.68,0,0,0-.47,2.37,5.52,5.52,0,0,0,.51,2.43,3.86,3.86,0,0,0,1.4,1.63,3.82,3.82,0,0,0,4.06,0,3.86,3.86,0,0,0,1.37-1.65,5.68,5.68,0,0,0,.47-2.37,5.52,5.52,0,0,0-.51-2.43,3.86,3.86,0,0,0-1.4-1.62A3.63,3.63,0,0,0,162.19,145.84Z"></path>
+<path class="cls-2" d="M180.93,157.05a6.49,6.49,0,0,1-3.37-.84,5.61,5.61,0,0,1-2.17-2.33,7.45,7.45,0,0,1-.76-3.42,7,7,0,0,1,.84-3.45,5.88,5.88,0,0,1,2.28-2.33,6.48,6.48,0,0,1,3.23-.81,8.49,8.49,0,0,1,2.15.26,7.94,7.94,0,0,1,1.91.79l-.6,1.68a7.87,7.87,0,0,0-1.58-.58,7.34,7.34,0,0,0-1.65-.16,4.56,4.56,0,0,0-2.35.59,4,4,0,0,0-1.55,1.63,5.13,5.13,0,0,0-.54,2.39,4.76,4.76,0,0,0,1.16,3.38,4.1,4.1,0,0,0,3.15,1.24,6.05,6.05,0,0,0,2.17-.33v-3.18h-2.92v-1.84h5v6.21A8.39,8.39,0,0,1,180.93,157.05Z"></path>
+<path class="cls-2" d="M196.89,152.18h-2.34v4.67h-2.1V144.07H197a4.88,4.88,0,0,1,3.34,1,3.73,3.73,0,0,1,1.19,2.95,4.07,4.07,0,0,1-.67,2.34,3.82,3.82,0,0,1-1.87,1.44l3.1,5h-2.41Zm-2.34-1.84H197a2.49,2.49,0,0,0,1.76-.6,2.11,2.11,0,0,0,.65-1.62,2.07,2.07,0,0,0-.64-1.61,2.53,2.53,0,0,0-1.77-.58h-2.41Z"></path>
+<path class="cls-2" d="M212.36,144.07h2.12l4.82,12.78H217l-1.06-3h-5.22l-1,3h-2.19Zm-1,7.91h4l-2-5.75Z"></path>
+<path class="cls-2" d="M236,156.85v-9.06l-3.45,6.81H231l-3.49-6.68v8.93h-2V144.07h2l4.25,8.22,4.2-8.22h2v12.78Z"></path>
+</svg></a></div>
+<div class="col-sm-2 col-xs-6" style="min-height: 100px;"><a href="/navigator"><img src="https://media.erepublic.com/image/GT_NAV_1Asset_3GT_NAV_1.svg" style="padding:15px 0px;" alt="" /></a></div>
+</div>
+</div>
+</div>
+</div>
+
+<footer>
+	<div id="slim-footer" class="container text-center">
+		<svg id="Layer_1" class="logo" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="20 0 150 75"><defs><style>.cls-1{fill:#a2a4a7;}</style></defs><title>GT Logo</title><path class="cls-1" d="M48.83,55.64c0,4.4,1.93,5.28,4,5.28a3.82,3.82,0,0,0,3.09-1.32V57.54a3.2,3.2,0,0,1-1.76.5c-0.87,0-1.6-.31-1.6-2.07V43.08h3.24V40.44H52.55V31.79H52.07l-2.89,1.95,0,6.7h-1.9v2.65h1.57V55.64Zm12.88,5.26c3.47,0,5.35-1.68,5.35-5.51V54.61H64v0.63C64,57.38,63.1,58,62.19,58,60.5,58,60,56.85,60,53.32V51.26h6.72a23.12,23.12,0,0,0,.48-4.73c0-4.88-2.43-6.32-5.1-6.32-2.15,0-5.84.63-5.84,8.37v3.82c0,6,1.93,8.51,5.41,8.51M60,48.76V47.52c0-3.49.62-4.6,1.93-4.6s1.87,1.09,1.87,3.77c0,0.53,0,1.65-.06,2.07H60ZM73.6,60.91c3.37,0,5.07-1.68,5.07-5.51V54.61H75.46v0.63c0,2.13-.7,2.79-1.46,2.79-1.46,0-1.9-1.34-1.9-4.87V47.42c0-3.49.6-4.5,1.81-4.5s1.54,1.22,1.54,3.25v0.68h3a8.36,8.36,0,0,0,.25-2.19c0-3-1.9-4.46-4.65-4.46-2,0-5.69.63-5.69,8.37v3.82c0,5.74,1.84,8.51,5.25,8.51m6.58-.22H83.9V44.33A2.74,2.74,0,0,1,86,42.92c1.06,0,1.62.6,1.62,2.38V60.69h3.72V45.17c0-3.29-1.35-5-3.71-5a4.65,4.65,0,0,0-3.94,2L83.56,38.7v-7H83.14l-3,1.86V60.69Zm13.52,0h3.72V44.3a2.7,2.7,0,0,1,2.09-1.38c1.06,0,1.62.6,1.62,2.38V60.69h3.72V45.17c0-3.29-1.35-5-3.71-5a4.77,4.77,0,0,0-4.24,2.41v0l-0.34-2.16H93.7V60.69Zm18.6,0.22c2.34,0,5.57-1,5.57-8.91V48.82c0-8-3.13-8.62-5.56-8.62s-5.65.75-5.65,8.62V52c0,8,3,8.91,5.63,8.91m0-2.87c-1.4,0-1.93-1.25-1.93-5V48c0-3.79.53-5.09,1.93-5.09s1.81,1.3,1.81,5.09v5c0,3.79-.47,5-1.81,5m7.39,2.65h3.72v-29h-0.62l-3,2-0.06.11v27Zm11.2,0.22c2.34,0,5.57-1,5.57-8.91V48.82c0-8-3.13-8.62-5.56-8.62s-5.65.75-5.65,8.62V52c0,8,3,8.91,5.63,8.91m0-2.87c-1.4,0-1.93-1.25-1.93-5V48c0-3.79.53-5.09,1.93-5.09s1.81,1.3,1.81,5.09v5c0,3.79-.47,5-1.81,5m7.73,4a4.65,4.65,0,0,0-.19,1.18c0,3.19,2.18,4,4.85,4,4,0,5.65-2.85,5.65-7.37V40.42h-2.9l-0.34,2a3.69,3.69,0,0,0-3.5-2.2c-1.47,0-4.44.38-4.44,7v5.32c0,6.88,3,7.32,4.35,7.32a3.91,3.91,0,0,0,3.23-1.57v3.19c0,2.47-1,3-2.1,3-1.34,0-2-.66-2-2.4h-2.63ZM143.43,57c-1.09,0-1.88-.69-1.88-3.71V46.58c0-3,.78-3.66,1.87-3.66a2.17,2.17,0,0,1,1.87,1.49V55.48A2.07,2.07,0,0,1,143.43,57m7.66,7.63v2.28a5.68,5.68,0,0,0,2,.37c3.15,0,4.62-1.91,5.37-5.79l4.26-21H159l-1.72,11.21-0.43,3.87h-0.12l-0.62-3.87L154,40.44h-3.78L155,60.8c-0.12,2.87-1.66,4.1-3.91,3.78"></path><path class="cls-1" d="M147.79,37.58v-17c0-3.6-1.48-5.43-4-5.43a5.21,5.21,0,0,0-4.63,2.64v0l-0.37-2.36h-3.13V37.58h4.07V19.68A2.94,2.94,0,0,1,142,18.17c1.16,0,1.77.66,1.77,2.6V37.58h4.06Zm-13.85-10.3a25.27,25.27,0,0,0,.53-5.17c0-5.33-2.65-6.91-5.58-6.91-2.35,0-6.38.69-6.38,9.14v4.18c0,0.66,0,1.27.07,1.86h2v5.89a5,5,0,0,0,3.89,1.56c3.79,0,5.85-1.83,5.85-6V30.94h-3.39v0.69c0,2.33-.93,3.05-1.93,3.05-1.85,0-2.36-1.3-2.36-5.16V27.28h7.34Zm-3.2-5c0,0.58,0,1.8-.06,2.26H126.6V23.2c0-3.81.67-5,2.1-5s2,1.19,2,4.11m-9.56,8.87V20.63c0-3.6-1.48-5.43-4-5.43a5.15,5.15,0,0,0-4.52,2.51,3.54,3.54,0,0,0-3.57-2.51,5.15,5.15,0,0,0-4.6,2.64v0l-0.35-2.36H101V37.58H105V19.68a2.83,2.83,0,0,1,2.12-1.51c1.32,0,1.88.66,1.88,2.6V37.58h4.07V20.29c0-.19,0-0.39,0-0.58a2.88,2.88,0,0,1,2.15-1.54c1.32,0,1.88.66,1.88,2.6V37.58h1.57V32.81ZM95.33,37.58H99.4v-17c0-3.6-1.48-5.43-4-5.43a5.21,5.21,0,0,0-4.63,2.64v0l-0.37-2.36H87.22V37.58h4.07V19.68a2.94,2.94,0,0,1,2.28-1.51c1.16,0,1.77.66,1.77,2.6V37.58ZM85.74,22.51a11.47,11.47,0,0,0,.55-3c0-2.86-1.09-4.31-3.42-4.31-1.22,0-2.46.83-3.34,2.51l-0.35-2.25h-3V37.58h2.93V32.81l1.14-.76V19.36a1.85,1.85,0,0,1,1.58-1.19c0.6,0,1.08.5,1.08,2.28v2.06h2.83ZM74.53,27.28a25.2,25.2,0,0,0,.53-5.17c0-5.33-2.65-6.91-5.58-6.91-2.35,0-6.38.69-6.38,9.14v4.18c0,6.59,2.11,9.3,5.91,9.3s5.85-1.83,5.85-6V30.94H71.48v0.69c0,2.33-.93,3.05-1.93,3.05-1.85,0-2.36-1.3-2.36-5.16V27.28h7.34Zm-3.2-5c0,0.58,0,1.8-.06,2.26H67.19V23.2c0-3.81.68-5,2.11-5s2,1.19,2,4.11M58.57,37.58l5-22.13H59.69L57.57,27.22,57,31.92H56.83L56.3,27.22,54.16,15.45h-4l5,22.13h3.47Zm-7.92-13c0-8.71-3.42-9.42-6.07-9.42s-6.17.82-6.17,9.42v3.47c0,8.74,3.33,9.74,6.15,9.74A5.24,5.24,0,0,0,48,36.69V32.84l2.42-1.62a23.72,23.72,0,0,0,.19-3.14V24.61Zm-4.08,4.56c0,4.15-.51,5.51-2,5.51s-2.11-1.37-2.11-5.51V23.73c0-4.15.58-5.56,2.11-5.56s2,1.41,2,5.56v5.45Zm-9.21,7.51V15.44H34.19l-0.37,2.18A4,4,0,0,0,30,15.21c-1.61,0-4.85.42-4.85,7.62v5.82c0,7.52,3.26,8,4.76,8a4.27,4.27,0,0,0,3.54-1.72v3.49c0,2.7-1.09,3.29-2.3,3.29C29.68,41.71,29,41,29,39.09H26.09a5.09,5.09,0,0,0-.21,1.28c0,3.49,2.38,4.35,5.3,4.35,4.32,0,6.17-3.12,6.17-8m-4-4.79a2.26,2.26,0,0,1-2,1.61c-1.19,0-2.06-.76-2.06-4V22.17c0-3.31.85-4,2-4a2.37,2.37,0,0,1,2,1.62v12.1Z"></path><path class="cls-1" d="M150.36,32.4c0,4.4,1.93,5.28,4,5.28a3.82,3.82,0,0,0,3.09-1.32V34.3a3.2,3.2,0,0,1-1.76.5c-0.87,0-1.6-.31-1.6-2.07V19.84h3.24V17.19h-3.24V8.54H153.6l-2.89,1.95,0,6.7h-1.9v2.65h1.57V32.4Z"></path></svg>
+		<p><a href="//www.erepublic.com">© 2019 All rights reserved. e.Republic</a></p>
+	</div>
+	<div id="full-footer"  class="container text-left">
+		<div class="row">
+			<div class="col-sm-4">
+				<h4 style="margin-top:0">NEWSLETTERS</h4>
+			    <form action="https://cms.erepublic.com/common/forms/ajax_form/247?promo_code=footer" class="ajax-form multi-quick-sub">
+			      <div class="form-group">
+			        <label for="adl_product_1">
+			          <input class="product-selector" type="checkbox" name="adl_product_1" value="247" checked> GOVTECH TODAY
+			        </label>
+			      </div>
+			      <div class="form-group">
+			        <label for="adl_product_2">
+			          <input class="product-selector" type="checkbox" name="adl_product_2" value="74681"> GOVTECH BIZ
+			        </label>
+			      </div>
+			      <div class="form-group">
+			        <label for="adl_product_3">
+			          <input class="product-selector" type="checkbox" name="adl_product_3" value="251"> EMERGENCY MANAGEMENT
+			        </label>
+			      </div>
+			      <div class="form-group">
+			        <label for="adl_product_4">
+			          <input class="product-selector" type="checkbox" name="adl_product_4" value="131"> FUTURESTRUCTURE
+			        </label>
+			      </div>
+			      <div class="form-group">
+			        <label for="adl_product_5">
+			          <input class="product-selector" type="checkbox" name="adl_product_5" value="250"> PUBLIC CIO
+			        </label>
+			      </div>
+			      <div class="form-group">
+			        <label for="adl_product_6">
+			          <input class="product-selector" type="checkbox" name="adl_product_6" value="249"> DIGITAL COMMUNITIES
+			        </label>
+			      </div>
+			      <div class="form-group">
+			        <label for="adl_product_7">
+			          <input class="product-selector" type="checkbox" name="adl_product_7" value="109446"> SPECIAL DISTRICTS
+			        </label>
+			      </div>
+			      <div class="form-group">
+			        <label for="adl_product_8">
+			          <input class="product-selector" type="checkbox" name="adl_product_8" value="266"> K-12
+			        </label>
+			      </div>
+			      <div class="form-group">
+			        <label for="adl_product_9">
+			          <input class="product-selector" type="checkbox" name="adl_product_9" value="265"> HIGHER EDUCATION
+			        </label>
+			      </div>
+			      <div class="flex-container" style="margin: 5px 0 25px;">
+			        <input type="email" name="email" placeholder="Email Address" class="flex-grow">
+			        <a class="btn" href="#" data-ac-submit="" >Subscribe</a>
+			      </div>
+			      <div class="clearfix"></div>
+			    </form>
+			</div>
+
+			<div class="col-sm-4">
+				<p><a href="/podcasts" style="color:#f47421;">PODCASTS</a></p>
+				<p class="hidden-xs"><a href="/podcasts/360">GOVTECH360</a></p>
+				<p class="hidden-xs"><a href="/podcasts/arena">IN THE ARENA</a></p>
+			</div>
+
+			<div id="site_info_links" class="col-sm-4">
+				<p><a href="/about">ABOUT</a></p>
+				<p><a href="//www.erepublic.com/privacy/">PRIVACY</a></p>
+				<p><a href="//www.erepublic.com/contact/">CONTACT</a></p>
+				<p><a href="//www.erepublic.com/brands/govtech/">ADVERTISE</a></p>
+				<div id="site_social">					
+					<a href="https://twitter.com/govtechnews" target="_blank" class="twitter">
+					  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 97.75 97.75" style="enable-background:new 0 0 97.75 97.75;" xml:space="preserve">
+					    <g>
+					      <path d="M48.875,0C21.882,0,0,21.882,0,48.875S21.882,97.75,48.875,97.75S97.75,75.868,97.75,48.875S75.868,0,48.875,0z    M78.43,35.841c0.023,0.577,0.035,1.155,0.035,1.736c0,20.878-15.887,42.473-42.473,42.473c-8.127,0-16.04-2.319-22.883-6.708   c-0.143-0.091-0.202-0.268-0.145-0.427c0.057-0.158,0.218-0.256,0.383-0.237c1.148,0.137,2.322,0.205,3.487,0.205   c6.323,0,12.309-1.955,17.372-5.664c-6.069-0.512-11.285-4.619-13.161-10.478c-0.039-0.122-0.011-0.255,0.073-0.351   c0.085-0.096,0.215-0.138,0.339-0.115c1.682,0.319,3.392,0.34,5.04,0.072c-6.259-1.945-10.658-7.808-10.658-14.483l0.002-0.194   c0.003-0.127,0.072-0.243,0.182-0.306c0.109-0.064,0.245-0.065,0.355-0.003c1.632,0.906,3.438,1.488,5.291,1.711   c-3.597-2.867-5.709-7.213-5.709-11.862c0-2.682,0.71-5.318,2.054-7.623c0.06-0.103,0.166-0.169,0.284-0.178   c0.119-0.012,0.234,0.04,0.309,0.132c7.362,9.03,18.191,14.59,29.771,15.305c-0.193-0.972-0.291-1.974-0.291-2.985   c0-8.361,6.802-15.162,15.162-15.162c4.11,0,8.082,1.689,10.929,4.641c3.209-0.654,6.266-1.834,9.09-3.508   c0.129-0.077,0.291-0.065,0.41,0.028c0.116,0.094,0.164,0.25,0.118,0.394c-0.957,2.993-2.823,5.604-5.33,7.489   c2.361-0.411,4.652-1.105,6.831-2.072c0.146-0.067,0.319-0.025,0.424,0.098c0.104,0.124,0.113,0.301,0.023,0.435   C83.759,31.175,81.299,33.744,78.43,35.841z" fill="#FFFFFF"/>
+					    </g>
+					  </svg>
+					</a>
+					<a href="https://www.facebook.com/governmenttechnology" target="_blank" class="facebook">
+					  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"  x="0px" y="0px" viewBox="0 0 97.75 97.75" style="enable-background:new 0 0 97.75 97.75;" xml:space="preserve">
+					    <g>
+					      <path d="M48.875,0C21.882,0,0,21.882,0,48.875S21.882,97.75,48.875,97.75S97.75,75.868,97.75,48.875S75.868,0,48.875,0z    M67.521,24.89l-6.76,0.003c-5.301,0-6.326,2.519-6.326,6.215v8.15h12.641L67.07,52.023H54.436v32.758H41.251V52.023H30.229V39.258   h11.022v-9.414c0-10.925,6.675-16.875,16.42-16.875l9.851,0.015V24.89L67.521,24.89z" fill="#FFFFFF"/>
+					    </g>
+					  </svg>
+					</a>
+					<a href="https://www.youtube.com/user/GovernmentTechnology" target="_blank" class="youtube">
+					  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 97.75 97.75" style="enable-background:new 0 0 97.75 97.75;" xml:space="preserve">
+					    <g>
+					      <g>
+					        <polygon points="25.676,52.482 29.551,52.482 29.551,73.455 33.217,73.455 33.217,52.482 37.164,52.482 37.164,49.047     25.676,49.047   " fill="#FFFFFF"/>
+					        <path d="M56.674,55.046c-1.212,0-2.343,0.662-3.406,1.972v-7.972h-3.295v24.409h3.295v-1.762c1.103,1.361,2.233,2.013,3.406,2.013    c1.311,0,2.193-0.69,2.633-2.044c0.221-0.771,0.334-1.982,0.334-3.665v-7.242c0-1.722-0.113-2.924-0.334-3.655    C58.868,55.736,57.984,55.046,56.674,55.046z M56.344,68.255c0,1.644-0.482,2.454-1.434,2.454c-0.541,0-1.092-0.259-1.643-0.811    V58.814c0.551-0.545,1.102-0.803,1.643-0.803c0.951,0,1.434,0.842,1.434,2.482V68.255z" fill="#FFFFFF"/>
+					        <path d="M43.824,69.167c-0.731,1.033-1.422,1.542-2.084,1.542c-0.44,0-0.691-0.259-0.771-0.771c-0.03-0.106-0.03-0.508-0.03-1.28    v-13.39h-3.296v14.379c0,1.285,0.111,2.153,0.291,2.705c0.331,0.922,1.063,1.354,2.123,1.354c1.213,0,2.457-0.732,3.767-2.234    v1.984h3.298V55.268h-3.298V69.167z" fill="#FFFFFF"/>
+					        <path d="M46.653,38.466c1.073,0,1.588-0.851,1.588-2.551v-7.731c0-1.701-0.515-2.548-1.588-2.548c-1.074,0-1.59,0.848-1.59,2.548    v7.731C45.063,37.616,45.579,38.466,46.653,38.466z" fill="#FFFFFF"/>
+					        <path d="M48.875,0C21.882,0,0,21.882,0,48.875S21.882,97.75,48.875,97.75S97.75,75.868,97.75,48.875S75.868,0,48.875,0z     M54.311,22.86h3.321v13.532c0,0.781,0,1.186,0.04,1.295c0.073,0.516,0.335,0.78,0.781,0.78c0.666,0,1.365-0.516,2.104-1.559    V22.86h3.33v18.379h-3.33v-2.004c-1.326,1.52-2.59,2.257-3.805,2.257c-1.072,0-1.812-0.435-2.146-1.365    c-0.184-0.557-0.295-1.436-0.295-2.733V22.86L54.311,22.86z M41.733,28.853c0-1.965,0.334-3.401,1.042-4.33    c0.921-1.257,2.218-1.885,3.878-1.885c1.668,0,2.964,0.628,3.885,1.885c0.698,0.928,1.032,2.365,1.032,4.33v6.436    c0,1.954-0.334,3.403-1.032,4.322c-0.921,1.254-2.217,1.881-3.885,1.881c-1.66,0-2.957-0.627-3.878-1.881    c-0.708-0.919-1.042-2.369-1.042-4.322V28.853z M32.827,16.576l2.622,9.685l2.519-9.685h3.735L37.26,31.251v9.989h-3.692v-9.989    c-0.335-1.77-1.074-4.363-2.259-7.803c-0.778-2.289-1.589-4.585-2.367-6.872H32.827z M75.186,75.061    c-0.668,2.899-3.039,5.039-5.894,5.358c-6.763,0.755-13.604,0.759-20.42,0.755c-6.813,0.004-13.658,0-20.419-0.755    c-2.855-0.319-5.227-2.458-5.893-5.358c-0.951-4.129-0.951-8.638-0.951-12.89s0.012-8.76,0.962-12.89    c0.667-2.9,3.037-5.04,5.892-5.358c6.762-0.755,13.606-0.759,20.421-0.755c6.813-0.004,13.657,0,20.419,0.755    c2.855,0.319,5.227,2.458,5.896,5.358c0.948,4.13,0.942,8.638,0.942,12.89S76.137,70.932,75.186,75.061z" fill="#FFFFFF"/>
+					        <path d="M67.17,55.046c-1.686,0-2.995,0.619-3.947,1.864c-0.699,0.92-1.018,2.342-1.018,4.285v6.371    c0,1.933,0.357,3.365,1.059,4.276c0.951,1.242,2.264,1.863,3.988,1.863c1.721,0,3.072-0.651,3.984-1.972    c0.4-0.584,0.66-1.245,0.77-1.975c0.031-0.33,0.07-1.061,0.07-2.124v-0.479h-3.361c0,1.32-0.043,2.053-0.072,2.232    c-0.188,0.881-0.662,1.321-1.473,1.321c-1.132,0-1.686-0.84-1.686-2.522v-3.226h6.592v-3.767c0-1.943-0.329-3.365-1.02-4.285    C70.135,55.666,68.824,55.046,67.17,55.046z M68.782,62.218h-3.296v-1.683c0-1.682,0.553-2.523,1.654-2.523    c1.09,0,1.642,0.842,1.642,2.523V62.218z" fill="#FFFFFF"/>
+					      </g>
+					    </g>
+					  </svg>
+					</a>
+					<a href="https://www.linkedin.com/company/government-technology/" target="_blank" class="linkedin">
+					  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 97.75 97.75" style="enable-background:new 0 0 97.75 97.75;" xml:space="preserve">
+					    <g>
+					      <path d="M48.875,0C21.882,0,0,21.882,0,48.875S21.882,97.75,48.875,97.75S97.75,75.868,97.75,48.875S75.868,0,48.875,0z    M30.562,81.966h-13.74V37.758h13.74V81.966z M23.695,31.715c-4.404,0-7.969-3.57-7.969-7.968c0.001-4.394,3.565-7.964,7.969-7.964   c4.392,0,7.962,3.57,7.962,7.964C31.657,28.146,28.086,31.715,23.695,31.715z M82.023,81.966H68.294V60.467   c0-5.127-0.095-11.721-7.142-11.721c-7.146,0-8.245,5.584-8.245,11.35v21.869H39.179V37.758h13.178v6.041h0.185   c1.835-3.476,6.315-7.14,13-7.14c13.913,0,16.481,9.156,16.481,21.059V81.966z" fill="#FFFFFF"/>
+					    </g>
+					  </svg>
+					</a>
+				</div>
+				<svg id="Layer_1" class="logo" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="20 0 150 75"><defs><style>.cls-1{fill:#a2a4a7;}</style></defs><title>GT Logo</title><path class="cls-1" d="M48.83,55.64c0,4.4,1.93,5.28,4,5.28a3.82,3.82,0,0,0,3.09-1.32V57.54a3.2,3.2,0,0,1-1.76.5c-0.87,0-1.6-.31-1.6-2.07V43.08h3.24V40.44H52.55V31.79H52.07l-2.89,1.95,0,6.7h-1.9v2.65h1.57V55.64Zm12.88,5.26c3.47,0,5.35-1.68,5.35-5.51V54.61H64v0.63C64,57.38,63.1,58,62.19,58,60.5,58,60,56.85,60,53.32V51.26h6.72a23.12,23.12,0,0,0,.48-4.73c0-4.88-2.43-6.32-5.1-6.32-2.15,0-5.84.63-5.84,8.37v3.82c0,6,1.93,8.51,5.41,8.51M60,48.76V47.52c0-3.49.62-4.6,1.93-4.6s1.87,1.09,1.87,3.77c0,0.53,0,1.65-.06,2.07H60ZM73.6,60.91c3.37,0,5.07-1.68,5.07-5.51V54.61H75.46v0.63c0,2.13-.7,2.79-1.46,2.79-1.46,0-1.9-1.34-1.9-4.87V47.42c0-3.49.6-4.5,1.81-4.5s1.54,1.22,1.54,3.25v0.68h3a8.36,8.36,0,0,0,.25-2.19c0-3-1.9-4.46-4.65-4.46-2,0-5.69.63-5.69,8.37v3.82c0,5.74,1.84,8.51,5.25,8.51m6.58-.22H83.9V44.33A2.74,2.74,0,0,1,86,42.92c1.06,0,1.62.6,1.62,2.38V60.69h3.72V45.17c0-3.29-1.35-5-3.71-5a4.65,4.65,0,0,0-3.94,2L83.56,38.7v-7H83.14l-3,1.86V60.69Zm13.52,0h3.72V44.3a2.7,2.7,0,0,1,2.09-1.38c1.06,0,1.62.6,1.62,2.38V60.69h3.72V45.17c0-3.29-1.35-5-3.71-5a4.77,4.77,0,0,0-4.24,2.41v0l-0.34-2.16H93.7V60.69Zm18.6,0.22c2.34,0,5.57-1,5.57-8.91V48.82c0-8-3.13-8.62-5.56-8.62s-5.65.75-5.65,8.62V52c0,8,3,8.91,5.63,8.91m0-2.87c-1.4,0-1.93-1.25-1.93-5V48c0-3.79.53-5.09,1.93-5.09s1.81,1.3,1.81,5.09v5c0,3.79-.47,5-1.81,5m7.39,2.65h3.72v-29h-0.62l-3,2-0.06.11v27Zm11.2,0.22c2.34,0,5.57-1,5.57-8.91V48.82c0-8-3.13-8.62-5.56-8.62s-5.65.75-5.65,8.62V52c0,8,3,8.91,5.63,8.91m0-2.87c-1.4,0-1.93-1.25-1.93-5V48c0-3.79.53-5.09,1.93-5.09s1.81,1.3,1.81,5.09v5c0,3.79-.47,5-1.81,5m7.73,4a4.65,4.65,0,0,0-.19,1.18c0,3.19,2.18,4,4.85,4,4,0,5.65-2.85,5.65-7.37V40.42h-2.9l-0.34,2a3.69,3.69,0,0,0-3.5-2.2c-1.47,0-4.44.38-4.44,7v5.32c0,6.88,3,7.32,4.35,7.32a3.91,3.91,0,0,0,3.23-1.57v3.19c0,2.47-1,3-2.1,3-1.34,0-2-.66-2-2.4h-2.63ZM143.43,57c-1.09,0-1.88-.69-1.88-3.71V46.58c0-3,.78-3.66,1.87-3.66a2.17,2.17,0,0,1,1.87,1.49V55.48A2.07,2.07,0,0,1,143.43,57m7.66,7.63v2.28a5.68,5.68,0,0,0,2,.37c3.15,0,4.62-1.91,5.37-5.79l4.26-21H159l-1.72,11.21-0.43,3.87h-0.12l-0.62-3.87L154,40.44h-3.78L155,60.8c-0.12,2.87-1.66,4.1-3.91,3.78"/><path class="cls-1" d="M147.79,37.58v-17c0-3.6-1.48-5.43-4-5.43a5.21,5.21,0,0,0-4.63,2.64v0l-0.37-2.36h-3.13V37.58h4.07V19.68A2.94,2.94,0,0,1,142,18.17c1.16,0,1.77.66,1.77,2.6V37.58h4.06Zm-13.85-10.3a25.27,25.27,0,0,0,.53-5.17c0-5.33-2.65-6.91-5.58-6.91-2.35,0-6.38.69-6.38,9.14v4.18c0,0.66,0,1.27.07,1.86h2v5.89a5,5,0,0,0,3.89,1.56c3.79,0,5.85-1.83,5.85-6V30.94h-3.39v0.69c0,2.33-.93,3.05-1.93,3.05-1.85,0-2.36-1.3-2.36-5.16V27.28h7.34Zm-3.2-5c0,0.58,0,1.8-.06,2.26H126.6V23.2c0-3.81.67-5,2.1-5s2,1.19,2,4.11m-9.56,8.87V20.63c0-3.6-1.48-5.43-4-5.43a5.15,5.15,0,0,0-4.52,2.51,3.54,3.54,0,0,0-3.57-2.51,5.15,5.15,0,0,0-4.6,2.64v0l-0.35-2.36H101V37.58H105V19.68a2.83,2.83,0,0,1,2.12-1.51c1.32,0,1.88.66,1.88,2.6V37.58h4.07V20.29c0-.19,0-0.39,0-0.58a2.88,2.88,0,0,1,2.15-1.54c1.32,0,1.88.66,1.88,2.6V37.58h1.57V32.81ZM95.33,37.58H99.4v-17c0-3.6-1.48-5.43-4-5.43a5.21,5.21,0,0,0-4.63,2.64v0l-0.37-2.36H87.22V37.58h4.07V19.68a2.94,2.94,0,0,1,2.28-1.51c1.16,0,1.77.66,1.77,2.6V37.58ZM85.74,22.51a11.47,11.47,0,0,0,.55-3c0-2.86-1.09-4.31-3.42-4.31-1.22,0-2.46.83-3.34,2.51l-0.35-2.25h-3V37.58h2.93V32.81l1.14-.76V19.36a1.85,1.85,0,0,1,1.58-1.19c0.6,0,1.08.5,1.08,2.28v2.06h2.83ZM74.53,27.28a25.2,25.2,0,0,0,.53-5.17c0-5.33-2.65-6.91-5.58-6.91-2.35,0-6.38.69-6.38,9.14v4.18c0,6.59,2.11,9.3,5.91,9.3s5.85-1.83,5.85-6V30.94H71.48v0.69c0,2.33-.93,3.05-1.93,3.05-1.85,0-2.36-1.3-2.36-5.16V27.28h7.34Zm-3.2-5c0,0.58,0,1.8-.06,2.26H67.19V23.2c0-3.81.68-5,2.11-5s2,1.19,2,4.11M58.57,37.58l5-22.13H59.69L57.57,27.22,57,31.92H56.83L56.3,27.22,54.16,15.45h-4l5,22.13h3.47Zm-7.92-13c0-8.71-3.42-9.42-6.07-9.42s-6.17.82-6.17,9.42v3.47c0,8.74,3.33,9.74,6.15,9.74A5.24,5.24,0,0,0,48,36.69V32.84l2.42-1.62a23.72,23.72,0,0,0,.19-3.14V24.61Zm-4.08,4.56c0,4.15-.51,5.51-2,5.51s-2.11-1.37-2.11-5.51V23.73c0-4.15.58-5.56,2.11-5.56s2,1.41,2,5.56v5.45Zm-9.21,7.51V15.44H34.19l-0.37,2.18A4,4,0,0,0,30,15.21c-1.61,0-4.85.42-4.85,7.62v5.82c0,7.52,3.26,8,4.76,8a4.27,4.27,0,0,0,3.54-1.72v3.49c0,2.7-1.09,3.29-2.3,3.29C29.68,41.71,29,41,29,39.09H26.09a5.09,5.09,0,0,0-.21,1.28c0,3.49,2.38,4.35,5.3,4.35,4.32,0,6.17-3.12,6.17-8m-4-4.79a2.26,2.26,0,0,1-2,1.61c-1.19,0-2.06-.76-2.06-4V22.17c0-3.31.85-4,2-4a2.37,2.37,0,0,1,2,1.62v12.1Z"/><path class="cls-1" d="M150.36,32.4c0,4.4,1.93,5.28,4,5.28a3.82,3.82,0,0,0,3.09-1.32V34.3a3.2,3.2,0,0,1-1.76.5c-0.87,0-1.6-.31-1.6-2.07V19.84h3.24V17.19h-3.24V8.54H153.6l-2.89,1.95,0,6.7h-1.9v2.65h1.57V32.4Z"/></svg>
+				<p><a href="//www.erepublic.com">&copy; 2019 All rights reserved. e.Republic</a></p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+<script>
+	$(document).ready(function(){
+		$( document ).ajaxStop(function() {
+				console.warn( "All ajax calls completed, do scroll." );
+			setTimeout( function(){ $(window).trigger('scroll'); }, 500 );
+			});
+	});
+</script>
+
+   <div data-ac-module="https://cms.erepublic.com/common/dynamic_modules/magazine_nag"></div>
+  <!-- <div data-ac-module="https://cms.erepublic.com/common/dynamic_modules/newsletter_nag"></div>
+  <div data-ac-module="https://cms.erepublic.com/common/dynamic_modules/webinar_nag"></div> -->
+ 
+<!-- LinkedIn Tracking for Paid -->
+<script type="text/javascript"> _linkedin_partner_id = "570164"; window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || []; window._linkedin_data_partner_ids.push(_linkedin_partner_id); </script><script type="text/javascript"> (function(){var s = document.getElementsByTagName("script")[0]; var b = document.createElement("script"); b.type = "text/javascript";b.async = true; b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js"; s.parentNode.insertBefore(b, s);})(); </script> <noscript> <img height="1" width="1" style="display:none;" alt="" src="https://dc.ads.linkedin.com/collect/?pid=570164&fmt=gif" /> </noscript>
+<!-- /LinkedIn Tracking for Paid -->
+<!-- Facebook Pixel Code -->
+<script>
+	!function(f,b,e,v,n,t,s)
+	{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+	n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+	if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+	n.queue=[];t=b.createElement(e);t.async=!0;
+	t.src=v;s=b.getElementsByTagName(e)[0];
+	s.parentNode.insertBefore(t,s)}(window, document,'script',
+	'https://connect.facebook.net/en_US/fbevents.js');
+	fbq('init', 'your-pixel-id-goes-here');
+	fbq('track', 'PageView');
+  </script>
+  <noscript>
+	<img height="1" width="1" style="display:none" 
+		 src="https://www.facebook.com/tr?id=your-pixel-id-goes-here&ev=PageView&noscript=1"/>
+  </noscript>
+  <!-- End Facebook Pixel Code -->
+
+<!-- Twitter universal website tag code -->
+<script>
+	!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);	
+	},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='//static.ads-twitter.com/uwt.js',	
+	a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+	// Insert Twitter Pixel ID and Standard Event data below
+	twq('init','o1brw');
+	twq('track','PageView');
+	</script>
+<!-- End Twitter universal website tag code -->
+
+
+    <script>
+var img = new Image();
+img.src = "https://analytics.erepublic.com/cms/module/lg/NTQuODYuMTc1LjE2O1VuaXRlZCBTdGF0ZXM=.gif";
+</script>
+ 
+</body>
+</html>
+ 	 
