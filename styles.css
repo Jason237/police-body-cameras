@@ -20,3 +20,7 @@ h3 {
 .tech.jpg {
     text-align:center;
 }
+table, th, td {
+    border: 3px solid skyblue;
+    border-style: dotted solid;
+  }
